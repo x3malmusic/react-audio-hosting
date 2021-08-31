@@ -1,7 +1,7 @@
 {
-  "name": "battleships",
+  "name": "react-audio-hosting-backend",
   "version": "1.0.0",
-  "description": "a battleships game",
+  "description": "server",
   "main": "server.js",
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production",
