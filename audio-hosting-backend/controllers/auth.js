@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { validationResult } from 'express-validator'
 import { asyncHandler } from "../middlewares/async";
-import { getUserByName, createUser } from "../services/dbService"
+import { createUser, getUserByEmail } from "../services/dbService"
 import {
   USER_NOT_FOUND,
   USER_EXIST,
@@ -10,19 +10,19 @@ import {
 } from "../helpers/errorTypes";
 
 export const register = asyncHandler(async (req, res, next) => {
-  const { name, password } = req.body;
+  const { email, password } = req.body;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) return next(errors.array()[0].msg)
 
-  const candidate = await getUserByName(name);
+  const candidate = await getUserByEmail(email);
   if (candidate) return next(USER_EXIST);
 
   const hashedPassword = await bcrypt.hash(password, 12);
-  const user = await createUser(name, hashedPassword);
+  const user = await createUser(email, hashedPassword);
 
-  const token = jwt.sign({ userId: user.id, name }, process.env.JWT_SECRET, { expiresIn: "24h" });
-  res.send({ userId: user.id, name: user.name, avatar: user.avatar, token });
+  const token = jwt.sign({ userId: user.id, email }, process.env.JWT_SECRET, { expiresIn: "24h" });
+  res.send({ user, token });
 });
 
 export const login = asyncHandler( async (req, res, next) => {

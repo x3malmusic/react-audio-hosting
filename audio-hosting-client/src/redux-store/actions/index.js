@@ -1,8 +1,9 @@
 import {
+  REGISTER,
   UPLOAD_TRACK,
   GET_SONGS,
   SET_CURRENT_SONG,
-  SET_PLAY
+  SET_PLAY,
 } from "./types";
 
 export const getSongs = () => ({
@@ -21,5 +22,10 @@ export const setSong = (payload) => ({
 
 export const setPlay = (payload) => ({
   type: SET_PLAY,
+  payload
+});
+
+export const register = (payload) => ({
+  type: REGISTER,
   payload
 });

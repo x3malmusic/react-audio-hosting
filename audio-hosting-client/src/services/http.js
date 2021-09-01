@@ -20,7 +20,7 @@ http.interceptors.response.use(
 //
 // export const silentLogin = () => http.post('/api/auth/silent-login', {})
 //
-// export const register = (creds) => http.post('/api/auth/register', { name: creds.name, password: creds.password })
+export const register = (creds) => http.post('/api/auth/register', { email: creds.email, password: creds.password })
 
 export const uploadSong = async (data) => {
   return await http.post('/api/upload', data.file, {

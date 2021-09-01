@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import Register from "./Register";
-import { setPlay } from "../../redux-store/actions";
+import { register } from "../../redux-store/actions";
 
 const mapDispatchToProps = (dispatch) => ({
-  setPlay: (play) => dispatch(setPlay(play)),
+  register: (creds) => dispatch(register(creds)),
 })
 
 export default connect(null, mapDispatchToProps)(Register);

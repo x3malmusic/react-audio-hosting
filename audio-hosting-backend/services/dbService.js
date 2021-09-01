@@ -5,7 +5,7 @@ import { cloudinary } from "../cloudinary.config";
 import { UPLOAD_FAILED } from "../helpers/errorTypes";
 
 
-export const getUserByName = (name) => {
+export const getUserByEmail = (name) => {
   return User.findOne({ name })
 }
 
@@ -13,8 +13,8 @@ export const getUserById = (id) => {
   return User.findOne({ _id: id })
 }
 
-export const createUser = async (name, password) => {
-  const user = new User({ name, password });
+export const createUser = async (email, password) => {
+  const user = new User({ email, password });
   await user.save();
 
   return user

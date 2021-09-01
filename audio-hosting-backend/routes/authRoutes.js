@@ -4,6 +4,7 @@ import { login, register, silentLogin } from "../controllers/auth";
 import { verifyToken } from "../middlewares/verifyTokenMiddleware";
 
 import {
+  EMAIL_NOT_VALID,
   NAME_PASSWORD_EMPTY,
   PASSWORD_SHORT
 } from "../helpers/errorTypes";
@@ -11,12 +12,13 @@ import {
 const router = Router();
 
 router.post('/login',
-  [check('name', NAME_PASSWORD_EMPTY).exists(),
+  [check('email', NAME_PASSWORD_EMPTY).exists(),
   check('password', NAME_PASSWORD_EMPTY).exists()],
   login)
 
 router.post('/register',
-  [check('name', NAME_PASSWORD_EMPTY).exists(),
+  [check('email', NAME_PASSWORD_EMPTY).exists(),
+    check('email', EMAIL_NOT_VALID).isEmail(),
     check('password', NAME_PASSWORD_EMPTY).exists(),
     check('password', PASSWORD_SHORT).isLength({min: 6})
   ],
