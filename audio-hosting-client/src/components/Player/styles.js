@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     textAlign: "center"
   },
+  canvas: {
+    boxShadow: "0px 0px 1px",
+  }
 }));
 
 export default useStyles;
