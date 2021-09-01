@@ -1,3 +1,4 @@
+import { Redirect } from "react-router-dom";
 import AudiotrackIcon from '@material-ui/icons/Audiotrack';
 import PublishIcon from '@material-ui/icons/Publish';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
@@ -5,7 +6,10 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import Main from "./pages/Main"
 import UploadTrack from "./pages/UploadTrack";
 
-const routes =  [
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+export const routes =  [
   {
     path: "/",
     component: Main,
@@ -27,4 +31,17 @@ const routes =  [
   },
 ]
 
-export default routes
+export const publicRoutes =  [
+  {
+    path: "/login",
+    component: Login,
+  },
+  {
+    path: "/register",
+    component: Register,
+  },
+  {
+    path: "*",
+    component: () => <Redirect to="/login" />,
+  },
+]
