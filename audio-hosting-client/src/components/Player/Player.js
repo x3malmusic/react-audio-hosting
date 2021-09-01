@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Typography, Box } from "@material-ui/core";
 import AudioPlayer from 'react-h5-audio-player';
 import AudioSpectrum from "react-audio-spectrum/lib/AudioSpectrum";
@@ -8,24 +8,19 @@ import useStyles from "./styles";
 export default function Player({ currentSong, songs, play, setSong }) {
   const classes = useStyles();
   const audio = useRef()
-  const [audioInit, setAudioInit] = useState(false)
 
   useEffect(() => {
-    if (audio.current.audio.current) {
-      audio.current.audio.current.id = "audio"
-      setAudioInit(true)
-    }
     if (play && songs[currentSong]) audio.current.audio.current.play();
   }, [currentSong, play]);
 
   return (
     <Box className={classes.playerContainer}>
-      {audioInit &&
+      {audio?.current?.audio?.current &&
         <AudioSpectrum
           id="audio-canvas"
+          audioEle={audio.current.audio.current}
           height={200}
           width={300}
-          audioId="audio"
           capColor={'red'}
           capHeight={2}
           meterWidth={2}
