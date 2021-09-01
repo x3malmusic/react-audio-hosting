@@ -8,7 +8,7 @@ export default function Playlist({ currentSong, songs, getSongs, setSong }) {
 
   useEffect(() => {
     if (!songs.length) getSongs()
-  }, [getSongs])
+  }, [getSongs, songs])
 
   return (
     <Box className={classes.playlist}>

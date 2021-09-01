@@ -9,7 +9,7 @@ export default function Main({ setPlay }) {
 
   useEffect(() => {
     return setPlay(false)
-  }, [])
+  }, [setPlay])
 
   return (
     <>
