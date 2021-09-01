@@ -1,7 +1,7 @@
 import React from "react";
 import { Drawer, List, ListItem, ListItemText } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-import routes from "../../routes";
+import { routes } from "../../routes";
 import useStyles from "./styles";
 
 export default function Sidebar() {
