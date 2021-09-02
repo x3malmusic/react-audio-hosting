@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     marginRight: theme.spacing(2)
+  },
+  activeLink: {
+    backgroundColor: "rgba(0, 0, 0, 0.145)"
   }
 }));
 

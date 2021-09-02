@@ -17,7 +17,7 @@ export default function Sidebar() {
     >
       <List className={classes.links}>
         {routes.map(({ Icon, name, path }) => (
-          <NavLink to={path} className={classes.link} key={path}>
+          <NavLink exact to={path} activeClassName={classes.activeLink} className={classes.link} key={path}>
             <ListItem button>
               <Icon className={classes.icon} />
               <ListItemText primary={name} />
