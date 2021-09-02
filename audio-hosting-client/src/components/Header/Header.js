@@ -1,17 +1,17 @@
 import React from "react";
-import { Box, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import AppButton from "../AppButton/AppButton";
 import useStyles from "./styles";
 
-export default function Header() {
+export default function Header({ logout }) {
   const classes = useStyles();
 
   return (
     <header className={classes.header}>
-      <Box className={classes.logo}>
-        <Typography variant="h5" className={classes.logoText}>
-          header
-        </Typography>
-      </Box>
+      <Typography variant="h5">
+        Audio Player
+      </Typography>
+      <AppButton onClick={logout} color="default" className={classes.btn}>Log Out</AppButton>
     </header>
   )
 }

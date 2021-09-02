@@ -4,7 +4,10 @@ import {
   UPLOAD_TRACK,
   GET_SONGS,
   SET_CURRENT_SONG,
-  SET_PLAY, SILENT_LOGIN,
+  SET_PLAY,
+  SILENT_LOGIN,
+  LOG_OUT,
+  SET_LOADING
 } from "./types";
 
 export const getSongs = () => ({
@@ -38,4 +41,13 @@ export const login = (payload) => ({
 
 export const silentLogin = () => ({
   type: SILENT_LOGIN,
+});
+
+export const logout = () => ({
+  type: LOG_OUT,
+});
+
+export const setLoading = (payload) => ({
+  type: SET_LOADING,
+  payload
 });

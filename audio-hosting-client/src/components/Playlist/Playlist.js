@@ -3,7 +3,7 @@ import { Box } from "@material-ui/core";
 import PlaylistItem from "../PlaylistItem/PlaylistItem";
 import useStyles from "./styles";
 
-export default function Playlist({ currentSong, songs, setSong }) {
+export default function Playlist({ currentSong, songs = [], setSong }) {
   const classes = useStyles();
 
   return (

@@ -9,11 +9,12 @@ import {
   SET_USER,
   REGISTER,
   LOGIN,
-  SILENT_LOGIN
+  SILENT_LOGIN,
+  LOG_OUT
 } from "../actions/types";
 import { safe } from "./error";
 import { uploadSong, getSongs, register, login, silentLogin } from "../../services/http";
-import { saveToken } from "../../utils/token";
+import { saveToken, deleteToken } from "../../utils/token";
 
 const registerUser = function* ({ payload }) {
   const data = yield register(payload);
@@ -30,6 +31,11 @@ const loginUser = function* ({ payload }) {
 const silentLoginUser = function* () {
   const data = yield silentLogin();
   yield put({ type: SET_USER, payload: data })
+};
+
+const logoutUser = function* () {
+  deleteToken();
+  yield put({ type: SET_USER, payload: {} })
 };
 
 const getAllSongs = function* () {
@@ -65,6 +71,7 @@ const userSagas = [
   takeLatest(REGISTER, safe(registerUser)),
   takeLatest(LOGIN, safe(loginUser)),
   takeLatest(SILENT_LOGIN, safe(silentLoginUser)),
+  takeLatest(LOG_OUT, safe(logoutUser)),
 ];
 
 export default userSagas;

@@ -1,8 +1,13 @@
 import { connect } from "react-redux";
 import Header from "./Header";
+import { logout } from "../../redux-store/actions";
 
-const mapStateToProps = ({ user: { userMoney, userBitcoins, bitCoinRatio } }) => ({
-  userMoney,
+const mapStateToProps = ({ user }) => ({
+  user,
 })
 
-export default connect(mapStateToProps, null)(Header)
+const mapDispatchToProps = (dispatch) => ({
+  logout: () => dispatch(logout()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

@@ -6,7 +6,7 @@ import { initAnalyser } from "../../utils/initAnalyser";
 import useStyles from "./styles";
 
 
-export default function Player({ currentSong, songs, play, setSong }) {
+export default function Player({ currentSong, songs = [], play, setSong }) {
   const classes = useStyles();
   const audio = useRef()
   const canvasRef = useRef()

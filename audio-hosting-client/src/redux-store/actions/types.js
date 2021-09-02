@@ -1,6 +1,7 @@
 export const REGISTER = "REGISTER";
 export const LOGIN = "LOGIN";
 export const SILENT_LOGIN = "SILENT_LOGIN";
+export const LOG_OUT = "LOG_OUT";
 
 export const GET_USER = "GET_USER";
 export const SET_USER = "SET_USER";
@@ -14,4 +15,4 @@ export const SET_PLAY = "SET_PLAY"
 
 export const UPLOAD_TRACK = "UPLOAD_TRACK";
 
-export const SET_ERROR = "SET_ERROR";
+export const SET_LOADING = "SET_LOADING";
