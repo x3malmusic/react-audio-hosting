@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import ProtectedRoute from "./ProtectedRoute";
 import { silentLogin } from "../../redux-store/actions";
 
-const mapStateToProps = ({ user, loading: { loading } }) => ({
+const mapStateToProps = ({ user, loading: { SET_LOADING_SILENT_LOGIN: loading } }) => ({
   user,
   loading
 });

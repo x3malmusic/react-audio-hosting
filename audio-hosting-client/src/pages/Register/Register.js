@@ -19,9 +19,9 @@ export default function Register({ register }) {
   return (
     <Box className={classes.login}>
       <Box className={classes.form}>
-        <TextField onChange={(e) => setEmail(e.target.value)} className={classes.input} variant="outlined" label="Email" />
-        <TextField type="password" onChange={(e) => setPassword(e.target.value)} className={classes.input} variant="outlined" label="Password" />
-        <TextField type="password" onChange={(e) => setRepeatPassword(e.target.value)} className={classes.input} variant="outlined" label="Repeat Password" />
+        <TextField value={email} onChange={(e) => setEmail(e.target.value)} className={classes.input} variant="outlined" label="Email" />
+        <TextField value={password} type="password" onChange={(e) => setPassword(e.target.value)} className={classes.input} variant="outlined" label="Password" />
+        <TextField value={repeatPassword} type="password" onChange={(e) => setRepeatPassword(e.target.value)} className={classes.input} variant="outlined" label="Repeat Password" />
         <Box className={classes.controlsContainer}>
           <AppButton onClick={registerUser} className={classes.btn}>Register</AppButton>
           <Box display="flex" alignItems="center">

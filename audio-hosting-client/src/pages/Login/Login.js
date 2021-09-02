@@ -6,16 +6,16 @@ import useStyles from "./styles";
 
 export default function Login({ login }) {
   const classes = useStyles();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const loginUser = () => login({ email, password });
 
   return (
     <Box className={classes.login}>
       <Box className={classes.form}>
-        <TextField onChange={(e) => setEmail(e.target.value)} className={classes.input} variant="outlined" label="Email" />
-        <TextField type="password" onChange={(e) => setPassword(e.target.value)} className={classes.input} variant="outlined" label="Password" />
+        <TextField value={email} onChange={(e) => setEmail(e.target.value)} className={classes.input} variant="outlined" label="Email" />
+        <TextField value={password} type="password" onChange={(e) => setPassword(e.target.value)} className={classes.input} variant="outlined" label="Password" />
         <Box className={classes.controlsContainer}>
           <AppButton onClick={loginUser} className={classes.btn}>Login</AppButton>
           <Box display="flex" alignItems="center">

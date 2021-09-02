@@ -1,19 +1,14 @@
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import MainLayout from "../../layouts/MainLayout";
 import Loader from "../Loader/Loader";
 import { routes, publicRoutes } from "../../routes";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { getToken } from "../../utils/token";
 
-export default function ProtectedRoute({ user, silentLogin, loading }) {
+export default function ProtectedRoute({ user, loading }) {
 
-  useLayoutEffect(() => {
-    if (getToken()) silentLogin()
-  }, [silentLogin])
+  if (loading) return <Loader/>
 
-  if (loading) return <Loader />
-
-  if (!user.email) {
+  if (!user.email && !loading) {
     return (
       <Switch>
         {publicRoutes.map(({ path, component  }) => (
@@ -23,6 +18,7 @@ export default function ProtectedRoute({ user, silentLogin, loading }) {
             component={component}
           />
         ))}
+        <Redirect to="/login" />
       </Switch>
     )
   }

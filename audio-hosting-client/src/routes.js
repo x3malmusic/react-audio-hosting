@@ -1,5 +1,3 @@
-import { Redirect } from "react-router-dom";
-
 import AudiotrackIcon from '@material-ui/icons/Audiotrack';
 import PublishIcon from '@material-ui/icons/Publish';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
@@ -47,9 +45,5 @@ export const publicRoutes =  [
   {
     path: "/register",
     component: Register,
-  },
-  {
-    path: "*",
-    component: () => <Redirect to="/login" />,
   },
 ]

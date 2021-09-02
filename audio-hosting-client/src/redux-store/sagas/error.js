@@ -5,12 +5,12 @@ import { notify } from "../../utils/notifications";
 const safeWrapper = function* (saga, ...rest) {
   const [args] = rest
   try {
-    yield put({ type: SET_LOADING, payload: true });
+    yield put({ type: `${SET_LOADING}_${args.type}`, payload: true });
     yield saga(args);
   } catch (err) {
     notify({ message: err.data.message, type: 'danger', title: 'Error' });
   } finally {
-    yield put({ type: SET_LOADING, payload: false });
+    yield put({ type: `${SET_LOADING}_${args.type}`, payload: false });
   }
 };
 
