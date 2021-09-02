@@ -7,14 +7,21 @@ import {
   CHANGE_SONG,
   SET_PLAY,
   SET_USER,
-  REGISTER
+  REGISTER,
+  LOGIN
 } from "../actions/types";
 import { safe } from "./error";
-import { uploadSong, getSongs, register } from "../../services/http";
+import { uploadSong, getSongs, register, login } from "../../services/http";
 import { saveToken } from "../../utils/token";
 
 const registerUser = function* ({ payload }) {
   const data = yield register(payload);
+  saveToken(data.token)
+  yield put({ type: SET_USER, payload: data.user })
+};
+
+const loginUser = function* ({ payload }) {
+  const data = yield login(payload);
   saveToken(data.token)
   yield put({ type: SET_USER, payload: data.user })
 };
@@ -25,12 +32,12 @@ const getAllSongs = function* () {
 };
 
 const uploadTrack = function* ({ payload }) {
-    const data = new FormData();
-    data.append('song', payload.file);
-    const song = yield uploadSong({ file: data, setUploadProgress: payload.setUploadProgress });
-    const allSongs = yield select(state => state.user.songs);
+  const data = new FormData();
+  data.append('song', payload.file);
+  const song = yield uploadSong({ file: data, setUploadProgress: payload.setUploadProgress });
+  const allSongs = yield select(state => state.user.songs);
 
-    yield put({ type: SET_SONGS, payload: [...allSongs, song] });
+  yield put({ type: SET_SONGS, payload: [...allSongs, song] });
 };
 
 const setCurrentSong = function* ({ payload }) {
@@ -50,6 +57,7 @@ const userSagas = [
   takeLatest(UPLOAD_TRACK, safe(uploadTrack)),
   takeLatest(SET_CURRENT_SONG, setCurrentSong),
   takeLatest(REGISTER, safe(registerUser)),
+  takeLatest(LOGIN, safe(loginUser)),
 ];
 
 export default userSagas;

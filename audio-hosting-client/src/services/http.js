@@ -16,7 +16,7 @@ http.interceptors.response.use(
 //   }
 // );
 
-// export const login = (creds) => http.post('/api/auth/login', { name: creds.name, password: creds.password })
+export const login = (creds) => http.post('/api/auth/login', { email: creds.email, password: creds.password })
 //
 // export const silentLogin = () => http.post('/api/auth/silent-login', {})
 //

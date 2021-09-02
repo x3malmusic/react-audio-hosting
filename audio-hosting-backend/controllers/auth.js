@@ -6,7 +6,7 @@ import { createUser, getUserByEmail } from "../services/dbService"
 import {
   USER_NOT_FOUND,
   USER_EXIST,
-  NAME_PASSWORD_WRONG,
+  EMAIL_PASSWORD_WRONG,
 } from "../helpers/errorTypes";
 
 export const register = asyncHandler(async (req, res, next) => {
@@ -21,28 +21,32 @@ export const register = asyncHandler(async (req, res, next) => {
   const hashedPassword = await bcrypt.hash(password, 12);
   const user = await createUser(email, hashedPassword);
 
+  const { __v, password: p, ...data } = user.toObject();
+
   const token = jwt.sign({ userId: user.id, email }, process.env.JWT_SECRET, { expiresIn: "24h" });
-  res.send({ user, token });
+  res.send({ user: data, token });
 });
 
 export const login = asyncHandler( async (req, res, next) => {
-  const { name, password } = req.body;
+  const { email, password } = req.body;
 
-  const user = await getUserByName(name);
+  const user = await getUserByEmail(email);
   if (!user) return next(USER_NOT_FOUND);
 
   const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) return next(NAME_PASSWORD_WRONG);
+  if (!isMatch) return next(EMAIL_PASSWORD_WRONG);
 
-  const token = jwt.sign({ userId: user.id, name: user.name }, process.env.JWT_SECRET,{ expiresIn: "24h" });
-  res.send({ userId: user.id, name: user.name, avatar: user.avatar, token });
+  const { __v, password: p, ...data } = user.toObject();
+
+  const token = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET,{ expiresIn: "24h" });
+  res.send({ user: data, token });
 });
 
 export const silentLogin = async (req, res, next) => {
   const { name } = req.user;
 
-  const user = await getUserByName(name);
+  const user = await getUserByEmail(name);
   if (!user) return next(USER_NOT_FOUND);
 
-  res.send({ userId: user.id, name: user.name, avatar: user.avatar })
+  res.send({ user })
 }

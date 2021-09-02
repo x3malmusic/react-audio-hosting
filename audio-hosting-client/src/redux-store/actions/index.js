@@ -1,5 +1,6 @@
 import {
   REGISTER,
+  LOGIN,
   UPLOAD_TRACK,
   GET_SONGS,
   SET_CURRENT_SONG,
@@ -27,5 +28,10 @@ export const setPlay = (payload) => ({
 
 export const register = (payload) => ({
   type: REGISTER,
+  payload
+});
+
+export const login = (payload) => ({
+  type: LOGIN,
   payload
 });

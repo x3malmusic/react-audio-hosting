@@ -5,8 +5,8 @@ import { cloudinary } from "../cloudinary.config";
 import { UPLOAD_FAILED } from "../helpers/errorTypes";
 
 
-export const getUserByEmail = (name) => {
-  return User.findOne({ name })
+export const getUserByEmail = (email) => {
+  return User.findOne({ email })
 }
 
 export const getUserById = (id) => {

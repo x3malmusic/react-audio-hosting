@@ -1,8 +1,7 @@
 import { SET_SONGS, SET_USER } from "../actions/types";
 
 const initialState = {
-  user: {},
-  songs: [],
+  songs: []
 };
 
 const user = (state = initialState, action) => {
@@ -13,10 +12,7 @@ const user = (state = initialState, action) => {
         songs: action.payload,
       };
     case SET_USER:
-      return {
-        ...state,
-        user: action.payload,
-      };
+      return { ...state, ...action.payload };
     default:
       return state;
   }
