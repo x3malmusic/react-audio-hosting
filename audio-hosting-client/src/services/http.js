@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getToken } from "../utils/token";
 
 const http = axios.create({
   baseURL: process.env.REACT_APP_URL,
@@ -10,16 +11,16 @@ http.interceptors.response.use(
   (err) => Promise.reject(err.response)
 );
 
-// http.interceptors.request.use((config) => {
-//     config.headers.authorization = `Bearer ${getToken()}`
-//     return config
-//   }
-// );
+http.interceptors.request.use((config) => {
+    config.headers.authorization = `Bearer ${getToken()}`
+    return config
+  }
+);
 
 export const login = (creds) => http.post('/api/auth/login', { email: creds.email, password: creds.password })
-//
-// export const silentLogin = () => http.post('/api/auth/silent-login', {})
-//
+
+export const silentLogin = () => http.post('/api/auth/silent-login', {})
+
 export const register = (creds) => http.post('/api/auth/register', { email: creds.email, password: creds.password })
 
 export const uploadSong = async (data) => {

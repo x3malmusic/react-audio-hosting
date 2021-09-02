@@ -1,12 +1,15 @@
-import React, {useState} from "react";
-import MainLayout from "../layouts/MainLayout";
-import { routes, publicRoutes } from "../routes";
+import React, { useEffect } from "react";
+import MainLayout from "../../layouts/MainLayout";
+import { routes, publicRoutes } from "../../routes";
 import { Redirect, Route, Switch } from "react-router-dom";
 
-export default function ProtectedRoute() {
-  const [auth, setAuth] = useState(false)
+export default function ProtectedRoute({ user, silentLogin }) {
 
-  if (!auth) {
+  useEffect(() => {
+    if (!user.email) silentLogin()
+  }, [silentLogin, user])
+
+  if (!user) {
     return (
       <Switch>
         {publicRoutes.map(({ path, component  }) => (

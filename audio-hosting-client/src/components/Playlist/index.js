@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Playlist from "./Playlist";
-import { getSongs, setSong } from "../../redux-store/actions";
+import { setSong } from "../../redux-store/actions";
 
 const mapStateToProps = ({ user: { songs }, player: { currentSong } }) => ({
   songs,
@@ -8,8 +8,7 @@ const mapStateToProps = ({ user: { songs }, player: { currentSong } }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getSongs: () => dispatch(getSongs()),
-  setSong: (song) => dispatch(setSong(song))
+  setSong: (song) => dispatch(setSong(song)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

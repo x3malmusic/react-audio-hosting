@@ -10,7 +10,7 @@ export const verifyToken = asyncHandler(async (req, res, next) => {
   await jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) return next(AUTHORIZATION_DENIED)
 
-    req.user = { name: user.name, userId: user.userId };
+    req.user = { email: user.email, userId: user.userId };
     next();
   });
 });

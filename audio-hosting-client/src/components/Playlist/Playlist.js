@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box } from "@material-ui/core";
 import PlaylistItem from "../PlaylistItem/PlaylistItem";
 import useStyles from "./styles";
 
-export default function Playlist({ currentSong, songs, getSongs, setSong }) {
+export default function Playlist({ currentSong, songs, setSong }) {
   const classes = useStyles();
-
-  useEffect(() => {
-    if (!songs.length) getSongs()
-  }, [getSongs, songs])
 
   return (
     <Box className={classes.playlist}>
