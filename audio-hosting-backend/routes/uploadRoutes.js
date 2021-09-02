@@ -9,8 +9,6 @@ const uploadOptions = {
   uploadTimeout: 10000,
 }
 
-router.post('/', fileUpload(uploadOptions), uploadSong);
-
-// router.get('/:id', getSong);
+router.post('/', verifyToken, fileUpload(uploadOptions), uploadSong);
 
 export default router

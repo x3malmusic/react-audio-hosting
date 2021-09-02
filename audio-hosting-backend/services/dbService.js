@@ -2,11 +2,11 @@ import Stream from "stream";
 import { User } from "../models/User";
 import { Song } from "../models/Song";
 import { cloudinary } from "../cloudinary.config";
-import { UPLOAD_FAILED } from "../helpers/errorTypes";
+import { UPLOAD_FAILED, USER_NOT_FOUND, FILE_EXIST } from "../helpers/errorTypes";
 
 
 export const getUserByEmail = (email) => {
-  return User.findOne({ email })
+  return User.findOne({ email }).populate('songs')
 }
 
 export const getUserById = (id) => {
@@ -45,12 +45,21 @@ export const uploadTrack = (file) => {
 }
 
 export const addNewSong = async (file, userId) => {
-  const { url, bytes, audio,  duration, original_filename } = await uploadTrack(file);
+  return new Promise(async (resolve, reject) => {
+    const user = await getUserById(userId);
+    if (!user) return reject(USER_NOT_FOUND)
 
-  const song = new Song({ url, bytes, bit_rate: audio.bit_rate, duration, original_filename });
-  await song.save();
+    const { url, bytes, audio, duration, original_filename, overwritten } = await uploadTrack(file);
+    if (overwritten) return reject(FILE_EXIST)
 
-  return song
+    const song = new Song({ url, bytes, bit_rate: audio.bit_rate, duration, original_filename, owner: userId });
+    await song.save();
+
+    user.songs.push(song);
+    await user.save();
+
+    resolve(song);
+  })
 }
 
 export const getSongs = () => {

@@ -10,6 +10,7 @@ export const AUTHORIZATION_DENIED = 'AUTHORIZATION_DENIED'
 export const NO_FILE_TO_UPLOAD = 'NO_FILE_TO_UPLOAD'
 export const UPLOAD_FAILED = 'UPLOAD_FAILED'
 export const FILE_NOT_FOUND = 'FILE_NOT_FOUND'
+export const FILE_EXIST = 'FILE_EXIST'
 export const DATABASE_ERROR = 'DATABASE_ERROR'
 
 export default {
@@ -25,6 +26,7 @@ export default {
   [UPLOAD_FAILED]:  { message: 'Something went wrong while uploading image', status: 400 },
   [FILE_NOT_FOUND]:  { message: 'File not found', status: 404 },
   [DATABASE_ERROR]:  { message: 'Database error', status: 400 },
+  [FILE_EXIST]:  { message: 'File already exist', status: 400 },
   [UNKNOWN_ERROR]:  { message: 'Something went wrong', status: 500 },
 }
 
