@@ -7,6 +7,7 @@ const theme = createTheme({
     sidebarWidth: 300,
     btnWidth: 120,
     playlistHeight: 600,
+    songCardValue: 80
   },
   color: {
     palette: {
