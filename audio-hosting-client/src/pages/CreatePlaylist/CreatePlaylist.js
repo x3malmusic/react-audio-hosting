@@ -11,6 +11,9 @@ export default function CreatePlaylist({ songs = [] }) {
       <Box className={classes.allSongs}>
         {!!songs.length && songs.map(song => <SongCard key={song._id} song={song} />)}
       </Box>
+      <Box className={classes.newPlaylist}>
+        new playlist
+      </Box>
     </Box>
   )
 }

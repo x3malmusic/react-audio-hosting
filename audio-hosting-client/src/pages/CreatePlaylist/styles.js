@@ -10,8 +10,22 @@ const useStyles = makeStyles((theme) => ({
     display: "grid",
     gridTemplateColumns: `repeat(auto-fill, minmax(${theme.constants.songCardValue}px, 1fr))`,
     maxHeight: theme.constants.playlistHeight,
-    overflowX: "hidden",
     padding: theme.spacing(2),
+    overflow: "auto",
+    "&::-webkit-scrollbar": {
+      width: 5
+    },
+    "&::-webkit-scrollbar-thumb": {
+      background: "#ccc",
+      borderRadius: 5
+    },
+  },
+  newPlaylist: {
+    overflowX: "auto",
+    width: "100%",
+    padding: 0,
+    boxShadow: "-1px 0 0 0 rgba(34, 60, 80, 0.2)",
+    maxHeight: theme.constants.playlistHeight,
     "&::-webkit-scrollbar": {
       width: 5
     },
