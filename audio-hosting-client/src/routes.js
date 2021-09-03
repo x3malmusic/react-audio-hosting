@@ -5,6 +5,7 @@ import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 
 import Main from "./pages/Main"
 import UploadTrack from "./pages/UploadTrack";
+import CreatePlaylist from "./pages/CreatePlaylist";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -25,7 +26,7 @@ export const routes =  [
   },
   {
     path: "/create-playlist",
-    component: null,
+    component: CreatePlaylist,
     Icon: PlaylistAddIcon,
     name: "Create playlist",
   },
