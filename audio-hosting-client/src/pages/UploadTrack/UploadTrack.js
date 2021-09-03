@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Input, LinearProgress, CircularProgress, Box, Typography } from "@material-ui/core";
 import AppButton from "../../components/AppButton/AppButton";
-import Loader from "../../components/Loader/Loader";
 import useStyles from "./styles";
 
 export default function UploadTrack({ upload, loading }) {

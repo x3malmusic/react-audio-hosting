@@ -6,7 +6,7 @@ import { initAnalyser } from "../../utils/initAnalyser";
 import useStyles from "./styles";
 
 
-export default function Player({ currentSong, songs = [], play, setSong }) {
+export default function Player({ currentSong, songs = [], play, setSong, setPlay }) {
   const classes = useStyles();
   const audio = useRef()
   const canvasRef = useRef()
@@ -14,6 +14,12 @@ export default function Player({ currentSong, songs = [], play, setSong }) {
   useEffect(() => {
     if (play && songs[currentSong]) audio.current.audio.current.play();
   }, [currentSong, play]);
+
+  useEffect(() => {
+    return () => {
+      if (play) setPlay(false);
+    }
+  }, [setPlay, play])
 
   return (
     <Box className={classes.playerContainer}>

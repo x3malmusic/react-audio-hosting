@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box } from "@material-ui/core";
 import Playlist from "../../components/Playlist";
 import Player from "../../components/Player";
 import useStyles from "./styles";
 
-export default function Main({ setPlay }) {
+export default function Main() {
   const classes = useStyles();
-
-  useEffect(() => {
-    return setPlay(false)
-  }, [setPlay])
 
   return (
     <>
