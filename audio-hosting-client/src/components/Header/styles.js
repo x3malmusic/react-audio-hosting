@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(3),
     height: theme.constants.headerHeight,
     width: "100%",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
+    zIndex: 10
   },
 }));
 

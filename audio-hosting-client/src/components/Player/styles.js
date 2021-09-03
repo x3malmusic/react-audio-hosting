@@ -5,10 +5,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    textAlign: "center"
+    textAlign: "center",
+    overflowX: "hidden",
   },
   canvas: {
-    boxShadow: "0px 0px 1px",
+    width: "100%",
+    boxShadow: `0px 0px 3px 0 ${theme.color.palette.shadow}`,
   }
 }));
 
