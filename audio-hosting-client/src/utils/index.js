@@ -14,5 +14,9 @@ export const formatDate = (date) => {
 }
 
 export const makeDuration = (duration) => {
-  return `${Math.floor(duration / 60)}:${Math.floor(duration % 60)}`
+  const minutes = Math.floor(duration / 60);
+  let seconds = Math.floor(duration % 60);
+
+  if (seconds < 10) seconds = `0${seconds}`
+  return `${minutes}:${seconds}`
 }
