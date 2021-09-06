@@ -7,8 +7,12 @@ import useStyles from "./styles";
 export default function SongCard({ song }) {
   const classes = useStyles();
 
+  const dragStartHandler = (e) => {
+    e.dataTransfer.setData("song", JSON.stringify(song));
+  }
+
   return (
-    <Box className={classes.cardContainer}>
+    <Box className={classes.cardContainer} draggable onDragStart={dragStartHandler}>
       <Box className={classes.iconContainer}>
         <AudiotrackIcon className={classes.iconMusic} />
         <InsertDriveFileIcon className={classes.iconFile} />

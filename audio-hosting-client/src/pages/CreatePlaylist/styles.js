@@ -9,7 +9,9 @@ const useStyles = makeStyles((theme) => ({
   allSongs: {
     display: "grid",
     gridTemplateColumns: `repeat(auto-fill, minmax(${theme.constants.songCardValue}px, 1fr))`,
-    maxHeight: theme.constants.playlistHeight,
+    gridTemplateRows: `repeat(auto-fill, minmax(${theme.constants.songCardValue}px, 1fr))`,
+    height: theme.constants.playlistHeight,
+    boxSizing: "border-box",
     padding: theme.spacing(2),
     overflow: "auto",
     "&::-webkit-scrollbar": {

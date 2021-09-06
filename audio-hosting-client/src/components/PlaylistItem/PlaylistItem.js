@@ -6,7 +6,7 @@ import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import useStyles from "./styles";
 import { makeDuration } from "../../utils";
 
-export default function PlaylistItem({ original_filename, duration, _id, currentSong, setSong, index }) {
+export default function PlaylistItem({ original_filename, duration, _id, currentSong, setSong = () => {}, index }) {
   const classes = useStyles();
   const [hover, setHover] = useState(false)
 
