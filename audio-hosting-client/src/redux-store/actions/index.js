@@ -7,7 +7,9 @@ import {
   SET_PLAY,
   SILENT_LOGIN,
   LOG_OUT,
-  SET_LOADING
+  SET_LOADING,
+  SET_NAME_NEW_PLAYLIST,
+  SET_SONGS_NEW_PLAYLIST,
 } from "./types";
 
 export const getSongs = () => ({
@@ -49,5 +51,15 @@ export const logout = () => ({
 
 export const setLoading = (payload) => ({
   type: SET_LOADING,
+  payload
+});
+
+export const setNameOfNewPlaylist = (payload) => ({
+  type: SET_NAME_NEW_PLAYLIST,
+  payload
+});
+
+export const setSongsOfNewPlaylist = (payload) => ({
+  type: SET_SONGS_NEW_PLAYLIST,
   payload
 });

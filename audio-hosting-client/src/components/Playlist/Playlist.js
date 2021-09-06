@@ -51,8 +51,8 @@ export default function Playlist({ currentSong, setSongs = fn, songs = [], setPl
                         key={song._id}
                         currentSong={currentSong}
                         setSong={setPlaySong}
-                        index={index} {...song}
                         deleteSong={deleteSong}
+                        {...song}
                       />
                     </div>
                   )}

@@ -15,22 +15,23 @@ import {
 import { safe } from "./error";
 import { uploadSong, getSongs, register, login, silentLogin } from "../../services/http";
 import { saveToken, deleteToken } from "../../utils/token";
+import { arrayToMap } from "../../utils";
 
 const registerUser = function* ({ payload }) {
   const data = yield register(payload);
   saveToken(data.token)
-  yield put({ type: SET_USER, payload: data.user })
+  yield put({ type: SET_USER, payload: {...data, songs: arrayToMap(data.songs)} })
 };
 
 const loginUser = function* ({ payload }) {
   const data = yield login(payload);
   saveToken(data.token)
-  yield put({ type: SET_USER, payload: data.user })
+  yield put({ type: SET_USER, payload: {...data, songs: arrayToMap(data.songs)}})
 };
 
 const silentLoginUser = function* () {
-  const data = yield silentLogin();
-  yield put({ type: SET_USER, payload: data })
+  let data = yield silentLogin();
+  yield put({ type: SET_USER, payload: {...data, songs: arrayToMap(data.songs)} })
 };
 
 const logoutUser = function* () {

@@ -30,3 +30,7 @@ export const reorder = (list, startIndex, endIndex) => {
 };
 
 export const fn = () => {}
+
+export const arrayToMap = (arr) => {
+  return arr.reduce((acc, el) => ({ ...acc, [el._id]: el }), {})
+}

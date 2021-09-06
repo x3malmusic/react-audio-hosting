@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box } from "@material-ui/core";
 import SongCard from "../../components/SongCard/SongCard";
 import Playlist from "../../components/Playlist/Playlist";
 import useStyles from "./styles";
 
-export default function CreatePlaylist({ songs = [] }) {
+export default function CreatePlaylist({ songs = [], newPlaylistSongs, setSongs }) {
   const classes = useStyles();
-  const [newSongs, setNewSongs] = useState([])
 
   const dropHandler = (e) => {
     e.preventDefault();
     const addedSong = JSON.parse(e.dataTransfer.getData("song"));
-    const exist = newSongs.find(s => s._id === addedSong._id)
+    const exist = Object.values(newPlaylistSongs).find(s => s._id === addedSong._id)
 
     if (exist) return
-    setNewSongs(state => ([...state, addedSong]))
+    setSongs({ ...newPlaylistSongs, [addedSong._id]: addedSong })
   }
 
   const dragOverHandler = (e) => {
@@ -23,15 +22,17 @@ export default function CreatePlaylist({ songs = [] }) {
   }
 
   const deleteSong = (id) => {
-    const songs = newSongs.filter(song => song._id !== id)
-    setNewSongs(songs)
+    const songs = {...newPlaylistSongs}
+    delete songs[id]
+
+    setSongs(songs)
   }
 
   return (
     <Box className={classes.createPlaylistContainer}>
 
       <Box className={classes.allSongs}>
-        {!!songs.length && songs.map(song => <SongCard key={song._id} draggable song={song} />)}
+        {!!Object.values(songs).length && Object.values(songs).map(song => <SongCard key={song._id} draggable song={song} />)}
       </Box>
 
       <Box
@@ -39,7 +40,7 @@ export default function CreatePlaylist({ songs = [] }) {
         onDrop={dropHandler}
         onDragOver={dragOverHandler}
       >
-        <Playlist songs={newSongs} setSongs={setNewSongs} deleteSong={deleteSong} />
+        <Playlist songs={Object.values(newPlaylistSongs)} setSongs={setSongs} deleteSong={deleteSong} />
       </Box>
 
     </Box>

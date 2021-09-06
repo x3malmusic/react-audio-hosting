@@ -1,7 +1,7 @@
 import { CHANGE_SONG, SET_PLAY } from "../actions/types";
 
 const initialState = {
-  currentSong: 0,
+  currentSong: "",
   play: false
 };
 

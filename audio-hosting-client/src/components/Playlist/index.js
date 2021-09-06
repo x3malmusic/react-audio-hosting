@@ -3,7 +3,7 @@ import Playlist from "./Playlist";
 import { setSong } from "../../redux-store/actions";
 
 const mapStateToProps = ({ user: { songs }, player: { currentSong } }) => ({
-  songs,
+  songs: Object.values(songs),
   currentSong
 });
 
