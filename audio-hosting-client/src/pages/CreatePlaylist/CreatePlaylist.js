@@ -22,12 +22,16 @@ export default function CreatePlaylist({ songs = [] }) {
     e.dataTransfer.dropEffect = "move"
   }
 
+  const deleteSong = (id) => {
+    const songs = newSongs.filter(song => song._id !== id)
+    setNewSongs(songs)
+  }
 
   return (
     <Box className={classes.createPlaylistContainer}>
 
       <Box className={classes.allSongs}>
-        {!!songs.length && songs.map(song => <SongCard key={song._id} song={song} />)}
+        {!!songs.length && songs.map(song => <SongCard key={song._id} draggable song={song} />)}
       </Box>
 
       <Box
@@ -35,7 +39,7 @@ export default function CreatePlaylist({ songs = [] }) {
         onDrop={dropHandler}
         onDragOver={dragOverHandler}
       >
-        <Playlist songs={newSongs} setSongs={setNewSongs} />
+        <Playlist songs={newSongs} setSongs={setNewSongs} deleteSong={deleteSong} />
       </Box>
 
     </Box>

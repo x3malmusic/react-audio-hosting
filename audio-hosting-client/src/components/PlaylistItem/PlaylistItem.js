@@ -3,10 +3,11 @@ import { ListItem, Typography, IconButton } from "@material-ui/core";
 import clsx from "clsx";
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
+import CancelIcon from '@material-ui/icons/Cancel';
 import useStyles from "./styles";
 import { makeDuration } from "../../utils";
 
-export default function PlaylistItem({ original_filename, duration, _id, currentSong, setSong = () => {}, index }) {
+export default function PlaylistItem({ original_filename, duration, _id, currentSong, setSong = () => {}, index, deleteSong }) {
   const classes = useStyles();
   const [hover, setHover] = useState(false)
 
@@ -26,6 +27,16 @@ export default function PlaylistItem({ original_filename, duration, _id, current
       </IconButton>
       <Typography className={classes.name} noWrap>{original_filename}</Typography>
       <Typography className={classes.duration}>{makeDuration(duration)}</Typography>
+      {deleteSong &&
+        <IconButton
+          color="primary"
+          className={clsx(classes.deleteBtn)}
+          disabled={!hover}
+          onClick={() => deleteSong(_id)}
+        >
+          <CancelIcon />
+        </IconButton>
+      }
     </ListItem>
   )
 }

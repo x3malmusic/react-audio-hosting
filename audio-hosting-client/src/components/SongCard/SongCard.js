@@ -4,7 +4,7 @@ import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 import AudiotrackIcon from '@material-ui/icons/Audiotrack';
 import useStyles from "./styles";
 
-export default function SongCard({ song }) {
+export default function SongCard({ song, ...props }) {
   const classes = useStyles();
 
   const dragStartHandler = (e) => {
@@ -12,7 +12,7 @@ export default function SongCard({ song }) {
   }
 
   return (
-    <Box className={classes.cardContainer} draggable onDragStart={dragStartHandler}>
+    <Box className={classes.cardContainer} onDragStart={dragStartHandler} {...props}>
       <Box className={classes.iconContainer}>
         <AudiotrackIcon className={classes.iconMusic} />
         <InsertDriveFileIcon className={classes.iconFile} />

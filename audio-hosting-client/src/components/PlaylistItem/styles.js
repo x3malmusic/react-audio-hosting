@@ -8,9 +8,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     overflowY: "auto",
     transition: "background-color .3s ease",
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: 0,
+    padding: 0,
     "&:hover": {
       cursor: "pointer",
       backgroundColor: theme.color.palette.light
@@ -19,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   playBtn: {
     marginRight: theme.spacing(1),
     opacity: 0
+  },
+  deleteBtn: {
+    color: theme.color.palette.red
   },
   playBtnHover: {
     opacity: 1
@@ -30,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   duration: {
-    marginLeft: theme.spacing(2)
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
   }
 }));
 

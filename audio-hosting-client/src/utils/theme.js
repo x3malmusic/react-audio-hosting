@@ -14,6 +14,7 @@ const theme = createTheme({
       sidebar: "#4d61d3",
       light: "#d9dfff",
       shadow: "rgba(34, 60, 80, 0.2)",
+      red: "#d14141"
     }
   }
 });
