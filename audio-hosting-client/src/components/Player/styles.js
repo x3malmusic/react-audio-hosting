@@ -4,9 +4,9 @@ const useStyles = makeStyles((theme) => ({
   playerContainer: {
     display: "flex",
     flexDirection: "column",
-    width: "100%",
     textAlign: "center",
     overflowX: "hidden",
+    boxShadow: theme.constants.shadow,
   },
   canvas: {
     width: "100%",

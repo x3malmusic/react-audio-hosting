@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   playlist: {
     overflowX: "auto",
-    width: "100%",
     maxHeight: theme.constants.playlistHeight,
     padding: 0,
     "&::-webkit-scrollbar": {
