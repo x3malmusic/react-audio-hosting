@@ -11,7 +11,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle
 });
 
-export default function Playlist({ currentSong, setSongs = fn, songs = [], setPlaySong = fn, deleteSong }) {
+export default function Playlist({ currentSong, setSongs = fn, songs = [], setPlaySong = fn, deleteSong, ...props }) {
   const classes = useStyles();
 
   const onDragEnd = (result) => {
@@ -27,7 +27,7 @@ export default function Playlist({ currentSong, setSongs = fn, songs = [], setPl
   }
 
   return (
-    <Box className={classes.playlist}>
+    <Box className={classes.playlist} {...props}>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (

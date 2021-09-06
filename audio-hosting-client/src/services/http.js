@@ -38,3 +38,5 @@ export const uploadSong = async (data) => {
 };
 
 export const getSongs = () => http.get('/api/user/songs')
+
+export const createPlaylist = ({ songs, name }) => http.post('/api/user/create-playlist', { songs, name })

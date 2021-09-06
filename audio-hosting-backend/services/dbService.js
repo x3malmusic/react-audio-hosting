@@ -1,6 +1,7 @@
 import Stream from "stream";
 import { User } from "../models/User";
 import { Song } from "../models/Song";
+import { Playlist } from "../models/Playlist";
 import { cloudinary } from "../cloudinary.config";
 import { UPLOAD_FAILED, USER_NOT_FOUND, FILE_EXIST } from "../helpers/errorTypes";
 
@@ -64,4 +65,19 @@ export const addNewSong = async (file, userId) => {
 
 export const getSongs = () => {
   return Song.find()
+}
+
+export const createNewPlaylist = async (userId, name, songsArray) => {
+  return new Promise(async (resolve, reject) => {
+    const user = await getUserById(userId);
+    if (!user) return reject(USER_NOT_FOUND);
+
+    const playlist = new Playlist({ owner: userId, name, songs: songsArray });
+    await playlist.save();
+
+    user.playlists.push(playlist._id)
+    await user.save();
+
+    resolve(playlist)
+  })
 }

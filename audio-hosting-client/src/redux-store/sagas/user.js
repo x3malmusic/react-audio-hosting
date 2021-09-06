@@ -10,10 +10,11 @@ import {
   REGISTER,
   LOGIN,
   SILENT_LOGIN,
-  LOG_OUT
+  LOG_OUT,
+  CREATE_NEW_PLAYLIST
 } from "../actions/types";
 import { safe } from "./error";
-import { uploadSong, getSongs, register, login, silentLogin } from "../../services/http";
+import { uploadSong, getSongs, register, login, silentLogin, createPlaylist } from "../../services/http";
 import { saveToken, deleteToken } from "../../utils/token";
 import { arrayToMap } from "../../utils";
 
@@ -65,6 +66,18 @@ const setCurrentSong = function* ({ payload }) {
   yield put({ type: CHANGE_SONG, payload: payload });
 };
 
+const createNewPlaylist = function* () {
+  const newSongs = yield select(state => state.newPlaylist.songs);
+  const playlistName = yield select(state => state.newPlaylist.name);
+
+  const playlist = yield createPlaylist({ name: playlistName, songs: Object.keys(newSongs) });
+
+  const user = yield select(state => state.user)
+  user.playlists = { ...user, [playlist._id]: playlist }
+
+  yield put({ type: SET_USER, payload: { ...user } })
+};
+
 const userSagas = [
   takeLatest(GET_SONGS, safe(getAllSongs)),
   takeLatest(UPLOAD_TRACK, safe(uploadTrack)),
@@ -73,6 +86,7 @@ const userSagas = [
   takeLatest(LOGIN, safe(loginUser)),
   takeLatest(SILENT_LOGIN, safe(silentLoginUser)),
   takeLatest(LOG_OUT, safe(logoutUser)),
+  takeLatest(CREATE_NEW_PLAYLIST, safe(createNewPlaylist)),
 ];
 
 export default userSagas;

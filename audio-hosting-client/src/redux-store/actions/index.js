@@ -10,6 +10,7 @@ import {
   SET_LOADING,
   SET_NAME_NEW_PLAYLIST,
   SET_SONGS_NEW_PLAYLIST,
+  CREATE_NEW_PLAYLIST
 } from "./types";
 
 export const getSongs = () => ({
@@ -63,3 +64,8 @@ export const setSongsOfNewPlaylist = (payload) => ({
   type: SET_SONGS_NEW_PLAYLIST,
   payload
 });
+
+export const createNewPlaylist = () => ({
+  type: CREATE_NEW_PLAYLIST,
+});
+

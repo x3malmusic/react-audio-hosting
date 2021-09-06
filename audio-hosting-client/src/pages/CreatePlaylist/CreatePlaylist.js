@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "@material-ui/core";
 import SongCard from "../../components/SongCard/SongCard";
 import Playlist from "../../components/Playlist/Playlist";
+import AppButton from "../../components/AppButton/AppButton";
+import Modal from "../../components/Modal/Modal";
 import useStyles from "./styles";
 
-export default function CreatePlaylist({ songs = [], newPlaylistSongs, setSongs }) {
+export default function CreatePlaylist({ songs = [], newPlaylistSongs, setSongs, createNewPlaylist, setName, name }) {
   const classes = useStyles();
+  const [openModal, setOpenModal] = useState(false)
 
   const dropHandler = (e) => {
     e.preventDefault();
@@ -29,20 +32,34 @@ export default function CreatePlaylist({ songs = [], newPlaylistSongs, setSongs 
   }
 
   return (
-    <Box className={classes.createPlaylistContainer}>
+    <>
+      <Box className={classes.createPlaylistContainer}>
 
-      <Box className={classes.allSongs}>
-        {!!Object.values(songs).length && Object.values(songs).map(song => <SongCard key={song._id} draggable song={song} />)}
+        <Box className={classes.allSongs}>
+          {!!Object.values(songs).length && Object.values(songs).map(song => <SongCard key={song._id} draggable song={song} />)}
+        </Box>
+
+        <Playlist
+          songs={Object.values(newPlaylistSongs)}
+          setSongs={setSongs}
+          deleteSong={deleteSong}
+          onDrop={dropHandler}
+          onDragOver={dragOverHandler}
+        />
+
       </Box>
+      <AppButton onClick={() => setOpenModal(true)}>Create Playlist</AppButton>
 
-      <Box
-        className={classes.newPlaylist}
-        onDrop={dropHandler}
-        onDragOver={dragOverHandler}
-      >
-        <Playlist songs={Object.values(newPlaylistSongs)} setSongs={setSongs} deleteSong={deleteSong} />
-      </Box>
-
-    </Box>
+      <Modal
+        title="Create Playlist"
+        open={openModal}
+        setOpen={setOpenModal}
+        action={createNewPlaylist}
+        content="Enter the name of new playlist"
+        inputChange={setName}
+        inputValue={name}
+        fullWidth
+      />
+    </>
   )
 }
