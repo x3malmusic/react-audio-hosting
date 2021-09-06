@@ -8,7 +8,7 @@ const mapStateToProps = ({ user: { songs }, player: { currentSong } }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setSong: (song) => dispatch(setSong(song)),
+  setPlaySong: (song) => dispatch(setSong(song)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

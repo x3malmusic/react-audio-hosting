@@ -11,7 +11,10 @@ export default function Main() {
     <>
       <Box className={classes.main}>
         <Player />
-        <Playlist />
+
+        <Box className={classes.playlistContainer}>
+          <Playlist />
+        </Box>
       </Box>
     </>
   )

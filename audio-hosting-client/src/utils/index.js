@@ -28,3 +28,5 @@ export const reorder = (list, startIndex, endIndex) => {
 
   return result;
 };
+
+export const fn = () => {}

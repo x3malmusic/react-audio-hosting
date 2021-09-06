@@ -23,18 +23,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   newPlaylist: {
-    overflowX: "auto",
-    width: "100%",
-    padding: 0,
+    height: theme.constants.playlistHeight,
     boxShadow: "-1px 0 0 0 rgba(34, 60, 80, 0.2)",
-    maxHeight: theme.constants.playlistHeight,
-    "&::-webkit-scrollbar": {
-      width: 5
-    },
-    "&::-webkit-scrollbar-thumb": {
-      background: "#ccc",
-      borderRadius: 5
-    },
   }
 }));
 
