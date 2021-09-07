@@ -1,7 +1,7 @@
 import AudiotrackIcon from '@material-ui/icons/Audiotrack';
 import PublishIcon from '@material-ui/icons/Publish';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
-import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 import Main from "./pages/Main"
 import UploadTrack from "./pages/UploadTrack";
@@ -31,10 +31,10 @@ export const routes =  [
     name: "Create playlist",
   },
   {
-    path: "/songs",
+    path: "/settings",
     component: null,
-    Icon: LibraryMusicIcon,
-    name: "My songs",
+    Icon: SettingsIcon,
+    name: "Settings",
   },
 ]
 
