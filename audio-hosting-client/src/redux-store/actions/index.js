@@ -11,6 +11,7 @@ import {
   SET_SONGS_NEW_PLAYLIST,
   CREATE_NEW_PLAYLIST,
   SET_CURRENT_PLAYLIST,
+  REORDER_SONGS_IN_PLAYLIST,
   PLAY_NEXT_SONG,
   PLAY_PREVIOUS_SONG
 } from "./types";
@@ -60,6 +61,11 @@ export const setNameOfNewPlaylist = (payload) => ({
 
 export const setSongsOfNewPlaylist = (payload) => ({
   type: SET_SONGS_NEW_PLAYLIST,
+  payload
+});
+
+export const reorderSongsOfCurrentPlaylist = (payload) => ({
+  type: REORDER_SONGS_IN_PLAYLIST,
   payload
 });
 

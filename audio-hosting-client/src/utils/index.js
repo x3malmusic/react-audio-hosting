@@ -34,3 +34,13 @@ export const fn = () => {}
 export const arrayToMap = (arr) => {
   return arr.reduce((acc, el) => ({ ...acc, [el._id]: el }), {})
 }
+
+export const recalcNextAndPrevSongs = (currentSong, array) => {
+  const currentSongIndex = array.indexOf(currentSong);
+  let nextSongId = array[currentSongIndex + 1];
+  let previousSongId = array[currentSongIndex - 1];
+
+  if (!nextSongId) nextSongId = array[0];
+  if (!previousSongId) previousSongId = array[array.length - 1];
+  return { currentSong, nextSong: nextSongId, previousSong: previousSongId }
+}
