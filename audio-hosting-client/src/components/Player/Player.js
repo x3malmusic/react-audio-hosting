@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Typography, Box } from "@material-ui/core";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
@@ -10,6 +10,14 @@ export default function Player({ currentSong, playNext, playPrevious, songs = []
   const classes = useStyles();
   const audio = useRef()
   const canvasRef = useRef()
+  const [init, setInit] = useState(false)
+
+  const initAnalize = () => {
+    if (!init) {
+      initAnalyser(canvasRef, audio.current.audio.current)
+      setInit(true)
+    }
+  }
 
   useEffect(() => {
     if (play && songs[currentSong]) audio.current.audio.current.play();
@@ -29,7 +37,7 @@ export default function Player({ currentSong, playNext, playPrevious, songs = []
         ref={audio}
         src={songs[currentSong]?.url}
         autoPlayAfterSrcChange={play}
-        onPlay={() => initAnalyser(canvasRef, audio.current.audio.current)}
+        onPlay={() => initAnalize()}
         onClickNext={playNext}
         onClickPrevious={playPrevious}
         onEnded={playNext}
