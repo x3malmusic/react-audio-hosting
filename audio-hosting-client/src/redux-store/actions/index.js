@@ -10,7 +10,9 @@ import {
   SET_NAME_NEW_PLAYLIST,
   SET_SONGS_NEW_PLAYLIST,
   CREATE_NEW_PLAYLIST,
-  SET_CURRENT_PLAYLIST
+  SET_CURRENT_PLAYLIST,
+  PLAY_NEXT_SONG,
+  PLAY_PREVIOUS_SONG
 } from "./types";
 
 export const uploadTrack = (payload) => ({
@@ -68,5 +70,13 @@ export const createNewPlaylist = () => ({
 export const setPlaylist = (id) => ({
   type: SET_CURRENT_PLAYLIST,
   payload: id
+});
+
+export const playNext = (id) => ({
+  type: PLAY_NEXT_SONG,
+});
+
+export const playPrevious = (id) => ({
+  type: PLAY_PREVIOUS_SONG,
 });
 

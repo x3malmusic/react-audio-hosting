@@ -48,7 +48,6 @@ export default function Playlist({ allSongs, currentSong, setSongs = fn, songs =
                       )}
                     >
                       <PlaylistItem
-                        index={index}
                         currentSong={currentSong}
                         setSong={setPlaySong}
                         deleteSong={deleteSong}
