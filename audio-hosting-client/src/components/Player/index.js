@@ -2,8 +2,9 @@ import { connect } from "react-redux";
 import Player from "./Player";
 import { setSong, setPlay } from "../../redux-store/actions";
 
-const mapStateToProps = ({ user: { songs }, player: { currentSong, play } }) => ({
+const mapStateToProps = ({ user: { songs }, player: { currentSong, play, songsInPlaylist } }) => ({
   songs,
+  songsInPlaylist,
   currentSong,
   play
 });

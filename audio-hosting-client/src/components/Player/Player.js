@@ -6,7 +6,7 @@ import { initAnalyser } from "../../utils/initAnalyser";
 import useStyles from "./styles";
 
 
-export default function Player({ currentSong, songs = [], play, setSong, setPlay }) {
+export default function Player({ currentSong, songsInPlaylist, songs = [], play, setSong, setPlay }) {
   const classes = useStyles();
   const audio = useRef()
   const canvasRef = useRef()
@@ -24,10 +24,10 @@ export default function Player({ currentSong, songs = [], play, setSong, setPlay
   return (
     <Box className={classes.playerContainer}>
       <canvas ref={canvasRef} className={classes.canvas} />
-      <Typography noWrap variant="subtitle1">{songs[currentSong]?.original_filename || "--"}</Typography>
+      <Typography noWrap variant="subtitle1">{songs[songsInPlaylist[currentSong]]?.original_filename || "--"}</Typography>
       <AudioPlayer
         ref={audio}
-        src={songs[currentSong]?.url}
+        src={songs[songsInPlaylist[currentSong]]?.url}
         autoPlayAfterSrcChange={play}
         onPlay={() => initAnalyser(canvasRef, audio.current.audio.current)}
         onClickNext={() => setSong(currentSong + 1)}

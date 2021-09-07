@@ -1,8 +1,10 @@
-import { CHANGE_SONG, SET_PLAY } from "../actions/types";
+import { CHANGE_SONG, SET_PLAY, SET_CURRENT_PLAYLIST, SET_SONGS_IN_PLAYLIST } from "../actions/types";
 
 const initialState = {
-  currentSong: "",
-  play: false
+  currentSong: 0,
+  play: false,
+  currentPlaylist: "",
+  songsInPlaylist: []
 };
 
 const player = (state = initialState, action) => {
@@ -16,6 +18,16 @@ const player = (state = initialState, action) => {
       return {
         ...state,
         play: action.payload,
+      };
+    case SET_CURRENT_PLAYLIST:
+      return {
+        ...state,
+        currentPlaylist: action.payload,
+      };
+    case SET_SONGS_IN_PLAYLIST:
+      return {
+        ...state,
+        songsInPlaylist: action.payload,
       };
     default:
       return state;

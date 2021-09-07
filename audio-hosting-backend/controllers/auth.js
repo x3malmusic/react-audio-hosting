@@ -45,7 +45,7 @@ export const login = asyncHandler( async (req, res, next) => {
 export const silentLogin = async (req, res, next) => {
   const { email } = req.user;
 
-  const user = await getUserByEmail(email).populate('playlists');
+  const user = await getUserByEmail(email);
   if (!user) return next(USER_NOT_FOUND);
 
   const { __v, password: p, ...data } = user.toObject();

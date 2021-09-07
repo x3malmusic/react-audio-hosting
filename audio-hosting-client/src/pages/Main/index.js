@@ -1,9 +1,13 @@
 import { connect } from "react-redux";
 import Main from "./Main";
-import { setPlay } from "../../redux-store/actions";
+import { setPlaylist } from "../../redux-store/actions";
+
+const mapStateToProps = ({ user: { playlists } }) => ({
+  playlists
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  setPlay: (play) => dispatch(setPlay(play)),
+  changePlaylist: (id) => dispatch(setPlaylist(id)),
 })
 
-export default connect(null, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

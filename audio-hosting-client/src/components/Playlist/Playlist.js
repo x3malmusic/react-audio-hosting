@@ -11,7 +11,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle
 });
 
-export default function Playlist({ currentSong, setSongs = fn, songs = [], setPlaySong = fn, deleteSong, ...props }) {
+export default function Playlist({ allSongs, currentSong, setSongs = fn, songs = [], setPlaySong = fn, deleteSong, ...props }) {
   const classes = useStyles();
 
   const onDragEnd = (result) => {
@@ -35,8 +35,8 @@ export default function Playlist({ currentSong, setSongs = fn, songs = [], setPl
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {!!songs.length && songs.map((song, index) => (
-                <Draggable key={song._id} draggableId={song._id} index={index}>
+              {!!songs.length && songs.map((songId, index) => (
+                <Draggable key={songId} draggableId={songId} index={index}>
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
@@ -48,11 +48,11 @@ export default function Playlist({ currentSong, setSongs = fn, songs = [], setPl
                       )}
                     >
                       <PlaylistItem
-                        key={song._id}
+                        index={index}
                         currentSong={currentSong}
                         setSong={setPlaySong}
                         deleteSong={deleteSong}
-                        {...song}
+                        {...allSongs[songId]}
                       />
                     </div>
                   )}

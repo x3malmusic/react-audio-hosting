@@ -7,7 +7,7 @@ import { UPLOAD_FAILED, USER_NOT_FOUND, FILE_EXIST } from "../helpers/errorTypes
 
 
 export const getUserByEmail = (email) => {
-  return User.findOne({ email }).populate('songs')
+  return User.findOne({ email }).populate('songs').populate('playlists')
 }
 
 export const getUserById = (id) => {
