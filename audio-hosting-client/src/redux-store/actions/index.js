@@ -2,7 +2,6 @@ import {
   REGISTER,
   LOGIN,
   UPLOAD_TRACK,
-  GET_SONGS,
   SET_CURRENT_SONG,
   SET_PLAY,
   SILENT_LOGIN,
@@ -13,10 +12,6 @@ import {
   CREATE_NEW_PLAYLIST,
   SET_CURRENT_PLAYLIST
 } from "./types";
-
-export const getSongs = () => ({
-  type: GET_SONGS,
-});
 
 export const uploadTrack = (payload) => ({
   type: UPLOAD_TRACK,

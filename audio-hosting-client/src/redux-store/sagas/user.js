@@ -1,6 +1,5 @@
 import { takeLatest, put, select } from "redux-saga/effects";
 import {
-  GET_SONGS,
   SET_SONGS,
   UPLOAD_TRACK,
   SET_CURRENT_SONG,
@@ -16,7 +15,7 @@ import {
   SET_CURRENT_PLAYLIST
 } from "../actions/types";
 import { safe } from "./error";
-import { uploadSong, getSongs, register, login, silentLogin, createPlaylist } from "../../services/http";
+import { uploadSong, register, login, silentLogin, createPlaylist } from "../../services/http";
 import { saveToken, deleteToken } from "../../utils/token";
 import { arrayToMap } from "../../utils";
 
@@ -40,11 +39,6 @@ const silentLoginUser = function* () {
 const logoutUser = function* () {
   deleteToken();
   yield put({ type: SET_USER, payload: {} })
-};
-
-const getAllSongs = function* () {
-  const songs = yield getSongs();
-  yield put({ type: SET_SONGS, payload: songs });
 };
 
 const uploadTrack = function* ({ payload }) {
@@ -88,7 +82,6 @@ const changePlaylist = function* ({ payload }) {
 };
 
 const userSagas = [
-  takeLatest(GET_SONGS, safe(getAllSongs)),
   takeLatest(UPLOAD_TRACK, safe(uploadTrack)),
   takeLatest(SET_CURRENT_SONG, setCurrentSong),
   takeLatest(REGISTER, safe(registerUser)),

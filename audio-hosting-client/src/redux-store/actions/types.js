@@ -6,7 +6,6 @@ export const LOG_OUT = "LOG_OUT";
 export const GET_USER = "GET_USER";
 export const SET_USER = "SET_USER";
 
-export const GET_SONGS = "GET_SONGS";
 export const SET_SONGS = "SET_SONGS";
 
 export const SET_SONGS_NEW_PLAYLIST = "SET_SONGS_NEW_PLAYLIST";
