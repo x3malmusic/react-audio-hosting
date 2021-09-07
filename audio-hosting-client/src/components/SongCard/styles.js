@@ -2,16 +2,17 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
-    overflowX: "hidden",
+    position: "relative",
     height: theme.constants.songCardValue,
     width: theme.constants.songCardValue,
     margin: "0 auto",
+    cursor: "pointer",
   },
   iconContainer: {
     position: "relative",
     lineHeight: 0,
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   iconMusic: {
     position: "absolute",
@@ -27,8 +28,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 48
   },
   songName: {
-    fontSize: 14
-  }
+    fontSize: 14,
+  },
+  fullSongName: {
+    fontSize: 14,
+    position:"absolute",
+    top: 48,
+    left: 0,
+    backgroundColor: "white",
+    zIndex: 2,
+  },
 }));
 
 export default useStyles;
