@@ -6,17 +6,17 @@ import AppButton from "../../components/AppButton/AppButton";
 import Modal from "../../components/Modal/Modal";
 import useStyles from "./styles";
 
-export default function CreatePlaylist({ songs = [], newPlaylistSongs, setSongs, createNewPlaylist, setName, name }) {
+export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSongs, createNewPlaylist, setName, name }) {
   const classes = useStyles();
   const [openModal, setOpenModal] = useState(false)
 
   const dropHandler = (e) => {
     e.preventDefault();
     const addedSong = JSON.parse(e.dataTransfer.getData("song"));
-    const exist = Object.values(newPlaylistSongs).find(s => s._id === addedSong._id)
+    const exist = newPlaylistSongs.find(s => s === addedSong)
 
     if (exist) return
-    setSongs({ ...newPlaylistSongs, [addedSong._id]: addedSong })
+    setSongs([ ...newPlaylistSongs, addedSong ])
   }
 
   const dragOverHandler = (e) => {
@@ -25,8 +25,7 @@ export default function CreatePlaylist({ songs = [], newPlaylistSongs, setSongs,
   }
 
   const deleteSong = (id) => {
-    const songs = {...newPlaylistSongs}
-    delete songs[id]
+    const songs = newPlaylistSongs.filter(song => song !== id)
 
     setSongs(songs)
   }
@@ -36,11 +35,12 @@ export default function CreatePlaylist({ songs = [], newPlaylistSongs, setSongs,
       <Box className={classes.createPlaylistContainer}>
 
         <Box className={classes.allSongs}>
-          {!!Object.values(songs).length && Object.values(songs).map(song => <SongCard key={song._id} draggable song={song} />)}
+          {!!Object.values(allSongs).length && Object.values(allSongs).map(song => <SongCard key={song._id} draggable song={song} />)}
         </Box>
 
         <Playlist
-          songs={Object.values(newPlaylistSongs)}
+          allSongs={allSongs}
+          songs={newPlaylistSongs}
           setSongs={setSongs}
           deleteSong={deleteSong}
           onDrop={dropHandler}

@@ -2,7 +2,7 @@ import { SET_SONGS_NEW_PLAYLIST, SET_NAME_NEW_PLAYLIST } from "../actions/types"
 
 const initialState = {
   name: "",
-  songs: {}
+  songs: []
 };
 
 const newPlaylist = (state = initialState, action) => {

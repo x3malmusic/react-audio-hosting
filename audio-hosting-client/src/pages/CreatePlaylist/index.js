@@ -3,7 +3,7 @@ import CreatePlaylist from "./CreatePlaylist";
 import { setSong, setNameOfNewPlaylist, setSongsOfNewPlaylist, createNewPlaylist } from "../../redux-store/actions";
 
 const mapStateToProps = ({ user: { songs } , newPlaylist: { songs: newPlaylistSongs, name }}) => ({
-  songs,
+  allSongs: songs,
   newPlaylistSongs,
   name
 });

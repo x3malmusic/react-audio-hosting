@@ -8,7 +8,7 @@ export default function SongCard({ song, ...props }) {
   const classes = useStyles();
 
   const dragStartHandler = (e) => {
-    e.dataTransfer.setData("song", JSON.stringify(song));
+    e.dataTransfer.setData("song", JSON.stringify(song._id));
   }
 
   return (
