@@ -6,7 +6,7 @@ import { initAnalyser } from "../../utils/initAnalyser";
 import useStyles from "./styles";
 
 
-export default function Player({ currentSong, playNext, playPrevious, songs = [], play, setPlay }) {
+export default function Player({ currentSong, playNext, playPrevious, defaultVolume = 50, songs = [], play, setPlay }) {
   const classes = useStyles();
   const audio = useRef()
   const canvasRef = useRef()
@@ -41,7 +41,7 @@ export default function Player({ currentSong, playNext, playPrevious, songs = []
         onClickNext={playNext}
         onClickPrevious={playPrevious}
         onEnded={playNext}
-        volume={0.5}
+        volume={defaultVolume / 100}
         showSkipControls
         crossOrigin="anonymous"
       />
