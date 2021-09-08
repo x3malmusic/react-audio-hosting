@@ -17,13 +17,13 @@ import { arrayToMap } from "../../utils";
 const registerUser = function* ({ payload }) {
   const data = yield register(payload);
   saveToken(data.token)
-  yield put({ type: SET_USER, payload: {...data, songs: arrayToMap(data.songs)} })
+  yield put({ type: SET_USER, payload: {...data.user, songs: arrayToMap(data.user.songs)} })
 };
 
 const loginUser = function* ({ payload }) {
   const data = yield login(payload);
   saveToken(data.token)
-  yield put({ type: SET_USER, payload: {...data, songs: arrayToMap(data.songs)}})
+  yield put({ type: SET_USER, payload: {...data.user, songs: arrayToMap(data.user.songs)}})
 };
 
 const silentLoginUser = function* () {
