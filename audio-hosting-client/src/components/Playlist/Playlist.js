@@ -3,6 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Box } from "@material-ui/core";
 import PlaylistItem from "../PlaylistItem/PlaylistItem";
 import { reorder, fn } from "../../utils";
+import Placeholder from "../Placeholder/Placeholder";
 import useStyles from "./styles";
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -11,7 +12,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle
 });
 
-export default function Playlist({ allSongs, currentSong, setSongs = fn, songs = [], setPlaySong = fn, deleteSong, ...props }) {
+export default function Playlist({ placeholder, allSongs, currentSong, setSongs = fn, songs = [], setPlaySong = fn, deleteSong, ...props }) {
   const classes = useStyles();
 
   const onDragEnd = (result) => {
@@ -28,6 +29,9 @@ export default function Playlist({ allSongs, currentSong, setSongs = fn, songs =
 
   return (
     <Box className={classes.playlist} {...props}>
+
+      {!songs.length && placeholder && <Placeholder placeholder={placeholder} />}
+
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (

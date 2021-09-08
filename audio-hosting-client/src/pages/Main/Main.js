@@ -4,6 +4,7 @@ import Playlist from "../../components/Playlist";
 import Player from "../../components/Player";
 import AppButton from "../../components/AppButton/AppButton";
 import ChoosePlaylistModal from "../../components/Modal/ChoosePlaylist";
+import { ADD_PLAYLIST } from "../../components/Placeholder";
 import useStyles from "./styles";
 
 export default function Main({ playlists, changePlaylist }) {
@@ -14,7 +15,7 @@ export default function Main({ playlists, changePlaylist }) {
     <>
       <Box className={classes.main}>
         <Player />
-        <Playlist />
+        <Playlist placeholder={ADD_PLAYLIST} />
       </Box>
       <AppButton onClick={() => setOpenModal(true)}>Open</AppButton>
       <ChoosePlaylistModal

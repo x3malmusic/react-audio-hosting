@@ -4,6 +4,7 @@ import SongCard from "../../components/SongCard/SongCard";
 import Playlist from "../../components/Playlist/Playlist";
 import AppButton from "../../components/AppButton/AppButton";
 import Modal from "../../components/Modal/Modal";
+import { DROP_SONGS_HERE } from "../../components/Placeholder";
 import useStyles from "./styles";
 
 export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSongs, createNewPlaylist, setName, name }) {
@@ -39,6 +40,7 @@ export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSon
         </Box>
 
         <Playlist
+          placeholder={DROP_SONGS_HERE}
           allSongs={allSongs}
           songs={newPlaylistSongs}
           setSongs={setSongs}
