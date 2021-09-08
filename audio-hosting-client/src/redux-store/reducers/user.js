@@ -1,4 +1,4 @@
-import { SET_SONGS, SET_USER } from "../actions/types";
+import { CLEAR_USER, SET_SONGS, SET_USER } from "../actions/types";
 
 const initialState = {};
 
@@ -10,7 +10,9 @@ const user = (state = initialState, action) => {
         songs: action.payload,
       };
     case SET_USER:
-      return { ...action.payload };
+      return { ...state, ...action.payload };
+    case CLEAR_USER:
+      return {};
     default:
       return state;
   }

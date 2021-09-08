@@ -13,7 +13,8 @@ import {
   SET_CURRENT_PLAYLIST,
   REORDER_SONGS_IN_PLAYLIST,
   PLAY_NEXT_SONG,
-  PLAY_PREVIOUS_SONG
+  PLAY_PREVIOUS_SONG,
+  SAVE_USER_SETTINGS,
 } from "./types";
 
 export const uploadTrack = (payload) => ({
@@ -78,11 +79,16 @@ export const setPlaylist = (id) => ({
   payload: id
 });
 
-export const playNext = (id) => ({
+export const playNext = () => ({
   type: PLAY_NEXT_SONG,
 });
 
-export const playPrevious = (id) => ({
+export const playPrevious = () => ({
   type: PLAY_PREVIOUS_SONG,
+});
+
+export const saveUserSettings = (payload) => ({
+  type: SAVE_USER_SETTINGS,
+  payload
 });
 

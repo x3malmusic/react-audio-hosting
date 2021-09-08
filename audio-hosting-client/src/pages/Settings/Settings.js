@@ -3,12 +3,16 @@ import { Box, TextField, Typography, Checkbox, Input, Select, MenuItem } from "@
 import AppButton from "../../components/AppButton/AppButton";
 import useStyles from "./styles";
 
-export default function Settings({ email, name, defaultPlaylist = {}, defaultVolume = 50, autoplay = false, playlists }) {
+export default function Settings({ saveUserSettings, email, name, defaultPlaylist, defaultVolume = 50, autoplay = false, playlists }) {
   const classes = useStyles();
   const [userName, setUserName] = useState(name)
   const [defPlaylist, setDefPlaylist] = useState(defaultPlaylist)
   const [defVolume, setDefVolume] = useState(defaultVolume)
   const [play, setPlay] = useState(autoplay)
+
+  const saveSettings = () => {
+    saveUserSettings({ name: userName, defaultPlaylist: defPlaylist, defaultVolume: defVolume, autoplay: play })
+  }
 
   return (
     <Box className={classes.settings}>
@@ -25,7 +29,7 @@ export default function Settings({ email, name, defaultPlaylist = {}, defaultVol
 
       <Box className={classes.formRow}>
         <Typography className={classes.label}>Autoplay:</Typography>
-        <Checkbox color="primary" value={play} className={classes.checkbox} onChange={(e) => setPlay(e.target.checked)} />
+        <Checkbox color="primary" checked={play} className={classes.checkbox} onChange={(e) => setPlay(e.target.checked)} />
       </Box>
 
       <Box className={classes.formRow}>
@@ -41,7 +45,7 @@ export default function Settings({ email, name, defaultPlaylist = {}, defaultVol
       </Box>
 
       <Box className={classes.formRow}>
-        <AppButton className={classes.btn}>Save changes</AppButton>
+        <AppButton className={classes.btn} onClick={saveSettings}>Save changes</AppButton>
       </Box>
 
     </Box>

@@ -8,9 +8,11 @@ import {
   SILENT_LOGIN,
   LOG_OUT,
   CREATE_NEW_PLAYLIST,
+  SAVE_USER_SETTINGS,
+  CLEAR_USER
 } from "../actions/types";
 import { safe } from "./error";
-import { uploadSong, register, login, silentLogin, createPlaylist } from "../../services/http";
+import { uploadSong, register, login, silentLogin, createPlaylist, saveUserSettings } from "../../services/http";
 import { saveToken, deleteToken } from "../../utils/token";
 import { arrayToMap } from "../../utils";
 
@@ -33,7 +35,7 @@ const silentLoginUser = function* () {
 
 const logoutUser = function* () {
   deleteToken();
-  yield put({ type: SET_USER, payload: {} })
+  yield put({ type: CLEAR_USER })
 };
 
 const uploadTrack = function* ({ payload }) {
@@ -57,6 +59,11 @@ const createNewPlaylist = function* () {
   yield put({ type: SET_USER, payload: { ...user } })
 };
 
+const saveSettings = function* ({ payload }) {
+  const user = yield saveUserSettings(payload);
+  yield put({ type: SET_USER, payload: user });
+};
+
 const userSagas = [
   takeLatest(UPLOAD_TRACK, safe(uploadTrack)),
   takeLatest(REGISTER, safe(registerUser)),
@@ -64,6 +71,7 @@ const userSagas = [
   takeLatest(SILENT_LOGIN, safe(silentLoginUser)),
   takeLatest(LOG_OUT, safe(logoutUser)),
   takeLatest(CREATE_NEW_PLAYLIST, safe(createNewPlaylist)),
+  takeLatest(SAVE_USER_SETTINGS, safe(saveSettings)),
 ];
 
 export default userSagas;

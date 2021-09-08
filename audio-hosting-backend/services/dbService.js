@@ -81,3 +81,19 @@ export const createNewPlaylist = async (userId, name, songsArray) => {
     resolve(playlist)
   })
 }
+
+export const saveUserSettings = async (userId, settings) => {
+  return new Promise(async (resolve, reject) => {
+    const user = await getUserById(userId);
+    if (!user) return reject(USER_NOT_FOUND);
+
+    await user.updateOne({
+      defaultPlaylist: settings.defaultPlaylist || null,
+      defaultVolume: settings.defaultVolume || 50,
+      autoplay: settings.autoplay,
+      name: settings.name
+    });
+
+    resolve(user)
+  })
+}
