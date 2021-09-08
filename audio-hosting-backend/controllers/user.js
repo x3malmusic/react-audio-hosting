@@ -21,7 +21,8 @@ export const saveSettings = asyncHandler(async (req, res, next) => {
   const { userId } = req.user
   const { defaultPlaylist, defaultVolume, autoplay, name } = req.body
 
-  const { __v, password, playlists, songs, email, ...user} = saveUserSettings(userId, { defaultPlaylist, defaultVolume, autoplay, name  })
+  const data = await saveUserSettings(userId, { defaultPlaylist, defaultVolume, autoplay, name })
+  const { __v, password, playlists, songs, email, ...user} = data.toObject();
 
   res.send(user)
 })

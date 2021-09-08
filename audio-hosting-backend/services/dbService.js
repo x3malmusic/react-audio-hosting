@@ -87,13 +87,12 @@ export const saveUserSettings = async (userId, settings) => {
     const user = await getUserById(userId);
     if (!user) return reject(USER_NOT_FOUND);
 
-    await user.updateOne({
-      defaultPlaylist: settings.defaultPlaylist || null,
-      defaultVolume: settings.defaultVolume || 50,
-      autoplay: settings.autoplay,
-      name: settings.name
-    });
+    user.defaultPlaylist = settings.defaultPlaylist || null
+    user.defaultVolume = settings.defaultVolume || 50
+    user.autoplay = settings.autoplay
+    user.name = settings.name
 
+    await user.save()
     resolve(user)
   })
 }
