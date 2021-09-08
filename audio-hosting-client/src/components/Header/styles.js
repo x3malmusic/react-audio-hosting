@@ -15,6 +15,15 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: "border-box",
     zIndex: 10
   },
+  btnContainer: {
+    display: "flex",
+    alignItems: "center"
+  },
+  username: {
+    marginRight: theme.spacing(2),
+    fontSize: 18,
+    fontStyle: "italic"
+  }
 }));
 
 export default useStyles;
