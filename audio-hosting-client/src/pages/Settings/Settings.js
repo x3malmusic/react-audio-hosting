@@ -6,7 +6,7 @@ import useStyles from "./styles";
 export default function Settings({ saveUserSettings, email, name, defaultPlaylist, defaultVolume = 50, autoplay = false, playlists }) {
   const classes = useStyles();
   const [userName, setUserName] = useState(name)
-  const [defPlaylist, setDefPlaylist] = useState(defaultPlaylist)
+  const [defPlaylist, setDefPlaylist] = useState(defaultPlaylist || "")
   const [defVolume, setDefVolume] = useState(defaultVolume)
   const [play, setPlay] = useState(autoplay)
 
@@ -34,12 +34,12 @@ export default function Settings({ saveUserSettings, email, name, defaultPlaylis
 
       <Box className={classes.formRow}>
         <Typography className={classes.label}>Default volume:</Typography>
-        <Input className={classes.grow} value={defVolume} onChange={e => setDefVolume(e.target.value)} type="range" min={0} max={100} step={1} disableUnderline />
+        <Input className={classes.grow} inputProps={{ className: classes.range }} value={defVolume} onChange={e => setDefVolume(Number(e.target.value))} type="range" min={0} max={100} step={1} disableUnderline />
       </Box>
 
       <Box className={classes.formRow}>
         <Typography className={classes.label}>Default playlist:</Typography>
-        <Select className={classes.grow} onChange={(e) => setDefPlaylist(e.target.value)} value={defPlaylist.name || ""} >
+        <Select className={classes.grow} onChange={(e) => setDefPlaylist(e.target.value)} value={defPlaylist} >
           {!!playlists?.length && playlists.map(playlist => <MenuItem key={playlist._id} value={playlist._id}>{playlist.name}</MenuItem>)}
         </Select>
       </Box>

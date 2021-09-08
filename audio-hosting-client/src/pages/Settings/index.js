@@ -7,7 +7,7 @@ const mapStateToProps = ({ user: { email, name, playlists, autoplay, defaultPlay
   name,
   playlists,
   autoplay,
-  defaultPlaylist: !defaultPlaylist && "",
+  defaultPlaylist,
   defaultVolume,
 });
 

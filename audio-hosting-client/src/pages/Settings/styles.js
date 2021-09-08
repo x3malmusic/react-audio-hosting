@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1.5),
     width: "100%",
   },
+  range: {
+    cursor: "pointer",
+  },
   grow: {
     flexGrow: 1,
   },
