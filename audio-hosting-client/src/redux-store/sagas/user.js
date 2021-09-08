@@ -10,7 +10,8 @@ import {
   LOG_OUT,
   CREATE_NEW_PLAYLIST,
   SAVE_USER_SETTINGS,
-  CLEAR_USER
+  CLEAR_USER,
+  SET_CURRENT_PLAYLIST
 } from "../actions/types";
 import { safe } from "./error";
 import { uploadSong, register, login, silentLogin, createPlaylist, saveUserSettings } from "../../services/http";
@@ -28,21 +29,29 @@ import {
 
 const registerUser = function* ({ payload }) {
   const data = yield register(payload);
+
   saveToken(data.token)
   yield put({ type: SET_USER, payload: {...data.user, songs: arrayToMap(data.user.songs)} })
+
   notify(messages[REGISTER_SUCCESS])
 };
 
 const loginUser = function* ({ payload }) {
   const data = yield login(payload);
+
   saveToken(data.token)
   yield put({ type: SET_USER, payload: {...data.user, songs: arrayToMap(data.user.songs)}})
+
+  if (data.user.defaultPlaylist) yield put({ type: SET_CURRENT_PLAYLIST, payload: data.user.defaultPlaylist })
+
   notify(messages[LOGIN_SUCCESS])
 };
 
 const silentLoginUser = function* () {
   let data = yield silentLogin();
   yield put({ type: SET_USER, payload: {...data, songs: arrayToMap(data.songs)} })
+
+  if (data.defaultPlaylist) yield put({ type: SET_CURRENT_PLAYLIST, payload: data.defaultPlaylist })
   notify(messages[LOGIN_SUCCESS])
 };
 
