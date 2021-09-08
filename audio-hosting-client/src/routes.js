@@ -6,6 +6,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Main from "./pages/Main"
 import UploadTrack from "./pages/UploadTrack";
 import CreatePlaylist from "./pages/CreatePlaylist";
+import Settings from "./pages/Settings";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -32,7 +33,7 @@ export const routes =  [
   },
   {
     path: "/settings",
-    component: null,
+    component: Settings,
     Icon: SettingsIcon,
     name: "Settings",
   },
