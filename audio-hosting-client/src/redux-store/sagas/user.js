@@ -54,7 +54,7 @@ const createNewPlaylist = function* () {
   const playlist = yield createPlaylist({ name: playlistName, songs: Object.keys(newSongs) });
 
   const user = yield select(state => state.user)
-  user.playlists = { ...user, [playlist._id]: playlist }
+  user.playlists = [...user.playlists, playlist]
 
   yield put({ type: SET_USER, payload: { ...user } })
 };
