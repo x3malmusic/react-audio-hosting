@@ -18,6 +18,9 @@ export default function Register({ register }) {
 
   return (
     <Box className={classes.login}>
+      <Box>
+        <Typography className={classes.title}>Register</Typography>
+      </Box>
       <Box className={classes.form}>
         <TextField value={email} onChange={(e) => setEmail(e.target.value)} className={classes.input} variant="outlined" label="Email" />
         <TextField value={password} type="password" onChange={(e) => setPassword(e.target.value)} className={classes.input} variant="outlined" label="Password" />

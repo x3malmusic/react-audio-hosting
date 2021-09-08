@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "column",
   },
   form: {
     maxWidth: 400,
@@ -32,6 +33,13 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
     marginLeft: theme.spacing(1)
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 48,
+    textShadow: `1px -1px 10px ${theme.color.palette.light}`,
+    color: theme.color.palette.sidebar,
+    marginBottom: theme.spacing(1),
   }
 }));
 
