@@ -41,6 +41,7 @@ export default function Player({ currentSong, playNext, playPrevious, songs = []
         onClickNext={playNext}
         onClickPrevious={playPrevious}
         onEnded={playNext}
+        volume={0.5}
         showSkipControls
         crossOrigin="anonymous"
       />
