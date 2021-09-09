@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Typography, Box } from "@material-ui/core";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import { DEFAULT_VOLUME } from "../../constants/default_settings";
 import { initAnalyser } from "../../utils/initAnalyser";
 import useStyles from "./styles";
 
 
-export default function Player({ currentSong, playNext, playPrevious, defaultVolume = 50, songs = [], play, setPlay }) {
+export default function Player({ currentSong, playNext, playPrevious, defaultVolume = DEFAULT_VOLUME, songs = [], play, setPlay }) {
   const classes = useStyles();
   const audio = useRef()
   const canvasRef = useRef()

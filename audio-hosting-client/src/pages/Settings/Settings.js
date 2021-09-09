@@ -4,7 +4,7 @@ import AppButton from "../../components/AppButton/AppButton";
 import { DEFAULT_VOLUME, DEFAULT_PLAYLIST } from "../../constants/default_settings";
 import useStyles from "./styles";
 
-export default function Settings({ saveUserSettings, email, name, defaultPlaylist, defaultVolume = 50, playlists }) {
+export default function Settings({ saveUserSettings, email, name, defaultPlaylist, defaultVolume = DEFAULT_VOLUME, playlists }) {
   const classes = useStyles();
   const [userName, setUserName] = useState(name)
   const [defPlaylist, setDefPlaylist] = useState(defaultPlaylist || "")
