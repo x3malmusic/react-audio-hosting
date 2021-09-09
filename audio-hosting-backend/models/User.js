@@ -8,7 +8,6 @@ const userSchema = new Schema({
   songs: [{ type: mongoose.Types.ObjectId, ref: "Song" }],
   defaultPlaylist: { type: mongoose.Types.ObjectId, ref: "Song", default: null },
   defaultVolume: { type: Number, default: 50 },
-  autoplay: { type: Boolean, default: false },
 });
 
 export const User = model("User", userSchema);

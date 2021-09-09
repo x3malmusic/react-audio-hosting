@@ -89,7 +89,6 @@ export const saveUserSettings = async (userId, settings) => {
 
     user.defaultPlaylist = settings.defaultPlaylist || null
     user.defaultVolume = settings.defaultVolume || 50
-    user.autoplay = settings.autoplay
     user.name = settings.name
 
     await user.save()

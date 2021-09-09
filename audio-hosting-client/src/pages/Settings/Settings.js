@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import { Box, TextField, Typography, Checkbox, Input, Select, MenuItem } from "@material-ui/core";
+import { Box, TextField, Typography, Input, Select, MenuItem } from "@material-ui/core";
 import AppButton from "../../components/AppButton/AppButton";
 import { DEFAULT_VOLUME, DEFAULT_PLAYLIST } from "../../constants/default_settings";
 import useStyles from "./styles";
 
-export default function Settings({ saveUserSettings, email, name, defaultPlaylist, defaultVolume = 50, autoplay = false, playlists }) {
+export default function Settings({ saveUserSettings, email, name, defaultPlaylist, defaultVolume = 50, playlists }) {
   const classes = useStyles();
   const [userName, setUserName] = useState(name)
   const [defPlaylist, setDefPlaylist] = useState(defaultPlaylist || "")
   const [defVolume, setDefVolume] = useState(defaultVolume)
-  const [play, setPlay] = useState(autoplay)
 
   const saveSettings = () => {
-    saveUserSettings({ name: userName, defaultPlaylist: defPlaylist, defaultVolume: defVolume, autoplay: play })
+    saveUserSettings({ name: userName, defaultPlaylist: defPlaylist, defaultVolume: defVolume })
   }
 
   const setDefaultSettings = () => {
-    saveUserSettings({ name: userName, defaultPlaylist: DEFAULT_PLAYLIST, defaultVolume: DEFAULT_VOLUME, autoplay: play })
+    saveUserSettings({ name: userName, defaultPlaylist: DEFAULT_PLAYLIST, defaultVolume: DEFAULT_VOLUME })
     setDefPlaylist(DEFAULT_PLAYLIST || "");
     setDefVolume(DEFAULT_VOLUME)
   }
@@ -32,11 +31,6 @@ export default function Settings({ saveUserSettings, email, name, defaultPlaylis
       <Box className={classes.formRow}>
         <Typography className={classes.label}>Email:</Typography>
         <TextField className={classes.grow} inputProps={{ className: classes.input }} variant="outlined" value={email} disabled />
-      </Box>
-
-      <Box className={classes.formRow}>
-        <Typography className={classes.label}>Autoplay:</Typography>
-        <Checkbox color="primary" checked={play} className={classes.checkbox} onChange={(e) => setPlay(e.target.checked)} />
       </Box>
 
       <Box className={classes.formRow}>
