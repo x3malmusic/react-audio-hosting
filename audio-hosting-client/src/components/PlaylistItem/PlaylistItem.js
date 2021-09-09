@@ -7,9 +7,14 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import { makeDuration } from "../../utils";
 import useStyles from "./styles";
 
-export default function PlaylistItem({ original_filename, duration, _id, currentSong, setSong = () => {}, deleteSong }) {
+export default function PlaylistItem({ setPlay, original_filename, duration, _id, currentSong, setSong = () => {}, deleteSong }) {
   const classes = useStyles();
   const [hover, setHover] = useState(false)
+
+  const clickPlay = () => {
+    setPlay(true);
+    setSong(_id);
+  }
 
   return (
     <ListItem
@@ -21,7 +26,7 @@ export default function PlaylistItem({ original_filename, duration, _id, current
         color="primary"
         className={clsx(classes.playBtn, { [classes.playBtnHover]: currentSong === _id || hover })}
         disabled={!hover}
-        onClick={() => setSong(_id)}
+        onClick={clickPlay}
       >
         {currentSong === _id  ? <VolumeUpIcon /> : <PlayArrowIcon />}
       </IconButton>

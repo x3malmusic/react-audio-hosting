@@ -12,7 +12,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle
 });
 
-export default function Playlist({ placeholder, allSongs, currentSong, setSongs = fn, songs = [], setPlaySong = fn, deleteSong, ...props }) {
+export default function Playlist({ setPlay = fn, placeholder, allSongs, currentSong, setSongs = fn, songs = [], setPlaySong = fn, deleteSong, ...props }) {
   const classes = useStyles();
 
   const onDragEnd = (result) => {
@@ -54,6 +54,7 @@ export default function Playlist({ placeholder, allSongs, currentSong, setSongs 
                       <PlaylistItem
                         currentSong={currentSong}
                         setSong={setPlaySong}
+                        setPlay={setPlay}
                         deleteSong={deleteSong}
                         {...allSongs[songId]}
                       />

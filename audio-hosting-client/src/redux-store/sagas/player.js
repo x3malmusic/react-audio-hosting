@@ -3,7 +3,6 @@ import {
   CHANGE_SONG,
   SET_CURRENT_PLAYLIST,
   SET_CURRENT_SONG,
-  SET_PLAY,
   SET_SONGS_IN_PLAYLIST,
   PLAY_NEXT_SONG,
   PLAY_PREVIOUS_SONG,
@@ -13,9 +12,6 @@ import { recalcNextAndPrevSongs } from "../../utils";
 
 
 const setCurrentSong = function* ({ payload }) {
-  const play = yield select(state => state.player.play);
-  if (!play) yield put({ type: SET_PLAY, payload: true });
-
   const songs = yield select(state => state.player.songsInPlaylist);
   const { currentSong, nextSong, previousSong } = yield recalcNextAndPrevSongs(payload, songs)
   yield put({ type: CHANGE_SONG, payload: { currentSong, nextSong, previousSong }});
