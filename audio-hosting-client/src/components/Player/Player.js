@@ -25,16 +25,12 @@ export default function Player({ currentSong, playNext, playPrevious, defaultVol
     if (!play) setPlay(true)
   }
 
-  const clickPause = () => {
-    if (play) setPlay(false)
-  }
-
   useEffect(() => {
     if (play && songs[currentSong]) audio.current.audio.current.play();
   }, [currentSong, play]);
 
   useEffect(() => {
-    return (play) => {
+    return () => {
       if (play) setPlay(false);
     }
   }, [setPlay, play])
@@ -48,7 +44,6 @@ export default function Player({ currentSong, playNext, playPrevious, defaultVol
         src={songs[currentSong]?.url}
         autoPlayAfterSrcChange={play}
         onPlay={() => clickPlay()}
-        onPause={() => clickPause()}
         onClickNext={playNext}
         onClickPrevious={playPrevious}
         onEnded={playNext}
