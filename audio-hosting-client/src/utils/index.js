@@ -9,8 +9,7 @@ export const formatDate = (date) => {
   if (day.length === 1) day = '0' + day;
   if (minutes < 10) minutes = '0' + minutes;
 
-  const formatted = `${day}/${month}/${year} ${hours}:${minutes}`
-  return formatted
+  return `${day}/${month}/${year} ${hours}:${minutes}`
 }
 
 export const makeDuration = (duration) => {
@@ -43,4 +42,8 @@ export const recalcNextAndPrevSongs = (currentSong, array) => {
   if (!nextSongId) nextSongId = array[0];
   if (!previousSongId) previousSongId = array[array.length - 1];
   return { currentSong, nextSong: nextSongId, previousSong: previousSongId }
+}
+
+export const isEqualArrays = (array, array2) => {
+  return array.every((e, i) => e === array2[i])
 }
