@@ -6,7 +6,7 @@ import { isEqualArrays } from "../../utils";
 import { DEFAULT_VOLUME, DEFAULT_PLAYLIST, DEFAULT_NAME } from "../../constants/default_settings";
 import useStyles from "./styles";
 
-const defaultsArray = [DEFAULT_VOLUME, DEFAULT_PLAYLIST, DEFAULT_NAME]
+const defaultsArray = [DEFAULT_VOLUME, "", DEFAULT_NAME]
 
 
 export default function Settings({ saveUserSettings, email, name, defaultPlaylist, defaultVolume = DEFAULT_VOLUME, playlists }) {
@@ -25,12 +25,14 @@ export default function Settings({ saveUserSettings, email, name, defaultPlaylis
 
   const saveSettings = () => {
     saveUserSettings({ name: userName, defaultPlaylist: defPlaylist, defaultVolume: defVolume })
+    setIsChanged(true)
   }
 
   const setDefaultSettings = () => {
-    saveUserSettings({ name: userName, defaultPlaylist: DEFAULT_PLAYLIST, defaultVolume: DEFAULT_VOLUME })
-    setDefPlaylist(DEFAULT_PLAYLIST || "");
+    saveUserSettings({ name: "", defaultPlaylist: DEFAULT_PLAYLIST, defaultVolume: DEFAULT_VOLUME })
+    setDefPlaylist("");
     setDefVolume(DEFAULT_VOLUME)
+    setUserName(DEFAULT_NAME)
   }
 
   const changeVolume = (e) => {
