@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
     textShadow: `1px -1px 10px ${theme.color.palette.light}`,
     color: theme.color.palette.sidebar,
     marginBottom: theme.spacing(1),
+  },
+  errorMessage: {
+    fontSize: 12
   }
 }));
 
