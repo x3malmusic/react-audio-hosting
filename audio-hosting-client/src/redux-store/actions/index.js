@@ -15,6 +15,7 @@ import {
   PLAY_NEXT_SONG,
   PLAY_PREVIOUS_SONG,
   SAVE_USER_SETTINGS,
+  SAVE_PLAYER_SETTINGS,
 } from "./types";
 
 export const uploadTrack = (payload) => ({
@@ -89,6 +90,11 @@ export const playPrevious = () => ({
 
 export const saveUserSettings = (payload) => ({
   type: SAVE_USER_SETTINGS,
+  payload
+});
+
+export const savePlayerSettings = (payload) => ({
+  type: SAVE_PLAYER_SETTINGS,
   payload
 });
 

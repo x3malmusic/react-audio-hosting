@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import Player from "./Player";
 import { setPlay, playNext, playPrevious } from "../../redux-store/actions";
 
-const mapStateToProps = ({ user: { songs, defaultVolume }, player: { currentSong, play, songsInPlaylist } }) => ({
+const mapStateToProps = ({ user: { songs }, player: { currentSong, play, songsInPlaylist, defaultVolume } }) => ({
   songs,
   songsInPlaylist,
   currentSong,

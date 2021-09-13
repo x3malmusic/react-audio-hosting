@@ -11,7 +11,7 @@ import {
   CREATE_NEW_PLAYLIST,
   SAVE_USER_SETTINGS,
   CLEAR_USER,
-  SET_CURRENT_PLAYLIST
+  INIT_PLAYER,
 } from "../actions/types";
 import { safe } from "./error";
 import { uploadSong, register, login, silentLogin, createPlaylist, saveUserSettings } from "../../services/http";
@@ -40,18 +40,19 @@ const loginUser = function* ({ payload }) {
   const data = yield login(payload);
 
   saveToken(data.token)
-  yield put({ type: SET_USER, payload: {...data.user, songs: arrayToMap(data.user.songs)}})
 
-  if (data.user.defaultPlaylist) yield put({ type: SET_CURRENT_PLAYLIST, payload: data.user.defaultPlaylist })
+  yield put({ type: SET_USER, payload: {...data.user, songs: arrayToMap(data.user.songs)}})
+  yield put({ type: INIT_PLAYER })
 
   notify(messages[LOGIN_SUCCESS])
 };
 
 const silentLoginUser = function* () {
-  let data = yield silentLogin();
-  yield put({ type: SET_USER, payload: {...data, songs: arrayToMap(data.songs)} })
+  const data = yield silentLogin();
 
-  if (data.defaultPlaylist) yield put({ type: SET_CURRENT_PLAYLIST, payload: data.defaultPlaylist })
+  yield put({ type: SET_USER, payload: {...data, songs: arrayToMap(data.songs)} })
+  yield put({ type: INIT_PLAYER })
+
   notify(messages[LOGIN_SUCCESS])
 };
 

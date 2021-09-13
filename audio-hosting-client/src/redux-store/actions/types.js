@@ -26,5 +26,7 @@ export const SET_PLAY = "SET_PLAY"
 
 export const UPLOAD_TRACK = "UPLOAD_TRACK";
 export const SAVE_USER_SETTINGS = "SAVE_USER_SETTINGS";
+export const SAVE_PLAYER_SETTINGS = "SAVE_PLAYER_SETTINGS";
+export const INIT_PLAYER = "INIT_PLAYER";
 
 export const SET_LOADING = "SET_LOADING";

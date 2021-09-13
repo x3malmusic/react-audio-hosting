@@ -1,12 +1,11 @@
 import { connect } from "react-redux";
 import Settings from "./Settings";
-import { saveUserSettings } from "../../redux-store/actions";
+import { saveUserSettings, savePlayerSettings } from "../../redux-store/actions";
 
-const mapStateToProps = ({ user: { email, name, playlists, autoplay, defaultPlaylist, defaultVolume } }) => ({
+const mapStateToProps = ({ user: { email, name, playlists }, player: { defaultPlaylist, defaultVolume } }) => ({
   email,
   name,
   playlists,
-  autoplay,
   defaultPlaylist,
   defaultVolume,
 });
@@ -14,6 +13,7 @@ const mapStateToProps = ({ user: { email, name, playlists, autoplay, defaultPlay
 
 const mapDispatchToProps = (dispatch) => ({
   saveUserSettings: (settings) => dispatch(saveUserSettings(settings)),
+  savePlayerSettings: (settings) => dispatch(savePlayerSettings(settings)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
