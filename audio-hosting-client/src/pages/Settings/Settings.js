@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, TextField, Typography, Input, Select, MenuItem, Divider } from "@material-ui/core";
+import { Box, TextField, Typography, Input, Select, MenuItem, Divider, Checkbox } from "@material-ui/core";
 import AppButton from "../../components/AppButton/AppButton";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
 import { isEqualArrays } from "../../utils";
@@ -9,12 +9,13 @@ import useStyles from "./styles";
 const defaultsArray = [DEFAULT_VOLUME, ""]
 
 
-export default function Settings({ savePlayerSettings, saveUserSettings, email, name, defaultPlaylist, defaultVolume, playlists }) {
+export default function Settings({ rememberLastSong, savePlayerSettings, saveUserSettings, email, name, defaultPlaylist, defaultVolume, playlists }) {
   const classes = useStyles();
 
   const [userName, setUserName] = useState(name)
   const [defPlaylist, setDefPlaylist] = useState(defaultPlaylist || "")
   const [defVolume, setDefVolume] = useState(defaultVolume)
+  const [savePlayedSong, setSavePlayedSong] = useState(rememberLastSong)
   const [openModal, setOpenModal] = useState(false)
 
   const userLocalSettings = [defVolume, defPlaylist];
@@ -28,7 +29,7 @@ export default function Settings({ savePlayerSettings, saveUserSettings, email, 
   }
 
   const saveUserPlayerSettings = () => {
-    savePlayerSettings({ defaultPlaylist: defPlaylist, defaultVolume: defVolume })
+    savePlayerSettings({ defaultPlaylist: defPlaylist, defaultVolume: defVolume, rememberLastSong: savePlayedSong })
     setIsChanged(true)
   }
 
@@ -49,6 +50,10 @@ export default function Settings({ savePlayerSettings, saveUserSettings, email, 
   const changeName = (e) => {
     setUserName(e.target.value)
     setIsChanged(e.target.value === name)
+  }
+
+  const checkLastPlayedSong = (e) => {
+    setSavePlayedSong(e.target.checked)
   }
 
   return (
@@ -73,6 +78,16 @@ export default function Settings({ savePlayerSettings, saveUserSettings, email, 
       <Divider />
 
       <Box className={classes.columnContainer}>
+        <Box className={classes.formRow}>
+          <Typography className={classes.label}>Remember last played song:</Typography>
+          <Checkbox
+            color="primary"
+            className={classes.checkbox}
+            checked={savePlayedSong}
+            onChange={checkLastPlayedSong}
+          />
+        </Box>
+
         <Box className={classes.formRow}>
           <Typography className={classes.label}>Default volume:</Typography>
           <Input

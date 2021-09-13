@@ -8,12 +8,12 @@ const useStyles = makeStyles((theme) => ({
     gap: theme.spacing(2),
     width: theme.constants.mainWidth / 3,
     gridTemplateColumns: "repeat(1, 1fr)",
-    gridTemplateRows: "repeat(1, 1fr)",
     boxShadow: "2px 4px 27px 0px rgba(34, 60, 80, 0.2)",
     height: "100%",
   },
   columnContainer: {
     display: "grid",
+    gap: theme.spacing(1),
   },
   formRow: {
     display: "flex",

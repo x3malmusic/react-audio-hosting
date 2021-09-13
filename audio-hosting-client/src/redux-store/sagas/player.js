@@ -8,27 +8,36 @@ import {
   PLAY_PREVIOUS_SONG,
   REORDER_SONGS_IN_PLAYLIST,
   SAVE_PLAYER_SETTINGS,
-  SET_USER,
-  INIT_PLAYER
+  INIT_PLAYER,
+  INIT_PLAYER_END,
 } from "../actions/types";
-import { saveLocalSettings } from "../../utils/userSettings";
+import { saveLocalSettings, deleteLastPlayedSong, getLastPlayedSong, saveLastPlayedSong } from "../../utils/userSettings";
 import { recalcNextAndPrevSongs } from "../../utils";
 import { notify } from "../../utils/notifications";
 import { messages, SETTINGS_SAVE_SUCCESS } from "../../constants/messages";
 
 
 const setCurrentSong = function* ({ payload }) {
-  const songs = yield select(state => state.player.songsInPlaylist);
-  const { currentSong, nextSong, previousSong } = yield recalcNextAndPrevSongs(payload, songs)
+  const { songsInPlaylist, rememberLastSong, initPlayer } = yield select(state => state.player);
+  const lastPlayedSong = yield getLastPlayedSong()
+
+  if (!initPlayer && rememberLastSong && lastPlayedSong) {
+    const { currentSong, nextSong, previousSong } = yield recalcNextAndPrevSongs(lastPlayedSong, songsInPlaylist)
+    yield put({ type: CHANGE_SONG, payload: { currentSong, nextSong, previousSong }});
+    return yield put({ type: INIT_PLAYER_END })
+  }
+
+  saveLastPlayedSong(payload)
+  const { currentSong, nextSong, previousSong } = yield recalcNextAndPrevSongs(payload, songsInPlaylist)
   yield put({ type: CHANGE_SONG, payload: { currentSong, nextSong, previousSong }});
 };
 
 const changePlaylist = function* ({ payload }) {
   const playlists = yield select(state => state.user.playlists);
-  const songsOfPlaylist = yield playlists.find(list => list._id === payload);
+  const playlist = yield playlists.find(list => list._id === payload);
 
-  yield put({ type: SET_SONGS_IN_PLAYLIST, payload: [...songsOfPlaylist.songs] });
-  yield put({ type: SET_CURRENT_SONG, payload: songsOfPlaylist.songs[0] });
+  yield put({ type: SET_SONGS_IN_PLAYLIST, payload: [...playlist.songs] });
+  yield put({ type: SET_CURRENT_SONG, payload: playlist.songs[0] });
 };
 
 const playNext = function* () {
@@ -49,8 +58,9 @@ const recalcNextAndPreviousSongs = function* ({ payload }) {
 }
 
 const savePlayerSettings = function* ({ payload }) {
-  saveLocalSettings(payload)
-  yield put({ type: SET_USER, payload });
+  if (!payload.rememberLastSong) deleteLastPlayedSong()
+
+  yield saveLocalSettings(payload)
   notify(messages[SETTINGS_SAVE_SUCCESS])
 }
 
