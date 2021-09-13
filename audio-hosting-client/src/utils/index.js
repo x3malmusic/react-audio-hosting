@@ -35,13 +35,16 @@ export const arrayToMap = (arr) => {
 }
 
 export const recalcNextAndPrevSongs = (currentSong, array) => {
-  const currentSongIndex = array.indexOf(currentSong);
+  let currentSongIndex = array.indexOf(currentSong);
+  if (currentSongIndex === -1) currentSongIndex = 0
+
+  const currentSongId = array[currentSongIndex];
   let nextSongId = array[currentSongIndex + 1];
   let previousSongId = array[currentSongIndex - 1];
 
   if (!nextSongId) nextSongId = array[0];
   if (!previousSongId) previousSongId = array[array.length - 1];
-  return { currentSong, nextSong: nextSongId, previousSong: previousSongId }
+  return { currentSong: currentSongId, nextSong: nextSongId, previousSong: previousSongId }
 }
 
 export const isEqualArrays = (array, array2) => {

@@ -73,10 +73,9 @@ const uploadTrack = function* ({ payload }) {
 };
 
 const createNewPlaylist = function* () {
-  const newSongs = yield select(state => state.newPlaylist.songs);
-  const playlistName = yield select(state => state.newPlaylist.name);
+  const { songs, name } = yield select(state => state.newPlaylist.songs);
 
-  const playlist = yield createPlaylist({ name: playlistName, songs: Object.keys(newSongs) });
+  const playlist = yield createPlaylist({ name, songs });
 
   const user = yield select(state => state.user)
   user.playlists = [...user.playlists, playlist]
