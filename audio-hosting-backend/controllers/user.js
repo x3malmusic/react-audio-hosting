@@ -19,9 +19,9 @@ export const createPlaylist = asyncHandler(async (req, res, next) => {
 
 export const saveSettings = asyncHandler(async (req, res, next) => {
   const { userId } = req.user
-  const { defaultPlaylist, defaultVolume, name } = req.body
+  const { name } = req.body
 
-  const data = await saveUserSettings(userId, { defaultPlaylist, defaultVolume, name })
+  const data = await saveUserSettings(userId, { name })
   const { __v, password, playlists, songs, email, ...user} = data.toObject();
 
   res.send(user)

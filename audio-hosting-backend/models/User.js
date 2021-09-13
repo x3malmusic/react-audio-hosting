@@ -6,8 +6,6 @@ const userSchema = new Schema({
   password: { type: String, required: [true, "password is required"]},
   playlists: [{ type: mongoose.Types.ObjectId, ref: "Playlist" }],
   songs: [{ type: mongoose.Types.ObjectId, ref: "Song" }],
-  defaultPlaylist: { type: mongoose.Types.ObjectId, ref: "Song", default: null },
-  defaultVolume: { type: Number, default: 50 },
 });
 
 export const User = model("User", userSchema);

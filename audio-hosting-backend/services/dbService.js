@@ -87,8 +87,6 @@ export const saveUserSettings = async (userId, settings) => {
     const user = await getUserById(userId);
     if (!user) return reject(USER_NOT_FOUND);
 
-    user.defaultPlaylist = settings.defaultPlaylist || null
-    user.defaultVolume = settings.defaultVolume || 50
     user.name = settings.name
 
     await user.save()
