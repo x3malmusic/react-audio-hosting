@@ -11,6 +11,8 @@ import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
+import withPlayer from "./components/withPlayer/withPlayer";
+
 export const routes =  [
   {
     path: "/",
@@ -21,19 +23,19 @@ export const routes =  [
   },
   {
     path: "/upload",
-    component: UploadTrack,
+    component: withPlayer(UploadTrack),
     Icon: PublishIcon,
     name: "Upload track",
   },
   {
     path: "/create-playlist",
-    component: CreatePlaylist,
+    component: withPlayer(CreatePlaylist),
     Icon: PlaylistAddIcon,
     name: "Create playlist",
   },
   {
     path: "/settings",
-    component: Settings,
+    component: withPlayer(Settings),
     Icon: SettingsIcon,
     name: "Settings",
   },

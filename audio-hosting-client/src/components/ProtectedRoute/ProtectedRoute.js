@@ -3,6 +3,9 @@ import MainLayout from "../../layouts/MainLayout";
 import Loader from "../Loader/Loader";
 import { routes, publicRoutes } from "../../routes";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { RefProvider } from "../../context";
+import Player from "../Player";
+
 
 export default function ProtectedRoute({ user, loading }) {
 
@@ -24,16 +27,24 @@ export default function ProtectedRoute({ user, loading }) {
   }
 
   return (
-    <MainLayout>
-      {routes.map(({ path, component, exact }) => (
-        <Route
-          key={path}
-          path={path}
-          component={component}
-          exact={exact}
-        />
-      ))}
-      <Redirect to="/" />
-    </MainLayout>
+    <RefProvider>
+      <MainLayout>
+        <Switch>
+          {routes.map(({ path, component, exact }) => (
+            <Route
+              key={path}
+              path={path}
+              component={component}
+              exact={exact}
+            />
+          ))}
+          <Redirect to="/" />
+        </Switch>
+      </MainLayout>
+
+      <div>
+        <Player />
+      </div>
+    </RefProvider>
   )
 }

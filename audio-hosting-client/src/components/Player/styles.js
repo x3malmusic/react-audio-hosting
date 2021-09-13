@@ -6,12 +6,16 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     textAlign: "center",
     overflowX: "hidden",
-    boxShadow: theme.constants.shadow,
+    boxShadow: "0 0 2px 0 #ccc",
   },
   canvas: {
+    display: "none",
     width: "100%",
     boxShadow: `0px 0px 3px 0 ${theme.color.palette.shadow}`,
-  }
+  },
+  show: {
+    display: "block",
+  },
 }));
 
 export default useStyles;

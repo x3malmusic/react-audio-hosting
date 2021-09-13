@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "2px 4px 27px 0px rgba(34, 60, 80, 0.2)",
     height: theme.constants.playlistHeight,
   },
+  playerContainer: {
+    boxShadow: theme.constants.shadow,
+  },
 }));
 
 export default useStyles;
