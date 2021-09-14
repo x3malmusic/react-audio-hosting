@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     zIndex: 2,
   },
+  selected: {
+    backgroundColor: theme.color.palette.shadow
+  }
 }));
 
 export default useStyles;

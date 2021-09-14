@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box } from "@material-ui/core";
+import { SelectableGroup } from 'react-selectable-fast'
 import SongCard from "../../components/SongCard/SongCard";
 import Playlist from "../../components/Playlist/Playlist";
 import AppButton from "../../components/AppButton/AppButton";
@@ -9,15 +10,23 @@ import useStyles from "./styles";
 
 export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSongs, createNewPlaylist, setName, name }) {
   const classes = useStyles();
+  const selectableRef = useRef();
   const [openModal, setOpenModal] = useState(false)
+  const [clickCtrl, setClickCtrl] = useState(false)
+  const [selectedItems, setSelectedItems] = useState([])
 
   const dropHandler = (e) => {
     e.preventDefault();
-    const addedSong = JSON.parse(e.dataTransfer.getData("song"));
-    const exist = newPlaylistSongs.find(s => s === addedSong)
+    const addedSong = e.dataTransfer.getData("song");
 
-    if (exist) return
-    setSongs([ ...newPlaylistSongs, addedSong ])
+    if (addedSong) {
+      const newSongs = [...new Set([ ...newPlaylistSongs, JSON.parse(addedSong) ])]
+      return setSongs(newSongs)
+    }
+
+    const newSongs = [...new Set([ ...newPlaylistSongs, ...selectedItems ])]
+    setSongs(newSongs)
+    selectableRef.current.clearSelection()
   }
 
   const dragOverHandler = (e) => {
@@ -25,19 +34,55 @@ export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSon
     e.dataTransfer.dropEffect = "move"
   }
 
+  const ctrlClickHandler = (e) => {
+    if (e.code === "ControlLeft") setClickCtrl(true)
+  }
+
+  const ctrlUpClickHandler = (e) => {
+    if (e.code === "ControlLeft") setClickCtrl(false)
+  }
+
   const deleteSong = (id) => {
     const songs = newPlaylistSongs.filter(song => song !== id)
-
     setSongs(songs)
   }
+
+  const selectHandler = (items) => {
+    if (items.length) {
+      const selectedIds = items.reduce((acc, item) => {
+        acc.push(item.props.song._id)
+        return acc
+      }, [])
+
+      setSelectedItems(selectedIds)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", ctrlClickHandler)
+    document.addEventListener("keyup", ctrlUpClickHandler)
+    return () => {
+      document.removeEventListener("keydown", ctrlClickHandler)
+      document.removeEventListener("keyup", ctrlUpClickHandler)
+    }
+  }, [])
 
   return (
     <>
       <Box className={classes.createPlaylistContainer}>
 
-        <Box className={classes.allSongs}>
+        <SelectableGroup
+          ref={selectableRef}
+          className={classes.allSongs}
+          enableDeselect
+          onSelectionFinish={selectHandler}
+          resetOnStart={!clickCtrl}
+          allowCtrlClick
+          ignoreList={[".selected"]}
+          disabled={!clickCtrl}
+        >
           {!!Object.values(allSongs).length && Object.values(allSongs).map(song => <SongCard key={song._id} draggable song={song} />)}
-        </Box>
+        </SelectableGroup>
 
         <Playlist
           placeholder={DROP_SONGS_HERE}

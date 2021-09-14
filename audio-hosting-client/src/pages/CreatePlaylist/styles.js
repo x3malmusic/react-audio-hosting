@@ -17,6 +17,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     boxShadow: theme.constants.shadow,
     overflow: "auto",
+    "& .selectable-selectbox": {
+      Zindex: 9000,
+      position: "absolute",
+      cursor: "default",
+      background: "none",
+      border: "1px dashed grey",
+    },
     "&::-webkit-scrollbar": {
       width: 5
     },
@@ -28,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
   newPlaylist: {
     height: theme.constants.playlistHeight,
     boxShadow: "-1px 0 0 0 rgba(34, 60, 80, 0.2)",
+  },
+  invisible: {
+    display: "none"
   }
 }));
 
