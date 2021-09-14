@@ -20,14 +20,17 @@ export default function UploadTrack({ upload, loading }) {
 
   return (
     <>
-      <Input type="file" onChange={chooseSong} inputProps={{ accept: ".mp3"  }} />
+      <Input type="file" onChange={chooseSong} inputProps={{ accept: ".mp3" }} />
       <AppButton onClick={uploadTrack}>
         {loading ? <CircularProgress size={24} className={classes.loader} /> : 'Upload Track'}
       </AppButton>
-      <Box className={classes.uploadProgress}>
-        <LinearProgress className={classes.progressBar} variant="determinate" value={uploadProgress} />
-        <Typography className={classes.progressValue}>{`${uploadProgress}%`}</Typography>
-      </Box>
+
+      {loading &&
+        <Box className={classes.uploadProgress}>
+          <LinearProgress className={classes.progressBar} variant="determinate" value={uploadProgress} />
+          <Typography className={classes.progressValue}>{`${uploadProgress}%`}</Typography>
+        </Box>
+      }
     </>
   )
 }

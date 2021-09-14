@@ -66,9 +66,13 @@ const uploadTrack = function* ({ payload }) {
   const data = new FormData();
   data.append('song', payload.file);
   const song = yield uploadSong({ file: data, setUploadProgress: payload.setUploadProgress });
-  const allSongs = yield select(state => state.user.songs);
 
-  yield put({ type: SET_SONGS, payload: [...allSongs, song] });
+  const allSongs = yield select(state => state.user.songs);
+  allSongs[song._id] = song
+
+  payload.setUploadProgress(0)
+
+  yield put({ type: SET_SONGS, payload: { ...allSongs } });
   notify(messages[UPLOAD_SUCCESS])
 };
 
