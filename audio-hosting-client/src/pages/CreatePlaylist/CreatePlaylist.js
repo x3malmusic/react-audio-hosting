@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Box } from "@material-ui/core";
 import Playlist from "../../components/Playlist/Playlist";
 import AppButton from "../../components/AppButton/AppButton";
@@ -6,37 +6,13 @@ import Modal from "../../components/Modal/Modal";
 import AllSongsList from "../../components/AllSongsList";
 import SearchInput from "../../components/SearchInput";
 import { DROP_SONGS_HERE } from "../../components/Placeholder";
+import useSelectable from "../../hooks/useSelectable";
 import useStyles from "./styles";
 
 export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSongs, createNewPlaylist, setName, name }) {
   const classes = useStyles();
-  const selectableRef = useRef();
+  const { selectableRef, setSelectedItems, dropHandler, dragOverHandler, deleteSong } = useSelectable({ playlistSongs: newPlaylistSongs, setSongs })
   const [openModal, setOpenModal] = useState(false)
-  const [selectedItems, setSelectedItems] = useState([])
-
-  const dropHandler = (e) => {
-    e.preventDefault();
-    const addedSong = e.dataTransfer.getData("song");
-
-    if (addedSong) {
-      const newSongs = [...new Set([ ...newPlaylistSongs, JSON.parse(addedSong) ])]
-      return setSongs(newSongs)
-    }
-
-    const newSongs = [...new Set([ ...newPlaylistSongs, ...selectedItems ])]
-    setSongs(newSongs)
-    selectableRef.current.clearSelection()
-  }
-
-  const dragOverHandler = (e) => {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = "move"
-  }
-
-  const deleteSong = (id) => {
-    const songs = newPlaylistSongs.filter(song => song !== id)
-    setSongs(songs)
-  }
 
   return (
     <>
@@ -48,7 +24,6 @@ export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSon
       <Box className={classes.createPlaylistContainer}>
 
         <AllSongsList
-          allSongs={allSongs}
           setSelectedItems={setSelectedItems}
           selectableRef={selectableRef}
         />
