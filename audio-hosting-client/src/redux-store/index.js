@@ -4,7 +4,7 @@ import rootReducer from "./reducers/index";
 import rootSaga from "./sagas";
 
 const saga = createSagaMiddleware({onError: error => {
-    console.log(error)
+    console.log('sagaRoot', error)
     saga.run(rootSaga);
   }});
 

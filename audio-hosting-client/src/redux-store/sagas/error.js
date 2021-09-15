@@ -8,7 +8,8 @@ const safeWrapper = function* (saga, ...rest) {
     yield put({ type: `${SET_LOADING}_${args.type}`, payload: true });
     yield saga(args);
   } catch (err) {
-    notify({ message: err.data.message, type: 'danger', title: 'Error' });
+    console.log('sagaWrapper', err)
+    notify({ message: err.data?.message, type: 'danger', title: 'Error' });
   } finally {
     yield put({ type: `${SET_LOADING}_${args.type}`, payload: false });
   }
