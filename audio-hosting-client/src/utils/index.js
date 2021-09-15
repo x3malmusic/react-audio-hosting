@@ -50,3 +50,10 @@ export const recalcNextAndPrevSongs = (currentSong, array) => {
 export const isEqualArrays = (array, array2) => {
   return array.every((e, i) => e === array2[i])
 }
+
+export const searchSongs = (search, songs) => {
+  const regex = new RegExp(search, "gi")
+
+  return Object.fromEntries(Object.entries(songs)
+    .filter(([key, song]) => song.original_filename.match(regex)))
+}

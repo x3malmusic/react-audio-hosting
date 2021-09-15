@@ -1,4 +1,12 @@
-import { CHANGE_SONG, SET_PLAY, SET_CURRENT_PLAYLIST, SET_SONGS_IN_PLAYLIST, SAVE_PLAYER_SETTINGS, INIT_PLAYER_END } from "../actions/types";
+import {
+  CHANGE_SONG,
+  SET_PLAY,
+  SET_CURRENT_PLAYLIST,
+  SET_SONGS_IN_PLAYLIST,
+  SAVE_PLAYER_SETTINGS,
+  INIT_PLAYER_END ,
+  SET_SEARCH_VALUE
+} from "../actions/types";
 import { getLocalSettings } from "../../utils/userSettings";
 
 const settings = getLocalSettings()
@@ -14,6 +22,7 @@ const initialState = {
   defaultPlaylist: settings.defaultPlaylist,
   defaultVolume: settings.defaultVolume,
   rememberLastSong: settings.rememberLastSong,
+  searchValue: "",
 };
 
 const player = (state = initialState, action) => {
@@ -51,6 +60,11 @@ const player = (state = initialState, action) => {
       return {
         ...state,
         initPlayer: true,
+      };
+    case SET_SEARCH_VALUE:
+      return {
+        ...state,
+        searchValue: action.payload,
       };
     default:
       return state;

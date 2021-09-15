@@ -30,4 +30,6 @@ export const SAVE_PLAYER_SETTINGS = "SAVE_PLAYER_SETTINGS";
 export const INIT_PLAYER = "INIT_PLAYER";
 export const INIT_PLAYER_END = "INIT_PLAYER_END";
 
+export const SET_SEARCH_VALUE = "SET_SEARCH_VALUE";
+
 export const SET_LOADING = "SET_LOADING";
