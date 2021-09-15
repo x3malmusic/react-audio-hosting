@@ -6,14 +6,14 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import { DEFAULT_VOLUME } from "../../constants/default_settings";
 import { initAnalyser } from "../../utils/initAnalyser";
-import { Context } from "../../context";
+import { PlayerRefContext } from "../../context";
 import useStyles from "./styles";
 
 
 export default function Player({ currentSong, playNext, playPrevious, defaultVolume = DEFAULT_VOLUME, songs = [], play, setPlay }) {
   const classes = useStyles();
 
-  const playerRef = useContext(Context)
+  const playerRef = useContext(PlayerRefContext)
   const audio = useRef()
   const canvasRef = useRef()
 

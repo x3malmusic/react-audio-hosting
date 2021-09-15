@@ -22,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
   },
   loader: {
     color: "white",
+  },
+  controls: {
+    display: "flex",
+  },
+  input: {
+    marginRight: theme.spacing(2)
   }
 }));
 

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { Box } from "@material-ui/core";
-import { Context } from "../../context";
+import { PlayerRefContext } from "../../context";
 import useStyles from "./styles";
 
 const withPlayer = (Component) => ({ ...props }) => {
   const classes = useStyles();
   const playerContainerRef = useRef();
-  const playerRef = useContext(Context)
+  const playerRef = useContext(PlayerRefContext)
 
   useEffect(() => {
     playerContainerRef.current.appendChild(playerRef.current)
