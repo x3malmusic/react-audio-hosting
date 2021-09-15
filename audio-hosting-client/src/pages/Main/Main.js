@@ -5,14 +5,17 @@ import Playlist from "../../components/Playlist";
 import AppButton from "../../components/AppButton/AppButton";
 import ChoosePlaylistModal from "../../components/Modal/ChoosePlaylist";
 import SearchInput from "../../components/SearchInput";
+import useSelectable from "../../hooks/useSelectable";
 import { PlayerRefContext } from "../../context";
 import { ADD_PLAYLIST } from "../../components/Placeholder";
 import useStyles from "./styles";
 
-export default function Main({ playlists, changePlaylist }) {
+export default function Main({ playlists, changePlaylist, songsInPlaylist, setSongs }) {
   const classes = useStyles();
   const playerContainerRef = useRef()
   const playerRef = useContext(PlayerRefContext)
+  const { selectableRef, setSelectedItems, dropHandler, dragOverHandler, deleteSong } = useSelectable({ playlistSongs: songsInPlaylist, setSongs })
+
   const [openModal, setOpenModal] = useState(false)
   const [openDrawer, setOpenDrawer] = useState(false)
 
@@ -23,14 +26,19 @@ export default function Main({ playlists, changePlaylist }) {
   return (
     <>
       <Box className={classes.controls}>
-        <SearchInput className={classes.marginRight} />
-        <AppButton className={classes.marginRight}  onClick={() => setOpenModal(true)}>Open</AppButton>
-        <AppButton onClick={() => setOpenDrawer(!openDrawer)}>Songs</AppButton>
+        <SearchInput className={classes.marginRight} disabled={!openDrawer} />
+        <AppButton className={classes.marginRight} onClick={() => setOpenModal(true)}>Open playlist</AppButton>
+        <AppButton onClick={() => setOpenDrawer(!openDrawer)}>Edit playlist</AppButton>
       </Box>
 
       <Box className={classes.main}>
         <Box ref={playerContainerRef} className={classes.playerContainer} />
-        <Playlist placeholder={ADD_PLAYLIST} />
+        <Playlist
+          placeholder={ADD_PLAYLIST}
+          deleteSong={openDrawer && deleteSong}
+          onDrop={dropHandler}
+          onDragOver={dragOverHandler}
+        />
 
         <Drawer
           open={openDrawer}
@@ -38,9 +46,12 @@ export default function Main({ playlists, changePlaylist }) {
           variant="persistent"
           className={classes.drawer}
           classes={{ paper: classes.drawerPaper }}
-          transitionDuration={{ enter: 1000, exit: 1000 }}
+          transitionDuration={{ enter: 700, exit: 700 }}
         >
-          <AllSongsList />
+          <AllSongsList
+            setSelectedItems={setSelectedItems}
+            selectableRef={selectableRef}
+          />
         </Drawer>
       </Box>
 

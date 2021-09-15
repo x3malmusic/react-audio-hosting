@@ -7,6 +7,7 @@ import {
   SILENT_LOGIN,
   LOG_OUT,
   SET_LOADING,
+  SET_SONGS_IN_PLAYLIST,
   SET_NAME_NEW_PLAYLIST,
   SET_SONGS_NEW_PLAYLIST,
   CREATE_NEW_PLAYLIST,
@@ -101,6 +102,11 @@ export const savePlayerSettings = (payload) => ({
 
 export const setSearchValue = (payload) => ({
   type: SET_SEARCH_VALUE,
+  payload
+});
+
+export const setSongsInPlaylist = (payload) => ({
+  type: SET_SONGS_IN_PLAYLIST,
   payload
 });
 
