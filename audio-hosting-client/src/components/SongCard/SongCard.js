@@ -25,7 +25,7 @@ function SongCard({ selectableRef, draggable, song, isSelected, isSelecting }) {
     >
       <Box className={classes.iconContainer}>
         <AudiotrackIcon className={classes.iconMusic} />
-        <InsertDriveFileIcon className={classes.iconFile} />
+        <InsertDriveFileIcon color="primary" className={classes.iconFile} />
       </Box>
       {(!hover || isSelecting || isSelected) && <Typography className={classes.songName} noWrap>{song.original_filename}</Typography>}
       {hover && !isSelecting && !isSelected && <Typography className={classes.fullSongName}>{song.original_filename}</Typography>}

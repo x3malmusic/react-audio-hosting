@@ -25,10 +25,11 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1
   },
   iconFile: {
-    fontSize: 48
+    fontSize: 48,
   },
   songName: {
     fontSize: 14,
+    color: "black",
   },
   fullSongName: {
     fontSize: 14,
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     backgroundColor: "white",
     zIndex: 2,
+    color: "black",
   },
   selected: {
     backgroundColor: theme.color.palette.shadow
