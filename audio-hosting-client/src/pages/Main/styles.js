@@ -13,13 +13,6 @@ const useStyles = makeStyles((theme) => ({
   playerContainer: {
     boxShadow: theme.constants.shadow,
   },
-  controls: {
-    display: "flex",
-    marginBottom: theme.spacing(2),
-  },
-  marginRight: {
-    marginRight: theme.spacing(2)
-  },
   drawer: {
     maxWidth: "50%",
   },

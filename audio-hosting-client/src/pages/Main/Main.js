@@ -2,15 +2,14 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Box, Drawer } from "@material-ui/core";
 import AllSongsList from "../../components/AllSongsList";
 import Playlist from "../../components/Playlist";
-import AppButton from "../../components/AppButton/AppButton";
 import ChoosePlaylistModal from "../../components/Modal/ChoosePlaylist";
-import SearchInput from "../../components/SearchInput";
+import MainControls from "../../components/MainControls";
 import useSelectable from "../../hooks/useSelectable";
 import { PlayerRefContext } from "../../context";
 import { ADD_PLAYLIST } from "../../components/Placeholder";
 import useStyles from "./styles";
 
-export default function Main({ playlists, changePlaylist, songsInPlaylist, setSongs, editPlaylist }) {
+export default function Main({ playlists, changePlaylist, songsInPlaylist, setSongs }) {
   const classes = useStyles();
   const playerContainerRef = useRef()
   const playerRef = useContext(PlayerRefContext)
@@ -25,12 +24,11 @@ export default function Main({ playlists, changePlaylist, songsInPlaylist, setSo
 
   return (
     <>
-      <Box className={classes.controls}>
-        <SearchInput className={classes.marginRight} disabled={!openDrawer} />
-        <AppButton className={classes.marginRight} onClick={() => setOpenModal(true)}>Open playlist</AppButton>
-        <AppButton className={classes.marginRight} onClick={() => setOpenDrawer(!openDrawer)}>Edit playlist</AppButton>
-        <AppButton onClick={editPlaylist}>Save playlist</AppButton>
-      </Box>
+      <MainControls
+        setOpenModal={setOpenModal}
+        setOpenDrawer={setOpenDrawer}
+        openDrawer={openDrawer}
+      />
 
       <Box className={classes.main}>
         <Box ref={playerContainerRef} className={classes.playerContainer} />
