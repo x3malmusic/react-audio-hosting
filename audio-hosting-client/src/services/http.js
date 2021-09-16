@@ -37,6 +37,8 @@ export const uploadSong = async (data) => {
   })
 };
 
-export const createPlaylist = ({ songs, name }) => http.post('/api/user/create-playlist', { songs, name })
+export const createPlaylist = ({ songs, name }) => http.post('/api/user/playlist', { songs, name })
+
+export const editPlaylist = ({ playlistId, songsInPlaylist }) => http.put('/api/user/playlist', { playlistId, songsInPlaylist })
 
 export const saveUserSettings = (settings) => http.post('/api/user/settings', settings)

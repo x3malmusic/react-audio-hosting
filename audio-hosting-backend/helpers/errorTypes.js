@@ -12,6 +12,7 @@ export const UPLOAD_FAILED = 'UPLOAD_FAILED'
 export const FILE_NOT_FOUND = 'FILE_NOT_FOUND'
 export const FILE_EXIST = 'FILE_EXIST'
 export const DATABASE_ERROR = 'DATABASE_ERROR'
+export const PLAYLIST_NOT_FOUND = 'PLAYLIST_NOT_FOUND'
 
 export default {
   [USER_NOT_FOUND]: { message: 'User is not found', status: 404 },
@@ -27,6 +28,7 @@ export default {
   [FILE_NOT_FOUND]:  { message: 'File not found', status: 404 },
   [DATABASE_ERROR]:  { message: 'Database error', status: 400 },
   [FILE_EXIST]:  { message: 'File already exist', status: 400 },
+  [PLAYLIST_NOT_FOUND]:  { message: 'Playlist not found', status: 403 },
   [UNKNOWN_ERROR]:  { message: 'Something went wrong', status: 500 },
 }
 

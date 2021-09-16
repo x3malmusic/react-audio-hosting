@@ -10,7 +10,7 @@ import { PlayerRefContext } from "../../context";
 import { ADD_PLAYLIST } from "../../components/Placeholder";
 import useStyles from "./styles";
 
-export default function Main({ playlists, changePlaylist, songsInPlaylist, setSongs }) {
+export default function Main({ playlists, changePlaylist, songsInPlaylist, setSongs, editPlaylist }) {
   const classes = useStyles();
   const playerContainerRef = useRef()
   const playerRef = useContext(PlayerRefContext)
@@ -28,7 +28,8 @@ export default function Main({ playlists, changePlaylist, songsInPlaylist, setSo
       <Box className={classes.controls}>
         <SearchInput className={classes.marginRight} disabled={!openDrawer} />
         <AppButton className={classes.marginRight} onClick={() => setOpenModal(true)}>Open playlist</AppButton>
-        <AppButton onClick={() => setOpenDrawer(!openDrawer)}>Edit playlist</AppButton>
+        <AppButton className={classes.marginRight} onClick={() => setOpenDrawer(!openDrawer)}>Edit playlist</AppButton>
+        <AppButton onClick={editPlaylist}>Save playlist</AppButton>
       </Box>
 
       <Box className={classes.main}>

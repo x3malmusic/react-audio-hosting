@@ -3,11 +3,15 @@ import { User } from "../models/User";
 import { Song } from "../models/Song";
 import { Playlist } from "../models/Playlist";
 import { cloudinary } from "../cloudinary.config";
-import { UPLOAD_FAILED, USER_NOT_FOUND, FILE_EXIST } from "../helpers/errorTypes";
+import { UPLOAD_FAILED, USER_NOT_FOUND, FILE_EXIST, PLAYLIST_NOT_FOUND } from "../helpers/errorTypes";
 
 
 export const getUserByEmail = (email) => {
   return User.findOne({ email }).populate('songs').populate('playlists')
+}
+
+export const getPlaylistById = (id) => {
+  return Playlist.findOne({ _id: id })
 }
 
 export const getUserById = (id) => {
@@ -91,5 +95,17 @@ export const saveUserSettings = async (userId, settings) => {
 
     await user.save()
     resolve(user)
+  })
+}
+
+export const editUserPlaylist = async (id, songs) => {
+  return new Promise(async (resolve, reject) => {
+    const playlist = await getPlaylistById(id);
+    if (!playlist) return reject(PLAYLIST_NOT_FOUND);
+
+    playlist.songs = songs
+
+    await playlist.save()
+    resolve(playlist)
   })
 }

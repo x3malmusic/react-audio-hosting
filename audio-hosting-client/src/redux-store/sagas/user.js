@@ -12,9 +12,19 @@ import {
   SAVE_USER_SETTINGS,
   CLEAR_USER,
   INIT_PLAYER,
+  EDIT_PLAYLIST,
+  SET_PLAYLIST,
 } from "../actions/types";
 import { safe } from "./error";
-import { uploadSong, register, login, silentLogin, createPlaylist, saveUserSettings } from "../../services/http";
+import {
+  uploadSong,
+  register,
+  login,
+  silentLogin,
+  createPlaylist,
+  saveUserSettings,
+  editPlaylist
+} from "../../services/http";
 import { saveToken, deleteToken } from "../../utils/token";
 import { arrayToMap } from "../../utils";
 import {
@@ -94,6 +104,21 @@ const saveSettings = function* ({ payload }) {
   notify(messages[SETTINGS_SAVE_SUCCESS])
 };
 
+const editUserPlaylist = function* () {
+  const { currentPlaylist: playlistId, songsInPlaylist } = yield select(state => state.player)
+
+  const playlist = yield editPlaylist({ playlistId, songsInPlaylist });
+
+  const { playlists: userPlaylists } = yield select(state => state.user);
+  const newPlaylists = yield userPlaylists.map(list => {
+    if (list._id === playlistId) return playlist
+    return list
+  })
+
+  yield put({ type: SET_PLAYLIST, payload: newPlaylists })
+  notify(messages[SETTINGS_SAVE_SUCCESS])
+};
+
 const userSagas = [
   takeLatest(UPLOAD_TRACK, safe(uploadTrack)),
   takeLatest(REGISTER, safe(registerUser)),
@@ -102,6 +127,7 @@ const userSagas = [
   takeLatest(LOG_OUT, safe(logoutUser)),
   takeLatest(CREATE_NEW_PLAYLIST, safe(createNewPlaylist)),
   takeLatest(SAVE_USER_SETTINGS, safe(saveSettings)),
+  takeLatest(EDIT_PLAYLIST, safe(editUserPlaylist)),
 ];
 
 export default userSagas;

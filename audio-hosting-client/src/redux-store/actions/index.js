@@ -18,6 +18,7 @@ import {
   SAVE_USER_SETTINGS,
   SAVE_PLAYER_SETTINGS,
   SET_SEARCH_VALUE,
+  EDIT_PLAYLIST,
 } from "./types";
 
 export const uploadTrack = (payload) => ({
@@ -108,5 +109,9 @@ export const setSearchValue = (payload) => ({
 export const setSongsInPlaylist = (payload) => ({
   type: SET_SONGS_IN_PLAYLIST,
   payload
+});
+
+export const editPlaylist = () => ({
+  type: EDIT_PLAYLIST,
 });
 

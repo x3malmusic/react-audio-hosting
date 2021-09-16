@@ -1,5 +1,5 @@
 import { asyncHandler } from "../middlewares/async";
-import { createNewPlaylist, getSongs, saveUserSettings } from "../services/dbService";
+import { createNewPlaylist, getSongs, saveUserSettings, editUserPlaylist } from "../services/dbService";
 
 export const getAllSongs = asyncHandler(async (req, res, next) => {
   // const { userId } = req.user
@@ -25,5 +25,14 @@ export const saveSettings = asyncHandler(async (req, res, next) => {
   const { __v, password, playlists, songs, email, ...user} = data.toObject();
 
   res.send(user)
+})
+
+export const editPlaylist = asyncHandler(async (req, res, next) => {
+  const { playlistId, songsInPlaylist } = req.body
+
+  const data = await editUserPlaylist(playlistId, songsInPlaylist)
+  const playlist = data.toObject();
+
+  res.send(playlist)
 })
 
