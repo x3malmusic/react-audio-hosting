@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     border: "none",
     maxWidth: "50%",
-    boxShadow: theme.constants.shadow
+    boxShadow: theme.constants.shadow,
+    zIndex: 5,
   },
 }));
 

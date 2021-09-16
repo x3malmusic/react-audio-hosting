@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   playlistItem: {
     display: "flex",
     alignItems: "center",
@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0
   },
   deleteBtn: {
-    color: theme.color.palette.red
+    color: theme.color.palette.red,
+    transition: "opacity .4s ease-in-out",
   },
   playBtnHover: {
     opacity: 1
@@ -36,4 +37,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default useStyles;
+export const transitionStyles = {
+  entering: { opacity: 0 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 1 },
+  exited: { opacity: 0 }
+};
