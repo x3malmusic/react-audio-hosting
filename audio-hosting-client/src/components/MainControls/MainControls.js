@@ -4,7 +4,7 @@ import SearchInput from "../SearchInput";
 import AppButton from "../AppButton/AppButton";
 import useStyles from "./styles";
 
-export default function MainControls({ openDrawer, setOpenModal, setOpenDrawer, editPlaylist, loading }) {
+export default function MainControls({ openDrawer, setOpenModal, setOpenDrawer, editPlaylist, loading, isPlaylistChanged }) {
   const classes = useStyles();
 
   return(
@@ -12,7 +12,7 @@ export default function MainControls({ openDrawer, setOpenModal, setOpenDrawer, 
       <SearchInput className={classes.marginRight} disabled={!openDrawer} />
       <AppButton className={classes.marginRight} onClick={() => setOpenModal(true)}>Open playlist</AppButton>
       <AppButton className={classes.marginRight} onClick={() => setOpenDrawer(!openDrawer)}>Edit playlist</AppButton>
-      <AppButton onClick={editPlaylist} disabled={loading}>Save playlist</AppButton>
+      <AppButton onClick={editPlaylist} disabled={isPlaylistChanged || loading}>Save playlist</AppButton>
     </Box>
   )
 }
