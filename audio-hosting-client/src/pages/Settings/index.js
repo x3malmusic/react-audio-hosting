@@ -2,11 +2,9 @@ import { connect } from "react-redux";
 import Settings from "./Settings";
 import { saveUserSettings, savePlayerSettings } from "../../redux-store/actions";
 
-const mapStateToProps = ({ user: { email, name, playlists }, player: { defaultPlaylist, defaultVolume, rememberLastSong } }) => ({
+const mapStateToProps = ({ user: { email, name }, player: { defaultVolume, rememberLastSong } }) => ({
   email,
   name,
-  playlists,
-  defaultPlaylist,
   defaultVolume,
   rememberLastSong
 });

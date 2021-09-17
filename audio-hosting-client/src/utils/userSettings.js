@@ -1,24 +1,17 @@
-import { DEFAULT_PLAYLIST, DEFAULT_VOLUME, DEFAULT_REMEMBER_LAST_SONG, DEFAULT_LAST_PLAYED_SONG } from "../constants/default_settings";
+import { DEFAULT_PLAYLIST, DEFAULT_LAST_PLAYED_SONG } from "../constants/default_settings";
 
 const keyName = 'player-settings';
 const lastPlayedSongKey = "player-last-song"
 
-export const saveLocalSettings = (settings) => {
-  localStorage.setItem(keyName, JSON.stringify(settings));
+export const saveLastPlayedPlaylist = (playlistId) => {
+  localStorage.setItem(keyName, JSON.stringify(playlistId));
 }
 
-export const getLocalSettings = () => {
-  const userSettings = localStorage.getItem(keyName)
-  const lastPlayedSong = getLastPlayedSong(lastPlayedSongKey)
+export const getLastPlayedPlaylist = () => {
+  const lastPlayedPlaylist = localStorage.getItem(keyName)
+  if (!lastPlayedPlaylist) return DEFAULT_PLAYLIST
 
-  if (!userSettings) return {
-      defaultPlaylist: DEFAULT_PLAYLIST,
-      defaultVolume: DEFAULT_VOLUME,
-      rememberLastSong: DEFAULT_REMEMBER_LAST_SONG,
-      lastPlayedSong: lastPlayedSong
-    };
-
-  return JSON.parse(userSettings);
+  return JSON.parse(lastPlayedPlaylist);
 }
 
 export const saveLastPlayedSong = (song) => {

@@ -42,3 +42,5 @@ export const createPlaylist = ({ songs, name }) => http.post('/api/user/playlist
 export const editPlaylist = ({ playlistId, songsInPlaylist }) => http.put('/api/user/playlist', { playlistId, songsInPlaylist })
 
 export const saveUserSettings = (settings) => http.post('/api/user/settings', settings)
+
+export const savePlayerSettings = (settings) => http.post('/api/user/player-settings', settings)

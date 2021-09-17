@@ -10,8 +10,11 @@ import {
   SAVE_PLAYER_SETTINGS,
   INIT_PLAYER,
   INIT_PLAYER_END,
+  SET_PLAYER_SETTINGS
 } from "../actions/types";
-import { saveLocalSettings, deleteLastPlayedSong, getLastPlayedSong, saveLastPlayedSong } from "../../utils/userSettings";
+import { safe } from "./error";
+import { savePlayerSettings } from "../../services/http";
+import { deleteLastPlayedSong, getLastPlayedSong, saveLastPlayedSong, saveLastPlayedPlaylist } from "../../utils/userSettings";
 import { recalcNextAndPrevSongs } from "../../utils";
 import { notify } from "../../utils/notifications";
 import { messages, SETTINGS_SAVE_SUCCESS } from "../../constants/messages";
@@ -35,6 +38,7 @@ const setCurrentSong = function* ({ payload }) {
 const changePlaylist = function* ({ payload }) {
   const playlists = yield select(state => state.user.playlists);
   const playlist = yield playlists.find(list => list._id === payload);
+  saveLastPlayedPlaylist(playlist._id)
 
   yield put({ type: SET_SONGS_IN_PLAYLIST, payload: [...playlist.songs] });
   yield put({ type: SET_CURRENT_SONG, payload: playlist.songs[0] });
@@ -57,17 +61,18 @@ const recalcNextAndPreviousSongs = function* ({ payload }) {
   yield put({ type: SET_CURRENT_SONG, payload: currentSong });
 }
 
-const savePlayerSettings = function* ({ payload }) {
+const saveUserPlayerSettings = function* ({ payload }) {
   if (!payload.rememberLastSong) deleteLastPlayedSong()
+  const settings = yield savePlayerSettings(payload);
 
-  yield saveLocalSettings(payload)
+  yield put({ type: SET_PLAYER_SETTINGS, payload: settings });
   notify(messages[SETTINGS_SAVE_SUCCESS])
 }
 
 const initPlayer = function* () {
-  const player = yield select(state => state.player)
+  const { defaultPlaylist } = yield select(state => state.player)
 
-  if (player.defaultPlaylist) yield put({ type: SET_CURRENT_PLAYLIST, payload: player.defaultPlaylist })
+  if (defaultPlaylist) yield put({ type: SET_CURRENT_PLAYLIST, payload: defaultPlaylist })
 }
 
 const playerSagas = [
@@ -76,7 +81,7 @@ const playerSagas = [
   takeLatest(PLAY_NEXT_SONG, playNext),
   takeLatest(PLAY_PREVIOUS_SONG, playPrevious),
   takeLatest(REORDER_SONGS_IN_PLAYLIST, recalcNextAndPreviousSongs),
-  takeLatest(SAVE_PLAYER_SETTINGS, savePlayerSettings),
+  takeLatest(SAVE_PLAYER_SETTINGS, safe(saveUserPlayerSettings)),
   takeLatest(INIT_PLAYER, initPlayer),
 ];
 

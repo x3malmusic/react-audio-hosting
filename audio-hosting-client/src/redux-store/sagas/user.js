@@ -14,6 +14,7 @@ import {
   INIT_PLAYER,
   EDIT_PLAYLIST,
   SET_PLAYLIST,
+  SET_PLAYER_SETTINGS
 } from "../actions/types";
 import { safe } from "./error";
 import {
@@ -38,20 +39,24 @@ import {
 } from "../../constants/messages";
 
 const registerUser = function* ({ payload }) {
-  const data = yield register(payload);
+  const { user, token }  = yield register(payload);
+  const { settings, ...userData } = user
 
-  saveToken(data.token)
-  yield put({ type: SET_USER, payload: {...data.user, songs: arrayToMap(data.user.songs)} })
+  saveToken(token)
+  yield put({ type: SET_USER, payload: { ...userData, songs: arrayToMap(userData.songs) }})
+  yield put({ type: SET_PLAYER_SETTINGS, payload: settings })
 
   notify(messages[REGISTER_SUCCESS])
 };
 
 const loginUser = function* ({ payload }) {
-  const data = yield login(payload);
+  const { user, token } = yield login(payload);
+  const { settings, ...userData } = user
 
-  saveToken(data.token)
+  saveToken(token)
 
-  yield put({ type: SET_USER, payload: {...data.user, songs: arrayToMap(data.user.songs)}})
+  yield put({ type: SET_USER, payload: { ...userData, songs: arrayToMap(userData.songs) }})
+  yield put({ type: SET_PLAYER_SETTINGS, payload: settings })
   yield put({ type: INIT_PLAYER })
 
   notify(messages[LOGIN_SUCCESS])
@@ -59,8 +64,10 @@ const loginUser = function* ({ payload }) {
 
 const silentLoginUser = function* () {
   const data = yield silentLogin();
+  const { settings , ...user } = data
 
-  yield put({ type: SET_USER, payload: {...data, songs: arrayToMap(data.songs)} })
+  yield put({ type: SET_USER, payload: {...user, songs: arrayToMap(user.songs)} })
+  yield put({ type: SET_PLAYER_SETTINGS, payload: settings })
   yield put({ type: INIT_PLAYER })
 
   notify(messages[LOGIN_SUCCESS])

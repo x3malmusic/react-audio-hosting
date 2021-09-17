@@ -2,16 +2,21 @@ import Stream from "stream";
 import { User } from "../models/User";
 import { Song } from "../models/Song";
 import { Playlist } from "../models/Playlist";
+import { Settings } from "../models/Settings";
 import { cloudinary } from "../cloudinary.config";
 import { UPLOAD_FAILED, USER_NOT_FOUND, FILE_EXIST, PLAYLIST_NOT_FOUND } from "../helpers/errorTypes";
 
 
 export const getUserByEmail = (email) => {
-  return User.findOne({ email }).populate('songs').populate('playlists')
+  return User.findOne({ email }).populate('songs').populate('playlists').populate("settings", "defaultVolume rememberLastSong")
 }
 
 export const getPlaylistById = (id) => {
   return Playlist.findOne({ _id: id })
+}
+
+export const getUserSettingsById = (id) => {
+  return Settings.findOne({ owner: id })
 }
 
 export const getUserById = (id) => {
@@ -19,8 +24,15 @@ export const getUserById = (id) => {
 }
 
 export const createUser = async (email, password) => {
-  const user = new User({ email, password });
-  await user.save();
+  const user = new User({ email, password })
+  await user.save()
+
+  const userSettings = new Settings()
+  userSettings.owner = user._id
+  await userSettings.save()
+
+  user.settings = userSettings._id
+  await user.save().then(user => user.populate('settings').execPopulate())
 
   return user
 }
@@ -67,10 +79,6 @@ export const addNewSong = async (file, userId) => {
   })
 }
 
-export const getSongs = () => {
-  return Song.find()
-}
-
 export const createNewPlaylist = async (userId, name, songsArray) => {
   return new Promise(async (resolve, reject) => {
     const user = await getUserById(userId);
@@ -95,6 +103,19 @@ export const saveUserSettings = async (userId, settings) => {
 
     await user.save()
     resolve(user)
+  })
+}
+
+export const saveUserPlayerSettings = async (userId, settings) => {
+  return new Promise(async (resolve, reject) => {
+    const userSettings = await getUserSettingsById(userId);
+    if (!userSettings) return reject(USER_NOT_FOUND);
+
+    userSettings.defaultVolume = settings.defaultVolume || 50
+    userSettings.rememberLastSong = settings.rememberLastSong || false
+
+    await userSettings.save()
+    resolve(userSettings)
   })
 }
 
