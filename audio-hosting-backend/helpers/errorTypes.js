@@ -24,7 +24,7 @@ export default {
   [NOT_AUTHORIZED]:  { message: 'Not authorized', status: 403 },
   [AUTHORIZATION_DENIED]:  { message: 'Authorization denied', status: 403 },
   [NO_FILE_TO_UPLOAD]:  { message: 'No file to upload', status: 400 },
-  [UPLOAD_FAILED]:  { message: 'Something went wrong while uploading image', status: 400 },
+  [UPLOAD_FAILED]:  { message: 'Something went wrong while uploading track', status: 400 },
   [FILE_NOT_FOUND]:  { message: 'File not found', status: 404 },
   [DATABASE_ERROR]:  { message: 'Database error', status: 400 },
   [FILE_EXIST]:  { message: 'File already exist', status: 400 },
