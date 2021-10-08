@@ -7,11 +7,11 @@ const errorHandler = (err, req, res, next) => {
   }
 
   if(err instanceof mongoose.Error) {
-    console.log("db Error", err);
+    console.error("db Error", err);
     return res.status(error[DATABASE_ERROR].status).json({ message: error[DATABASE_ERROR].message, type: DATABASE_ERROR })
   }
 
-  console.log("exception Error", err);
+  console.error("exception Error", err);
   res.status(error[UNKNOWN_ERROR].status).json({ message: error[UNKNOWN_ERROR].message, type: UNKNOWN_ERROR })
 };
 

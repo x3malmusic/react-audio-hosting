@@ -60,7 +60,6 @@ export const uploadTrack = (file) => {
 
       stream.pipe(uploadStream);
     } catch (e) {
-      console.log(e)
       reject(e)
     }
   });
