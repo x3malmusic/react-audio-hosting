@@ -39,43 +39,51 @@ export const createUser = async (email, password) => {
 
 export const uploadTrack = (file) => {
   return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder: '',
-        upload_preset: 'ml_default',
-        resource_type: "video",
-        filename: file.name,
-        use_filename: true,
-        unique_filename: false
-      },
-      (error, result) => {
-        if (result) resolve(result);
-        else reject(UPLOAD_FAILED);
-      },
-    );
+    try {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: '',
+          upload_preset: 'ml_default',
+          resource_type: "video",
+          filename: file.name,
+          use_filename: true,
+          unique_filename: false
+        },
+        (error, result) => {
+          if (result) resolve(result);
+          else reject(UPLOAD_FAILED);
+        },
+      );
 
-    const stream = new Stream.PassThrough();
-    stream.end(file.data);
+      const stream = new Stream.PassThrough();
+      stream.end(file.data);
 
-    stream.pipe(uploadStream);
+      stream.pipe(uploadStream);
+    } catch (e) {
+      reject(e)
+    }
   });
 }
 
 export const addNewSong = async (file, userId) => {
   return new Promise(async (resolve, reject) => {
-    const user = await getUserById(userId);
-    if (!user) return reject(USER_NOT_FOUND)
+    try {
+      const user = await getUserById(userId);
+      if (!user) return reject(USER_NOT_FOUND)
 
-    const { url, bytes, audio, duration, original_filename, overwritten } = await uploadTrack(file);
-    if (overwritten) return reject(FILE_EXIST)
+      const { url, bytes, audio, duration, original_filename, overwritten } = await uploadTrack(file);
+      if (overwritten) return reject(FILE_EXIST)
 
-    const song = new Song({ url, bytes, bit_rate: audio.bit_rate, duration, original_filename, owner: userId });
-    await song.save();
+      const song = new Song({ url, bytes, bit_rate: audio.bit_rate, duration, original_filename, owner: userId });
+      await song.save();
 
-    user.songs.push(song);
-    await user.save();
+      user.songs.push(song);
+      await user.save();
 
-    resolve(song);
+      resolve(song);
+    } catch (e) {
+      reject(e)
+    }
   })
 }
 
