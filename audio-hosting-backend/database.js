@@ -9,7 +9,7 @@ export const connectDB = async () => {
       useUnifiedTopology: true,
     });
 
-    console.log(`connected: ${conn.connection.host}`);
+    console.log(`DB connected: ${conn.connection.host}`);
   } catch (e) {
     console.log(e);
 

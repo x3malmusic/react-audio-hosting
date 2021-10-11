@@ -24,5 +24,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-  console.log(`Socket server is running on ${PORT}`);
+  console.log(`Server is running on ${PORT}`);
 });

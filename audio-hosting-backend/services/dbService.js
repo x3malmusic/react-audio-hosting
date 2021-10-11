@@ -39,7 +39,7 @@ export const createUser = async (email, password) => {
 
 export const uploadTrack = (file) => {
   return new Promise((resolve, reject) => {
-    try {
+    // try {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
           folder: '',
@@ -51,7 +51,7 @@ export const uploadTrack = (file) => {
         },
         (error, result) => {
           if (result) resolve(result);
-          else reject(UPLOAD_FAILED);
+          else reject(error);
         },
       );
 
@@ -59,9 +59,9 @@ export const uploadTrack = (file) => {
       stream.end(file.data);
 
       stream.pipe(uploadStream);
-    } catch (e) {
-      reject(e)
-    }
+    // } catch (e) {
+    //   reject(e)
+    // }
   });
 }
 
