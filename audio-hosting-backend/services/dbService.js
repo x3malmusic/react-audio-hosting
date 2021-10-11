@@ -51,7 +51,10 @@ export const uploadTrack = (file) => {
         },
         (error, result) => {
           if (result) resolve(result);
-          else reject(UPLOAD_FAILED);
+          else {
+            error.type = UPLOAD_FAILED;
+            reject(error)
+          };
         },
       );
 
