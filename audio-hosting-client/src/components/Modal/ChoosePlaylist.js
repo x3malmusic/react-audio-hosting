@@ -8,7 +8,7 @@ import {
   Select,
   MenuItem
 } from "@material-ui/core";
-import AppButton from "../AppButton/AppButton";
+import AppButton from "../AppButton";
 
 export default function ChoosePlaylistModal({ open, setOpen, changePlaylist, playlists, ...props }) {
   const [chosenPlaylist, setChosenPlaylist] = useState("")

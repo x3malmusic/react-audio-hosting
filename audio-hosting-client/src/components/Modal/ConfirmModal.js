@@ -5,7 +5,7 @@ import { Dialog,
   DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
-import AppButton from "../AppButton/AppButton";
+import AppButton from "../AppButton";
 
 export default function ConfirmModal({ open, setOpen, action, content, ...props }) {
 

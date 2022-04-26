@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Box, TextField, Typography, Input, Divider, Checkbox } from "@material-ui/core";
-import AppButton from "../../components/AppButton/AppButton";
+import AppButton from "../../components/AppButton";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
 import { DEFAULT_VOLUME, DEFAULT_REMEMBER_LAST_SONG } from "../../constants/default_settings";
 import useStyles from "./styles";

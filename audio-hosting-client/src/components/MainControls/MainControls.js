@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@material-ui/core";
 import SearchInput from "../SearchInput";
-import AppButton from "../AppButton/AppButton";
+import AppButton from "../AppButton";
 import useStyles from "./styles";
 
 export default function MainControls({ openDrawer, setOpenModal, setOpenDrawer, editPlaylist, loading, isPlaylistChanged }) {

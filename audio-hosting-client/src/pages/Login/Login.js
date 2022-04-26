@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Box, TextField, Typography } from "@material-ui/core";
 import { Formik } from 'formik';
 import { loginSchema } from "../../utils/validationSchemas";
-import AppButton from "../../components/AppButton/AppButton";
+import AppButton from "../../components/AppButton";
 import useStyles from "./styles";
 
 export default function Login({ login }) {

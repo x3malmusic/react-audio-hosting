@@ -6,7 +6,7 @@ import { Dialog,
   DialogTitle,
   TextField
 } from "@material-ui/core";
-import AppButton from "../AppButton/AppButton";
+import AppButton from "../AppButton";
 
 export default function Modal({ open, setOpen, action, inputChange, title, inputValue, content, ...props }) {
 

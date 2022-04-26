@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box } from "@material-ui/core";
 import Playlist from "../../components/Playlist/Playlist";
-import AppButton from "../../components/AppButton/AppButton";
+import AppButton from "../../components/AppButton";
 import Modal from "../../components/Modal/Modal";
 import AllSongsList from "../../components/AllSongsList";
 import SearchInput from "../../components/SearchInput";

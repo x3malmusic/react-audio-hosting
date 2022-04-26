@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, Box } from "@material-ui/core";
-import AppButton from "../AppButton/AppButton";
+import AppButton from "../AppButton";
 import useStyles from "./styles";
 
 export default function Header({ logout, email, name }) {

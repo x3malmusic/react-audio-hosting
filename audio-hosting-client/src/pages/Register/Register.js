@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Box, TextField, Typography } from "@material-ui/core";
 import { Formik } from 'formik';
-import AppButton from "../../components/AppButton/AppButton";
+import AppButton from "../../components/AppButton";
 import useStyles from "./styles";
 import { registerSchema } from "../../utils/validationSchemas";
 
