@@ -3,38 +3,47 @@ import PublishIcon from '@material-ui/icons/Publish';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import SettingsIcon from '@material-ui/icons/Settings';
 
-import Main from "./pages/Main"
-import UploadTrack from "./pages/UploadTrack";
-import CreatePlaylist from "./pages/CreatePlaylist";
-import Settings from "./pages/Settings";
+import { 
+  MAIN_PAGE,
+  UPLOAD_PAGE,
+  CREATE_PLAYLIST_PAGE,
+  SETTINGS_PAGE,
+  LOGIN_PAGE,
+  REGISTER_PAGE,
+ } from './pathnames'
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Main from "../pages/Main"
+import UploadTrack from "../pages/UploadTrack";
+import CreatePlaylist from "../pages/CreatePlaylist";
+import Settings from "../pages/Settings";
 
-import withPlayer from "./components/withPlayer/withPlayer";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+
+import withPlayer from "../components/withPlayer/withPlayer";
 
 export const routes =  [
   {
-    path: "/",
+    path: MAIN_PAGE,
     component: Main,
     Icon: AudiotrackIcon,
     name: "Player",
     exact: true
   },
   {
-    path: "/upload",
+    path: UPLOAD_PAGE,
     component: withPlayer(UploadTrack),
     Icon: PublishIcon,
     name: "Upload track",
   },
   {
-    path: "/create-playlist",
+    path: CREATE_PLAYLIST_PAGE,
     component: withPlayer(CreatePlaylist),
     Icon: PlaylistAddIcon,
     name: "Create playlist",
   },
   {
-    path: "/settings",
+    path: SETTINGS_PAGE,
     component: withPlayer(Settings),
     Icon: SettingsIcon,
     name: "Settings",
@@ -43,11 +52,11 @@ export const routes =  [
 
 export const publicRoutes =  [
   {
-    path: "/login",
+    path: LOGIN_PAGE,
     component: Login,
   },
   {
-    path: "/register",
+    path: REGISTER_PAGE,
     component: Register,
   },
 ]
