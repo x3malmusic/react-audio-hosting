@@ -9,7 +9,7 @@ export default function MainControls({ openDrawer, setOpenModal, setOpenDrawer, 
 
   return(
     <Box className={classes.controls}>
-      <SearchInput className={classes.marginRight} disabled={!openDrawer} />
+      <SearchInput className={classes.marginRight} focusOnDisable disabled={!openDrawer} />
       <AppButton className={classes.marginRight} onClick={() => setOpenModal(true)}>Open playlist</AppButton>
       <AppButton className={classes.marginRight} onClick={() => setOpenDrawer(!openDrawer)}>Edit playlist</AppButton>
       <AppButton onClick={editPlaylist} disabled={isPlaylistChanged || loading}>Save playlist</AppButton>

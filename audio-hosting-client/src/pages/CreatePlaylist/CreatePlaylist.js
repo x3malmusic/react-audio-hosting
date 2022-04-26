@@ -17,7 +17,7 @@ export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSon
   return (
     <>
       <Box className={classes.controls}>
-        <SearchInput className={classes.input} />
+        <SearchInput className={classes.input} focusOnDisable />
         <AppButton onClick={() => setOpenModal(true)}>Create Playlist</AppButton>
       </Box>
 
