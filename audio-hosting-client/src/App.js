@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from "react-redux";
-import ReactNotification from 'react-notifications-component';
+import { ReactNotifications } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import ProtectedRoute from "./components/ProtectedRoute";
+import TrackName from './components/TrackName';
 import { silentLogin } from "./redux-store/actions";
 import { getToken } from "./utils/token";
 
@@ -12,8 +13,9 @@ function App({ silentLogin }) {
 
   return (
     <>
-      <ReactNotification />
+      <ReactNotifications />
       <ProtectedRoute />
+      <TrackName />
     </>
   );
 }

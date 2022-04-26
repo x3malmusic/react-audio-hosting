@@ -1,8 +1,8 @@
-import { store } from 'react-notifications-component';
+import { Store } from 'react-notifications-component';
 
 export const notify = (notification) => {
   if(notification.message) {
-    store.addNotification({
+    Store.addNotification({
       title: notification.title,
       message: notification.message,
       type: notification.type,
