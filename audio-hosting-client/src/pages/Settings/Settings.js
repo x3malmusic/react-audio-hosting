@@ -1,50 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Box, TextField, Typography, Input, Divider, Checkbox } from "@material-ui/core";
 import AppButton from "../../components/AppButton/AppButton";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
-import { isEqualArrays } from "../../utils";
 import { DEFAULT_VOLUME, DEFAULT_REMEMBER_LAST_SONG } from "../../constants/default_settings";
 import useStyles from "./styles";
-
-const defaultsArray = [DEFAULT_VOLUME, DEFAULT_REMEMBER_LAST_SONG]
 
 
 export default function Settings({ rememberLastSong, savePlayerSettings, saveUserSettings, email, name, defaultVolume }) {
   const classes = useStyles();
 
   const [userName, setUserName] = useState(name)
-  const [defVolume, setDefVolume] = useState(defaultVolume)
+  const [volume, setVolume] = useState(defaultVolume)
   const [savePlayedSong, setSavePlayedSong] = useState(rememberLastSong)
   const [openModal, setOpenModal] = useState(false)
 
-  const userLocalSettings = [defVolume, savePlayedSong];
-  const [isChanged, setIsChanged] = useState(name === userName)
+  const [nameIsChanged, setNameIsChanged] = useState(name === userName)
 
-  const isDefault = isEqualArrays(userLocalSettings, defaultsArray);
+  const isDefault = useMemo(
+    () => volume === DEFAULT_VOLUME && savePlayedSong === DEFAULT_REMEMBER_LAST_SONG, [savePlayedSong, volume]);
+
+  const playerSettingsChanged = useMemo(
+    () => volume === defaultVolume && savePlayedSong === rememberLastSong, 
+    [volume, savePlayedSong, defaultVolume, rememberLastSong]);
 
   const saveSettings = () => {
     saveUserSettings({ name: userName })
-    setIsChanged(true)
+    setNameIsChanged(true)
   }
 
   const saveUserPlayerSettings = () => {
-    savePlayerSettings({ defaultVolume: defVolume, rememberLastSong: savePlayedSong })
-    setIsChanged(true)
+    savePlayerSettings({ defaultVolume: volume, rememberLastSong: savePlayedSong })
   }
 
-  const setDefaultSettings = () => {
-    saveUserSettings({ rememberLastSong: DEFAULT_REMEMBER_LAST_SONG, defaultVolume: DEFAULT_VOLUME })
-    setDefVolume(DEFAULT_VOLUME)
+  const resetToDefaultSettings = () => {
+    savePlayerSettings({ rememberLastSong: DEFAULT_REMEMBER_LAST_SONG, defaultVolume: DEFAULT_VOLUME })
+    setVolume(DEFAULT_VOLUME)
     setSavePlayedSong(DEFAULT_REMEMBER_LAST_SONG)
   }
 
   const changeVolume = (e) => {
-    setDefVolume(Number(e.target.value))
+    setVolume(e.target.value)
   }
 
   const changeName = (e) => {
     setUserName(e.target.value)
-    setIsChanged(e.target.value === name)
+    setNameIsChanged(e.target.value === name)
   }
 
   const checkLastPlayedSong = (e) => {
@@ -67,7 +67,7 @@ export default function Settings({ rememberLastSong, savePlayerSettings, saveUse
       </Box>
 
       <Box className={classes.btnContainer}>
-        <AppButton disabled={isChanged} className={classes.btn} onClick={saveSettings}>Save changes</AppButton>
+        <AppButton disabled={nameIsChanged} className={classes.btn} onClick={saveSettings}>Save changes</AppButton>
       </Box>
 
       <Divider />
@@ -88,7 +88,7 @@ export default function Settings({ rememberLastSong, savePlayerSettings, saveUse
           <Input
             className={classes.grow}
             inputProps={{ className: classes.range }}
-            value={defVolume}
+            value={volume}
             onChange={changeVolume}
             type="range"
             min={0}
@@ -103,7 +103,7 @@ export default function Settings({ rememberLastSong, savePlayerSettings, saveUse
         <AppButton
           className={classes.btn}
           onClick={saveUserPlayerSettings}
-          disabled={isDefault}
+          disabled={playerSettingsChanged}
         >
           Save changes
         </AppButton>
@@ -120,7 +120,7 @@ export default function Settings({ rememberLastSong, savePlayerSettings, saveUse
 
       <ConfirmModal
         content="You sure you want reset settings?"
-        action={setDefaultSettings}
+        action={resetToDefaultSettings}
         setOpen={setOpenModal}
         open={openModal}
       />
