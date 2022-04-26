@@ -27,6 +27,7 @@ export default function SearchInput({ setSearch, className, focusOnDisable, disa
       inputProps={{ className: classes.input, ref: inputRef }}
       variant="outlined"
       placeholder="Search songs..."
+      disabled={disabled}
       {...props}
     />
   )
