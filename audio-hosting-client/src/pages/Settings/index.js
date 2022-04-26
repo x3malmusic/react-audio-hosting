@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Settings from "./Settings";
-import { saveUserSettings, savePlayerSettings } from "../../redux-store/actions";
+import { saveUserSettingsRoutine, savePlayerSettingsRoutine } from "../../redux-store/actions/routines";
 
 const mapStateToProps = ({ user: { email, name }, player: { defaultVolume, rememberLastSong } }) => ({
   email,
@@ -11,8 +11,8 @@ const mapStateToProps = ({ user: { email, name }, player: { defaultVolume, remem
 
 
 const mapDispatchToProps = (dispatch) => ({
-  saveUserSettings: (settings) => dispatch(saveUserSettings(settings)),
-  savePlayerSettings: (settings) => dispatch(savePlayerSettings(settings)),
+  saveUserSettings: (settings) => dispatch(saveUserSettingsRoutine(settings)),
+  savePlayerSettings: (settings) => dispatch(savePlayerSettingsRoutine(settings)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

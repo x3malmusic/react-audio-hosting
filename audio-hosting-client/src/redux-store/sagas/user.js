@@ -2,20 +2,22 @@ import { takeLatest, put, select } from "redux-saga/effects";
 import { notify } from "../../utils/notifications";
 import {
   SET_SONGS,
-  UPLOAD_TRACK,
   SET_USER,
-  REGISTER,
-  LOGIN,
-  SILENT_LOGIN,
   LOG_OUT,
-  CREATE_NEW_PLAYLIST,
-  SAVE_USER_SETTINGS,
   CLEAR_USER,
   INIT_PLAYER,
-  EDIT_PLAYLIST,
   SET_PLAYLIST,
   SET_PLAYER_SETTINGS
 } from "../actions/types";
+import { 
+  silentLoginRoutine,
+  loginRoutine,
+  registerRoutine,
+  uploadTrackRoutine,
+  saveUserSettingsRoutine,
+  createNewPlaylistRoutine,
+  editPlaylistRoutine,
+ } from "../actions/routines";
 import { safe } from "./error";
 import {
   uploadSong,
@@ -127,14 +129,14 @@ const editUserPlaylist = function* () {
 };
 
 const userSagas = [
-  takeLatest(UPLOAD_TRACK, safe(uploadTrack)),
-  takeLatest(REGISTER, safe(registerUser)),
-  takeLatest(LOGIN, safe(loginUser)),
-  takeLatest(SILENT_LOGIN, safe(silentLoginUser)),
-  takeLatest(LOG_OUT, safe(logoutUser)),
-  takeLatest(CREATE_NEW_PLAYLIST, safe(createNewPlaylist)),
-  takeLatest(SAVE_USER_SETTINGS, safe(saveSettings)),
-  takeLatest(EDIT_PLAYLIST, safe(editUserPlaylist)),
+  takeLatest(uploadTrackRoutine.REQUEST, safe(uploadTrack)),
+  takeLatest(registerRoutine.REQUEST, safe(registerUser)),
+  takeLatest(loginRoutine.REQUEST, safe(loginUser)),
+  takeLatest(silentLoginRoutine.REQUEST, safe(silentLoginUser)),
+  takeLatest(LOG_OUT, logoutUser),
+  takeLatest(createNewPlaylistRoutine.REQUEST, safe(createNewPlaylist)),
+  takeLatest(saveUserSettingsRoutine.REQUEST, safe(saveSettings)),
+  takeLatest(editPlaylistRoutine.REQUEST, safe(editUserPlaylist)),
 ];
 
 export default userSagas;

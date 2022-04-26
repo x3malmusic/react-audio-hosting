@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import Login from "./Login";
-import { login } from "../../redux-store/actions";
+import { loginRoutine } from "../../redux-store/actions/routines";
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (creds) => dispatch(login(creds)),
+  login: (creds) => dispatch(loginRoutine(creds)),
 })
 
 export default connect(null, mapDispatchToProps)(Login);

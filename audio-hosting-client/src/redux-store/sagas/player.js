@@ -7,11 +7,11 @@ import {
   PLAY_NEXT_SONG,
   PLAY_PREVIOUS_SONG,
   REORDER_SONGS_IN_PLAYLIST,
-  SAVE_PLAYER_SETTINGS,
   INIT_PLAYER,
   INIT_PLAYER_END,
   SET_PLAYER_SETTINGS
 } from "../actions/types";
+import { savePlayerSettingsRoutine } from "../actions/routines";
 import { safe } from "./error";
 import { savePlayerSettings } from "../../services/http";
 import { deleteLastPlayedSong, getLastPlayedSong, saveLastPlayedSong, saveLastPlayedPlaylist } from "../../utils/userSettings";
@@ -81,7 +81,7 @@ const playerSagas = [
   takeLatest(PLAY_NEXT_SONG, playNext),
   takeLatest(PLAY_PREVIOUS_SONG, playPrevious),
   takeLatest(REORDER_SONGS_IN_PLAYLIST, recalcNextAndPreviousSongs),
-  takeLatest(SAVE_PLAYER_SETTINGS, safe(saveUserPlayerSettings)),
+  takeLatest(savePlayerSettingsRoutine.REQUEST, safe(saveUserPlayerSettings)),
   takeLatest(INIT_PLAYER, initPlayer),
 ];
 

@@ -17,11 +17,14 @@ export default function Settings({ rememberLastSong, savePlayerSettings, saveUse
   const [nameIsChanged, setNameIsChanged] = useState(name === userName)
 
   const isDefault = useMemo(
-    () => volume === DEFAULT_VOLUME && savePlayedSong === DEFAULT_REMEMBER_LAST_SONG, [savePlayedSong, volume]);
+    () => volume === DEFAULT_VOLUME && savePlayedSong === DEFAULT_REMEMBER_LAST_SONG,
+    [savePlayedSong, volume]
+  );
 
   const playerSettingsChanged = useMemo(
     () => volume === defaultVolume && savePlayedSong === rememberLastSong, 
-    [volume, savePlayedSong, defaultVolume, rememberLastSong]);
+    [volume, savePlayedSong, defaultVolume, rememberLastSong]
+  );
 
   const saveSettings = () => {
     saveUserSettings({ name: userName })

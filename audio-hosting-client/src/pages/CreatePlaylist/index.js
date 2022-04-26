@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import CreatePlaylist from "./CreatePlaylist";
-import { setSong, setNameOfNewPlaylist, setSongsOfNewPlaylist, createNewPlaylist } from "../../redux-store/actions";
+import { setSong, setNameOfNewPlaylist, setSongsOfNewPlaylist } from "../../redux-store/actions";
+import { createNewPlaylistRoutine } from "../../redux-store/actions/routines";
 
 const mapStateToProps = ({ user: { songs } , newPlaylist: { songs: newPlaylistSongs, name }}) => ({
   allSongs: songs,
@@ -12,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
   setSong: (song) => dispatch(setSong(song)),
   setName: (name) => dispatch(setNameOfNewPlaylist(name)),
   setSongs: (song) => dispatch(setSongsOfNewPlaylist(song)),
-  createNewPlaylist: () => dispatch(createNewPlaylist()),
+  createNewPlaylist: () => dispatch(createNewPlaylistRoutine()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePlaylist);
