@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { Box } from "@material-ui/core";
-import { PlayerRefContext } from "../../context";
+import { PlayerRefContext } from "../../context/PlayerContext";
 import useStyles from "./styles";
 
 const withPlayer = (Component) => ({ ...props }) => {

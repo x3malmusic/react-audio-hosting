@@ -5,7 +5,7 @@ import Playlist from "../../components/Playlist";
 import ChoosePlaylistModal from "../../components/Modal/ChoosePlaylist";
 import MainControls from "../../components/MainControls";
 import useSelectable from "../../hooks/useSelectable";
-import { PlayerRefContext } from "../../context";
+import { PlayerRefContext } from "../../context/PlayerContext";
 import { ADD_PLAYLIST } from "../../components/Placeholder";
 import useStyles from "./styles";
 

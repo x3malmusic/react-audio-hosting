@@ -6,7 +6,7 @@ import MainLayout from "./layouts/MainLayout";
 import Loader from "./components/Loader/Loader";
 import { routes, publicRoutes } from "./routes";
 import { LOGIN_PAGE, MAIN_PAGE } from "./routes/pathnames";
-import { RefProvider } from "./context";
+import { RefProvider } from "./context/PlayerContext";
 import Player from "./components/Player";
 import { silentLoginRoutine } from "./redux-store/actions/routines";
 

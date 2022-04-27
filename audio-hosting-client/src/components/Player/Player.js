@@ -6,7 +6,7 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import { DEFAULT_VOLUME } from "../../constants/default_settings";
 import { initAnalyser } from "../../utils/initAnalyser";
-import { PlayerRefContext } from "../../context";
+import { PlayerRefContext } from "../../context/PlayerContext";
 import { MAIN_PAGE } from "../../routes/pathnames";
 import useStyles from "./styles";
 
