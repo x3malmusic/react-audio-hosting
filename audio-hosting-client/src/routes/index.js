@@ -20,7 +20,7 @@ import Settings from "../pages/Settings";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
-import withPlayer from "../components/withPlayer/withPlayer";
+import withPlayer from "../HOCs/withPlayer/withPlayer";
 
 export const routes =  [
   {
