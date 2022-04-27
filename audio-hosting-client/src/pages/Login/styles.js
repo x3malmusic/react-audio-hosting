@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
   input: {
     width: "100%",
     marginBottom: theme.spacing(1),
-    "&:last-of-type": {
-      marginBottom: theme.spacing(2)
-    }
   },
   btn: {
     padding: "12px 10px"
@@ -28,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
   controlsContainer: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    marginTop: theme.spacing(1),
   },
   link: {
     textDecoration: "none",
@@ -42,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
   errorMessage: {
-    fontSize: 12
+    fontSize: 12,
+    marginBottom: theme.spacing(0.5),
   }
 }));
 

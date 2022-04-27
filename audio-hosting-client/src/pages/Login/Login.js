@@ -7,7 +7,7 @@ import LoginButton from "../../containers/LoginButton";
 import { REGISTER_PAGE } from "../../routes/pathnames";
 import useStyles from "./styles";
 
-export default function Login({ login, isLoading }) {
+export default function Login({ login }) {
   const classes = useStyles();
 
   const loginUser = ({ email, password }) => login({ email, password });
@@ -63,7 +63,7 @@ export default function Login({ login, isLoading }) {
                 title="Login"
                 titleOnLoading="Logging In..."
               />
-              <Box display="flex" alignItems="center">
+              <Box display="flex">
                 <Typography>No account?</Typography>
                 <Link className={classes.link} to={REGISTER_PAGE}>Register</Link>
               </Box>
