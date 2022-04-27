@@ -16,7 +16,7 @@ export default function Main({ playlists, changePlaylist, songsInPlaylist, setSo
   const { selectableRef, setSelectedItems, dropHandler, dragOverHandler, deleteSong } = useSelectable({ playlistSongs: songsInPlaylist, setSongs })
 
   const [openModal, setOpenModal] = useState(false)
-  const [openDrawer, setOpenDrawer] = useState(false)
+  const [showMySongsList, setShowMySongsList] = useState(false)
 
   useEffect(() => {
     playerContainerRef.current.appendChild(playerRef.current)
@@ -26,21 +26,21 @@ export default function Main({ playlists, changePlaylist, songsInPlaylist, setSo
     <>
       <MainControls
         setOpenModal={setOpenModal}
-        setOpenDrawer={setOpenDrawer}
-        openDrawer={openDrawer}
+        setShowMySongs={setShowMySongsList}
+        showMySongs={showMySongsList}
       />
 
       <Box className={classes.main}>
         <Box ref={playerContainerRef} className={classes.playerContainer} />
         <Playlist
           placeholder={ADD_PLAYLIST}
-          deleteSong={openDrawer && deleteSong}
+          deleteSong={showMySongsList && deleteSong}
           onDrop={dropHandler}
           onDragOver={dragOverHandler}
         />
 
         <Drawer
-          open={openDrawer}
+          open={showMySongsList}
           anchor="bottom"
           variant="persistent"
           className={classes.drawer}
