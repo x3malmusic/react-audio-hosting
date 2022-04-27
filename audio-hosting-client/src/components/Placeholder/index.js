@@ -1,23 +1,29 @@
-import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
-import OpenInBrowserIcon from '@material-ui/icons/OpenInBrowser';
+import React from "react";
+import { Box, ListItem, Typography } from "@material-ui/core";
+import { placeholderItems } from "./placeholderItems";
+import useStyles from "./styles";
 
-import { history } from "../../utils/history";
-import { fn } from "../../utils"
-import { CREATE_PLAYLIST_PAGE } from '../../routes/pathnames';
+export default function Placeholder({ placeholder }) {
+  const classes = useStyles();
 
-export const ADD_PLAYLIST = "ADD_PLAYLIST"
-export const DROP_SONGS_HERE = "DROP_SONGS_HERE"
+  const renderIcon = (icon) => {
+    const Icon = icon
+    return  <Icon className={classes.icon} />
+  }
 
-export const placeholderItems = {
-  [ADD_PLAYLIST]: {
-    title: "Create your first playlist",
-    icon: LibraryAddIcon,
-    action: () => history.push(CREATE_PLAYLIST_PAGE),
-    isButton: true,
-  },
-  [DROP_SONGS_HERE]: {
-    title: "Drag and drop your songs here",
-    icon: OpenInBrowserIcon,
-    action: fn
-  },
+  return(
+    <Box className={classes.container}>
+      <ListItem 
+        className={classes.addPlaylist}
+        onClick={placeholderItems[placeholder].action}
+        button={placeholderItems[placeholder].isButton}
+      >
+        {renderIcon(placeholderItems[placeholder].icon)}
+        
+        <Typography className={classes.text}>
+          {placeholderItems[placeholder].title}
+        </Typography>
+      </ListItem>
+    </Box>
+  )
 }

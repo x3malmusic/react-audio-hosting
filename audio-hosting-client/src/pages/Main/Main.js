@@ -6,7 +6,7 @@ import ChoosePlaylistModal from "../../components/Modal/ChoosePlaylist";
 import MainControls from "../../containers/MainControls";
 import useSelectable from "../../hooks/useSelectable";
 import { PlayerRefContext } from "../../context/PlayerContext";
-import { ADD_PLAYLIST } from "../../components/Placeholder";
+import { ADD_PLAYLIST } from "../../components/Placeholder/placeholderItems";
 import useStyles from "./styles";
 
 export default function Main({ playlists, changePlaylist, songsInPlaylist, setSongs }) {

@@ -5,7 +5,7 @@ import AppButton from "../../components/AppButton";
 import Modal from "../../components/Modal/Modal";
 import AllSongsList from "../../components/AllSongsList";
 import SearchInput from "../../components/SearchInput";
-import { DROP_SONGS_HERE } from "../../components/Placeholder";
+import { DROP_SONGS_HERE } from "../../components/Placeholder/placeholderItems";
 import useSelectable from "../../hooks/useSelectable";
 import useStyles from "./styles";
 

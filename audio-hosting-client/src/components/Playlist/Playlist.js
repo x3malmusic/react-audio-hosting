@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Box } from "@material-ui/core";
 import PlaylistItem from "../PlaylistItem/PlaylistItem";
 import { reorder, fn } from "../../utils";
-import Placeholder from "../Placeholder/Placeholder";
+import Placeholder from "../Placeholder";
 import useStyles from "./styles";
 
 const getItemStyle = (isDragging, draggableStyle) => ({
