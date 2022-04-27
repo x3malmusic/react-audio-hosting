@@ -3,9 +3,11 @@ import MainControls from "./MainControls";
 import { editPlaylistRoutine } from "../../redux-store/actions/routines";
 import { isEqualArrays } from "../../utils";
 
-const mapStateToProps = ({ user: { playlists }, loading: { [editPlaylistRoutine.LOADING]: loading }, player: { songsInPlaylist, currentPlaylist } }) => ({
+const mapStateToProps = ({ 
+  user: { playlists },
+  player: { songsInPlaylist, currentPlaylist }
+}) => ({
   isPlaylistChanged: isEqualArrays(songsInPlaylist, playlists.find(list => list._id === currentPlaylist)?.songs || []),
-  loading
 });
 
 const mapDispatchToProps = (dispatch) => ({
