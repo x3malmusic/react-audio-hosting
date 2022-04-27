@@ -3,13 +3,18 @@ import { Link } from "react-router-dom";
 import { Box, TextField, Typography } from "@material-ui/core";
 import { Formik } from 'formik';
 import { loginSchema } from "../../utils/validationSchemas";
-import AppButton from "../../components/AppButton";
+import LoginButton from "../../containers/LoginButton";
+import { REGISTER_PAGE } from "../../routes/pathnames";
 import useStyles from "./styles";
 
-export default function Login({ login }) {
+export default function Login({ login, isLoading }) {
   const classes = useStyles();
 
   const loginUser = ({ email, password }) => login({ email, password });
+
+  const keyListener = (e, submit) => {
+    if (e.key === "Enter") submit()
+  }
 
   return (
     <Formik
@@ -35,6 +40,7 @@ export default function Login({ login }) {
               variant="outlined"
               label="Email"
               error={!!errors.email}
+              onKeyUp={e => keyListener(e, handleSubmit)}
             />
 
             <Typography className={classes.errorMessage} color="error">{touched.password && errors.password}</Typography>
@@ -47,13 +53,19 @@ export default function Login({ login }) {
               variant="outlined"
               label="Password"
               error={!!errors.password}
+              onKeyUp={e => keyListener(e, handleSubmit)}
             />
 
             <Box className={classes.controlsContainer}>
-              <AppButton onClick={handleSubmit} className={classes.btn}>Login</AppButton>
+              <LoginButton 
+                onSave={handleSubmit}
+                className={classes.btn}
+                title="Login"
+                titleOnLoading="Logging In..."
+              />
               <Box display="flex" alignItems="center">
                 <Typography>No account?</Typography>
-                <Link className={classes.link} to="/register">Register</Link>
+                <Link className={classes.link} to={REGISTER_PAGE}>Register</Link>
               </Box>
             </Box>
           </Box>
