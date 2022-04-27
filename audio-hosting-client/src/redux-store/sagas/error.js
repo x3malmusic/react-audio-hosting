@@ -2,6 +2,8 @@ import { put, fork } from "redux-saga/effects";
 import { notify } from "../../utils/notifications";
 import routines from "../actions/routines";
 
+const DEFAULT_ERROR_MESSAGE = "Something went wrong"
+
 const safeWrapper = function* (saga, ...rest) {
   const [args] = rest
 
@@ -10,7 +12,9 @@ const safeWrapper = function* (saga, ...rest) {
     yield saga(args);
   } catch (err) {
     console.log('sagaWrapper', err)
-    notify({ message: err.data?.message, type: 'danger', title: 'Error' });
+    const errorMessage = err?.response?.data?.message || err?.message || DEFAULT_ERROR_MESSAGE
+
+    notify({ message: errorMessage, type: 'danger', title: 'Error' });
   } finally {
     yield put({ type: routines[args.type].LOADING, payload: false });
   }
