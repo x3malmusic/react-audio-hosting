@@ -1,20 +1,26 @@
 import React, { useState, useMemo } from "react";
 import { Box, TextField, Typography, Input, Divider, Checkbox } from "@material-ui/core";
 import AppButton from "../../components/AppButton";
+import SaveUserSettingsButton from "../../containers/SaveUserSettings";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
 import { DEFAULT_VOLUME, DEFAULT_REMEMBER_LAST_SONG } from "../../constants/default_settings";
 import useStyles from "./styles";
 
 
-export default function Settings({ rememberLastSong, savePlayerSettings, saveUserSettings, email, name, defaultVolume }) {
+export default function Settings({ 
+  rememberLastSong,
+  savePlayerSettings,
+  saveUserSettings,
+  email,
+  name,
+  defaultVolume,
+}) {
   const classes = useStyles();
 
   const [userName, setUserName] = useState(name)
   const [volume, setVolume] = useState(defaultVolume)
   const [savePlayedSong, setSavePlayedSong] = useState(rememberLastSong)
   const [openModal, setOpenModal] = useState(false)
-
-  const [nameIsChanged, setNameIsChanged] = useState(name === userName)
 
   const isDefault = useMemo(
     () => volume === DEFAULT_VOLUME && savePlayedSong === DEFAULT_REMEMBER_LAST_SONG,
@@ -26,9 +32,10 @@ export default function Settings({ rememberLastSong, savePlayerSettings, saveUse
     [volume, savePlayedSong, defaultVolume, rememberLastSong]
   );
 
+  const nameIsChanged = useMemo(() => name === userName, [name, userName]);
+
   const saveSettings = () => {
     saveUserSettings({ name: userName })
-    setNameIsChanged(true)
   }
 
   const saveUserPlayerSettings = () => {
@@ -47,7 +54,6 @@ export default function Settings({ rememberLastSong, savePlayerSettings, saveUse
 
   const changeName = (e) => {
     setUserName(e.target.value)
-    setNameIsChanged(e.target.value === name)
   }
 
   const checkLastPlayedSong = (e) => {
@@ -70,7 +76,12 @@ export default function Settings({ rememberLastSong, savePlayerSettings, saveUse
       </Box>
 
       <Box className={classes.btnContainer}>
-        <AppButton disabled={nameIsChanged} className={classes.btn} onClick={saveSettings}>Save changes</AppButton>
+        <SaveUserSettingsButton 
+          disabled={nameIsChanged}
+          className={classes.btn}
+          title="Save changes"
+          onSave={saveSettings}
+        />
       </Box>
 
       <Divider />
