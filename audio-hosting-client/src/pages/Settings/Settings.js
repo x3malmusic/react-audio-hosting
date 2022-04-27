@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import { Box, TextField, Typography, Input, Divider, Checkbox } from "@material-ui/core";
 import AppButton from "../../components/AppButton";
 import SaveUserSettingsButton from "../../containers/SaveUserSettings";
+import SavePlayerSettings from "../../containers/SavePlayerSettings";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
 import { DEFAULT_VOLUME, DEFAULT_REMEMBER_LAST_SONG } from "../../constants/default_settings";
 import useStyles from "./styles";
@@ -114,13 +115,12 @@ export default function Settings({
       </Box>
 
       <Box className={classes.btnContainer}>
-        <AppButton
+        <SavePlayerSettings
           className={classes.btn}
-          onClick={saveUserPlayerSettings}
+          title="Save changes"
+          onSave={saveUserPlayerSettings}
           disabled={playerSettingsChanged}
-        >
-          Save changes
-        </AppButton>
+        />
         <AppButton
           className={classes.btn}
           onClick={() => setOpenModal(true)}
