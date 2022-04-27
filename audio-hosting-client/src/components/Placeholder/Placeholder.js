@@ -13,9 +13,16 @@ export default function Placeholder({ placeholder }) {
 
   return(
     <Box className={classes.container}>
-      <ListItem button className={classes.addPlaylist} onClick={placeholderItems[placeholder].action}>
+      <ListItem 
+        className={classes.addPlaylist}
+        onClick={placeholderItems[placeholder].action}
+        button={placeholderItems[placeholder].isButton}
+      >
         {renderIcon(placeholderItems[placeholder].icon)}
-        <Typography className={classes.text}>{placeholderItems[placeholder].title}</Typography>
+        
+        <Typography className={classes.text}>
+          {placeholderItems[placeholder].title}
+        </Typography>
       </ListItem>
     </Box>
   )
