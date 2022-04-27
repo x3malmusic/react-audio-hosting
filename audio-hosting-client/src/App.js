@@ -8,6 +8,7 @@ import { routes, publicRoutes } from "./routes";
 import { LOGIN_PAGE, MAIN_PAGE } from "./routes/pathnames";
 import { RefProvider } from "./context/PlayerContext";
 import Player from "./components/Player";
+import PlayerContainer from "./containers/PlayerContainer";
 import { silentLoginRoutine } from "./redux-store/actions/routines";
 
 
@@ -49,6 +50,7 @@ export default function App() {
       </MainLayout>
 
       <div>
+        <PlayerContainer />
         <Player />
       </div>
     </RefProvider>

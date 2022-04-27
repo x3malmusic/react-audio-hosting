@@ -7,7 +7,10 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     bottom: 0,
     zIndex: 1250,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    "& canvas": {
+      display: "none"
+    }
   },
 }));
 

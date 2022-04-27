@@ -20,8 +20,6 @@ import Settings from "../pages/Settings";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
-import withPlayer from "../HOCs/withPlayer/withPlayer";
-
 export const routes =  [
   {
     path: MAIN_PAGE,
@@ -32,19 +30,19 @@ export const routes =  [
   },
   {
     path: UPLOAD_PAGE,
-    component: withPlayer(UploadTrack),
+    component: UploadTrack,
     Icon: PublishIcon,
     name: "Upload track",
   },
   {
     path: CREATE_PLAYLIST_PAGE,
-    component: withPlayer(CreatePlaylist),
+    component: CreatePlaylist,
     Icon: PlaylistAddIcon,
     name: "Create playlist",
   },
   {
     path: SETTINGS_PAGE,
-    component: withPlayer(Settings),
+    component: Settings,
     Icon: SettingsIcon,
     name: "Settings",
   },
