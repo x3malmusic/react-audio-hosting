@@ -2,18 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Box, TextField, Typography } from "@material-ui/core";
 import { Formik } from 'formik';
-import AppButton from "../../components/AppButton";
-import useStyles from "./styles";
+import RegisterButton from "../../containers/RegisterButton";
 import { registerSchema } from "../../utils/validationSchemas";
+import useStyles from "./styles";
 
 export default function Register({ register }) {
   const classes = useStyles();
 
-  const registerUser = ({ email, password, repeatPassword }) => {
-    if (password === repeatPassword) {
-      register({ email, password })
-    }
-  }
+  const registerUser = ({ email, password, repeatPassword }) => register({ email, password })
 
   return (
     <Formik
@@ -66,8 +62,13 @@ export default function Register({ register }) {
             />
 
             <Box className={classes.controlsContainer}>
-              <AppButton onClick={handleSubmit} className={classes.btn}>Register</AppButton>
-              <Box display="flex" alignItems="center">
+              <RegisterButton
+                onSave={handleSubmit}
+                className={classes.btn}
+                title="Register"
+                titleOnLoading="Register..."
+              />
+              <Box display="flex">
                 <Typography>Already have an account?</Typography>
                 <Link className={classes.link} to="/login">Login</Link>
               </Box>

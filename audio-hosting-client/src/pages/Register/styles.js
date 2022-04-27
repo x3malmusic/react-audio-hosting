@@ -13,22 +13,20 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     padding: theme.spacing(2),
     boxShadow: "2px 4px 27px 0px rgba(34, 60, 80, 0.2)",
-    borderRadius: 5
+    borderRadius: 5,
   },
   input: {
     width: "100%",
     marginBottom: theme.spacing(1),
-    "&:last-of-type": {
-      marginBottom: theme.spacing(2)
-    }
   },
   btn: {
-    padding: "12px 10px"
+    padding: "12px 10px",
   },
   controlsContainer: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    marginTop: theme.spacing(1),
   },
   link: {
     textDecoration: "none",
@@ -42,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
   errorMessage: {
-    fontSize: 12
+    fontSize: 12,
+    marginBottom: theme.spacing(0.5),
   }
 }));
 
