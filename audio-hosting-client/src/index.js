@@ -8,13 +8,13 @@ import { history } from "./utils/history";
 import theme from "./utils/theme";
 import store from "./redux-store";
 import "./index.css";
-import App from "./App";
+import MainEntry from "./MainEntry";
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <ThemeProvider theme={theme}>
-        <App />
+        <MainEntry />
       </ThemeProvider>
     </Router>
   </Provider>,
