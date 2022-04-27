@@ -3,7 +3,7 @@ import { Box, Drawer } from "@material-ui/core";
 import AllSongsList from "../../components/AllSongsList";
 import Playlist from "../../components/Playlist";
 import ChoosePlaylistModal from "../../components/Modal/ChoosePlaylist";
-import MainControls from "../../components/MainControls";
+import MainControls from "../../containers/MainControls";
 import useSelectable from "../../hooks/useSelectable";
 import { PlayerRefContext } from "../../context/PlayerContext";
 import { ADD_PLAYLIST } from "../../components/Placeholder";
