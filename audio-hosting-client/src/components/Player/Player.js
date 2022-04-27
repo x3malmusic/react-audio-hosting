@@ -7,6 +7,7 @@ import 'react-h5-audio-player/lib/styles.css';
 import { DEFAULT_VOLUME } from "../../constants/default_settings";
 import { initAnalyser } from "../../utils/initAnalyser";
 import { PlayerRefContext } from "../../context";
+import { MAIN_PAGE } from "../../routes/pathnames";
 import useStyles from "./styles";
 
 
@@ -20,7 +21,7 @@ export default function Player({ currentSong, playNext, playPrevious, defaultVol
   const [init, setInit] = useState(false)
   const { pathname } = useLocation();
 
-  const isOnMainPage = pathname === "/";
+  const isOnMainPage = pathname === MAIN_PAGE;
 
   const initAnalize = () => {
     if (!init) {
@@ -36,7 +37,7 @@ export default function Player({ currentSong, playNext, playPrevious, defaultVol
 
   useEffect(() => {
     if (play && songs[currentSong]) audio.current.audio.current.play();
-  }, [currentSong, play]);
+  }, [currentSong, play, songs]);
 
   useEffect(() => {
     return () => {
