@@ -2,6 +2,7 @@ import { createRoutine } from "../../utils/createRoutine"
 
 import { 
   LOGIN,
+  LOG_OUT,
   REGISTER,
   SILENT_LOGIN,
   CREATE_NEW_PLAYLIST,
@@ -14,6 +15,7 @@ import {
 export const loginRoutine = createRoutine(LOGIN)
 export const registerRoutine = createRoutine(REGISTER)
 export const silentLoginRoutine = createRoutine(SILENT_LOGIN)
+export const logoutRoutine = createRoutine(LOG_OUT)
 
 export const createNewPlaylistRoutine = createRoutine(CREATE_NEW_PLAYLIST)
 export const editPlaylistRoutine = createRoutine(EDIT_PLAYLIST)
@@ -32,6 +34,7 @@ const routines = {
   [uploadTrackRoutine.REQUEST]: uploadTrackRoutine,
   [saveUserSettingsRoutine.REQUEST]: saveUserSettingsRoutine,
   [savePlayerSettingsRoutine.REQUEST]: savePlayerSettingsRoutine,
+  [logoutRoutine.REQUEST]: logoutRoutine,
 }
 
 export default routines

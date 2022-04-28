@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Header from "./Header";
-import { logout } from "../../redux-store/actions";
+import { logoutRoutine } from "../../redux-store/actions/routines";
 
 const mapStateToProps = ({ user: { email, name } }) => ({
   email,
@@ -8,7 +8,7 @@ const mapStateToProps = ({ user: { email, name } }) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(logout()),
+  logout: () => dispatch(logoutRoutine()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
