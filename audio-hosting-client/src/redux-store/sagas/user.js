@@ -1,9 +1,7 @@
 import { takeLatest, put, select } from "redux-saga/effects";
-import { notify } from "../../utils/notifications";
 import {
   SET_SONGS,
   SET_USER,
-  LOG_OUT,
   CLEAR_USER,
   INIT_PLAYER,
   SET_PLAYLIST,
@@ -17,6 +15,7 @@ import {
   saveUserSettingsRoutine,
   createNewPlaylistRoutine,
   editPlaylistRoutine,
+  logoutRoutine,
  } from "../actions/routines";
 import { safe } from "./error";
 import {
@@ -30,15 +29,6 @@ import {
 } from "../../services/http";
 import { saveToken, deleteToken } from "../../utils/token";
 import { arrayToMap } from "../../utils";
-import {
-  messages,
-  LOGIN_SUCCESS,
-  REGISTER_SUCCESS,
-  LOGOUT_SUCCESS,
-  UPLOAD_SUCCESS,
-  PLAYLIST_CREATED,
-  SETTINGS_SAVE_SUCCESS
-} from "../../constants/messages";
 
 const registerUser = function* ({ payload }) {
   const { user, token }  = yield register(payload);
@@ -47,8 +37,6 @@ const registerUser = function* ({ payload }) {
   saveToken(token)
   yield put({ type: SET_USER, payload: { ...userData, songs: arrayToMap(userData.songs) }})
   yield put({ type: SET_PLAYER_SETTINGS, payload: settings })
-
-  notify(messages[REGISTER_SUCCESS])
 };
 
 const loginUser = function* ({ payload }) {
@@ -60,8 +48,6 @@ const loginUser = function* ({ payload }) {
   yield put({ type: SET_USER, payload: { ...userData, songs: arrayToMap(userData.songs) }})
   yield put({ type: SET_PLAYER_SETTINGS, payload: settings })
   yield put({ type: INIT_PLAYER })
-
-  notify(messages[LOGIN_SUCCESS])
 };
 
 const silentLoginUser = function* () {
@@ -71,14 +57,11 @@ const silentLoginUser = function* () {
   yield put({ type: SET_USER, payload: {...user, songs: arrayToMap(user.songs)} })
   yield put({ type: SET_PLAYER_SETTINGS, payload: settings })
   yield put({ type: INIT_PLAYER })
-
-  notify(messages[LOGIN_SUCCESS])
 };
 
 const logoutUser = function* () {
   deleteToken();
   yield put({ type: CLEAR_USER })
-  notify(messages[LOGOUT_SUCCESS])
 };
 
 const uploadTrack = function* ({ payload }) {
@@ -92,7 +75,6 @@ const uploadTrack = function* ({ payload }) {
   payload.setUploadProgress(0)
 
   yield put({ type: SET_SONGS, payload: { ...allSongs } });
-  notify(messages[UPLOAD_SUCCESS])
 };
 
 const createNewPlaylist = function* () {
@@ -104,13 +86,11 @@ const createNewPlaylist = function* () {
   user.playlists = [...user.playlists, playlist]
 
   yield put({ type: SET_USER, payload: { ...user } })
-  notify(messages[PLAYLIST_CREATED])
 };
 
 const saveSettings = function* ({ payload }) {
   const user = yield saveUserSettings(payload);
   yield put({ type: SET_USER, payload: user });
-  notify(messages[SETTINGS_SAVE_SUCCESS])
 };
 
 const editUserPlaylist = function* () {
@@ -125,7 +105,6 @@ const editUserPlaylist = function* () {
   })
 
   yield put({ type: SET_PLAYLIST, payload: newPlaylists })
-  notify(messages[SETTINGS_SAVE_SUCCESS])
 };
 
 const userSagas = [
@@ -133,7 +112,7 @@ const userSagas = [
   takeLatest(registerRoutine.REQUEST, safe(registerUser)),
   takeLatest(loginRoutine.REQUEST, safe(loginUser)),
   takeLatest(silentLoginRoutine.REQUEST, safe(silentLoginUser)),
-  takeLatest(LOG_OUT, logoutUser),
+  takeLatest(logoutRoutine.REQUEST, safe(logoutUser)),
   takeLatest(createNewPlaylistRoutine.REQUEST, safe(createNewPlaylist)),
   takeLatest(saveUserSettingsRoutine.REQUEST, safe(saveSettings)),
   takeLatest(editPlaylistRoutine.REQUEST, safe(editUserPlaylist)),

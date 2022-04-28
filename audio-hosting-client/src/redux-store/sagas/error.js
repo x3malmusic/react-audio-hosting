@@ -10,6 +10,7 @@ const safeWrapper = function* (saga, ...rest) {
   try {
     yield put({ type: routines[args.type].LOADING, payload: true });
     yield saga(args);
+    yield put({ type: routines[args.type].SUCCESS });
   } catch (err) {
     console.log('sagaWrapper', err)
     const errorMessage = err?.response?.data?.message || err?.message || DEFAULT_ERROR_MESSAGE
