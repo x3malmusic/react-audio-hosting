@@ -64,15 +64,15 @@ const logoutUser = function* () {
   yield put({ type: CLEAR_USER })
 };
 
-const uploadTrack = function* ({ payload }) {
+const uploadTrack = function* ({ payload: { file, setUploadProgress } }) {
   const data = new FormData();
-  data.append('song', payload.file);
-  const song = yield uploadSong({ file: data, setUploadProgress: payload.setUploadProgress });
+  data.append('song', file);
+  const song = yield uploadSong({ file: data, setUploadProgress: setUploadProgress });
 
   const allSongs = yield select(state => state.user.songs);
   allSongs[song._id] = song
 
-  payload.setUploadProgress(0)
+  setUploadProgress(0)
 
   yield put({ type: SET_SONGS, payload: { ...allSongs } });
 };

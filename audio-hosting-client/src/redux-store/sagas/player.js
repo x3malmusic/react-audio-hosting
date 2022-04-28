@@ -16,8 +16,6 @@ import { safe } from "./error";
 import { savePlayerSettings } from "../../services/http";
 import { deleteLastPlayedSong, getLastPlayedSong, saveLastPlayedSong, saveLastPlayedPlaylist } from "../../utils/userSettings";
 import { recalcNextAndPrevSongs } from "../../utils";
-import { notify } from "../../utils/notifications";
-import { messages, SETTINGS_SAVE_SUCCESS } from "../../constants/messages";
 
 
 const setCurrentSong = function* ({ payload }) {
@@ -66,7 +64,6 @@ const saveUserPlayerSettings = function* ({ payload }) {
   const settings = yield savePlayerSettings(payload);
 
   yield put({ type: SET_PLAYER_SETTINGS, payload: settings });
-  notify(messages[SETTINGS_SAVE_SUCCESS])
 }
 
 const initPlayer = function* () {
