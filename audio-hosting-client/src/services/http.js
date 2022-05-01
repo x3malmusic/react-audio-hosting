@@ -3,7 +3,6 @@ import { getToken } from "../utils/token";
 
 const http = axios.create({
   baseURL: process.env.REACT_APP_URL,
-  timeout: 6000,
 });
 
 http.interceptors.response.use(
