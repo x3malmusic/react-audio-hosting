@@ -78,7 +78,7 @@ const uploadTrack = function* ({ payload: { file, setUploadProgress } }) {
 };
 
 const createNewPlaylist = function* () {
-  const { songs, name } = yield select(state => state.newPlaylist.songs);
+  const { songs, name } = yield select(state => state.newPlaylist);
 
   const playlist = yield createPlaylist({ name, songs });
 
