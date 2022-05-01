@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Box } from "@material-ui/core";
 import Playlist from "../../components/Playlist/Playlist";
-import AppButton from "../../components/AppButton";
 import Modal from "../../components/Modal/Modal";
 import AllSongsList from "../../components/AllSongsList";
 import SearchInput from "../../components/SearchInput";
+import SaveNewPlaylistButton from "../../containers/SaveNewPlaylist"
 import { DROP_SONGS_HERE } from "../../components/Placeholder/placeholderItems";
 import useSelectable from "../../hooks/useSelectable";
 import useStyles from "./styles";
@@ -18,7 +18,11 @@ export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSon
     <>
       <Box className={classes.controls}>
         <SearchInput className={classes.input} focusOnDisable />
-        <AppButton onClick={() => setOpenModal(true)}>Create Playlist</AppButton>
+        <SaveNewPlaylistButton
+          disabled={!newPlaylistSongs.length}
+          onSave={() => setOpenModal(true)}
+          title="Create Playlist"
+        />
       </Box>
 
       <Box className={classes.createPlaylistContainer}>
