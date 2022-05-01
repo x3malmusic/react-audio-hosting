@@ -12,7 +12,7 @@ export default function MainControls({ showMySongs, setOpenModal, setShowMySongs
     <Box className={classes.controls}>
       <SearchInput className={classes.marginRight} focusOnDisable disabled={!showMySongs} />
       <AppButton className={classes.marginRight} onClick={() => setOpenModal(true)}>Open playlist</AppButton>
-      <AppButton className={classes.marginRight} onClick={() => setShowMySongs(!showMySongs)}>Show My Songs</AppButton>
+      <AppButton className={classes.marginRight} onClick={() => setShowMySongs(!showMySongs)}>Edit Playlist</AppButton>
       <SavePlaylistChanges onSave={editPlaylist} title="Save playlist" disabled={isPlaylistChanged} />
     </Box>
   )
