@@ -1,13 +1,12 @@
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "max-content",
+  },
   uploadProgress: {
     position: "relative",
     marginTop: theme.spacing(2),
-    display: "flex",
-    alignItems: "center",
-    maxWidth: 430,
-    width: "100%",
   },
   progressBar: {
     width: "100%",

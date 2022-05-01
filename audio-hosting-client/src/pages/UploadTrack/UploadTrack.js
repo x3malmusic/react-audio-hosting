@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Input, LinearProgress, CircularProgress, Box, Typography } from "@material-ui/core";
-import AppButton from "../../components/AppButton";
+import { Input, LinearProgress, Box, Typography } from "@material-ui/core";
+import UploadTrackButton from "../../containers/UploadTrackButton";
 import useStyles from "./styles";
 
 export default function UploadTrack({ upload, loading }) {
@@ -19,12 +19,15 @@ export default function UploadTrack({ upload, loading }) {
   }
 
   return (
-    <>
+    <Box className={classes.root}>
       <Box className={classes.controls}>
         <Input className={classes.input} type="file" onChange={chooseSong} inputProps={{ accept: ".mp3" }} />
-        <AppButton onClick={uploadTrack} disabled={!file}>
-          {loading ? <CircularProgress size={24} className={classes.loader} /> : 'Upload Track'}
-        </AppButton>
+        <UploadTrackButton
+          onSave={uploadTrack}
+          disabled={!file}
+          title="Upload Track"
+          titleOnLoading="Uploading..."
+        />
       </Box>
 
       {loading &&
@@ -33,6 +36,6 @@ export default function UploadTrack({ upload, loading }) {
           <Typography className={classes.progressValue}>{`${uploadProgress}%`}</Typography>
         </Box>
       }
-    </>
+    </Box>
   )
 }

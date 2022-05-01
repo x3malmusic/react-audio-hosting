@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import UploadTrack from "./UploadTrack";
 import { uploadTrackRoutine } from "../../redux-store/actions/routines";
 
-const mapStateToProps = ({ loading: { SET_LOADING_UPLOAD_TRACK: loading } }) => ({
+const mapStateToProps = ({ loading: { [uploadTrackRoutine.LOADING]: loading } }) => ({
   loading,
 });
 
