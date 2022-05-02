@@ -47,7 +47,7 @@ export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSon
       <Modal
         title="Create Playlist"
         open={openModal}
-        setOpen={setOpenModal}
+        onClose={() => setOpenModal(false)}
         action={createNewPlaylist}
         content="Enter the name of new playlist"
         inputChange={setName}

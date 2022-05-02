@@ -57,6 +57,7 @@ export default function Main({ playlists, changePlaylist, songsInPlaylist, setSo
       <ChoosePlaylistModal
         open={openModal}
         setOpen={setOpenModal}
+        onClose={() => setOpenModal(false)}
         playlists={playlists}
         changePlaylist={changePlaylist}
       />

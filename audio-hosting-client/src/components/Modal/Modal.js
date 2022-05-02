@@ -8,13 +8,13 @@ import { Dialog,
 } from "@material-ui/core";
 import AppButton from "../AppButton";
 
-export default function Modal({ open, setOpen, action, inputChange, title, inputValue, content, ...props }) {
+export default function Modal({ open, onClose, action, inputChange, title, inputValue, content, ...props }) {
 
-  const create = (e) => {
+  const create = () => {
     if (!inputValue || inputValue.length < 3) return
 
     action()
-    setOpen(false)
+    onClose()
   }
 
   const changeHandler = (e) => {
@@ -22,7 +22,7 @@ export default function Modal({ open, setOpen, action, inputChange, title, input
   }
 
   return (
-    <Dialog open={open} {...props}>
+    <Dialog onClose={onClose} open={open} {...props}>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -41,7 +41,7 @@ export default function Modal({ open, setOpen, action, inputChange, title, input
         <AppButton onClick={create}>
           Create
         </AppButton>
-        <AppButton onClick={() => setOpen(false)}>
+        <AppButton onClick={onClose}>
           Cancel
         </AppButton>
       </DialogActions>

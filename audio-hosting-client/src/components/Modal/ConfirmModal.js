@@ -7,15 +7,15 @@ import { Dialog,
 } from "@material-ui/core";
 import AppButton from "../AppButton";
 
-export default function ConfirmModal({ open, setOpen, action, content, ...props }) {
+export default function ConfirmModal({ open, onClose, action, content, ...props }) {
 
   const confirmAction = () => {
     action()
-    setOpen(false)
+    onClose()
   }
 
   return (
-    <Dialog open={open} fullWidth {...props}>
+    <Dialog onClose={onClose} open={open} fullWidth {...props}>
       <DialogTitle>Confirm action</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -26,7 +26,7 @@ export default function ConfirmModal({ open, setOpen, action, content, ...props 
         <AppButton onClick={confirmAction}>
           Confirm
         </AppButton>
-        <AppButton onClick={() => setOpen(false)}>
+        <AppButton onClick={onClose}>
           Cancel
         </AppButton>
       </DialogActions>

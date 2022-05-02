@@ -135,7 +135,7 @@ export default function Settings({
       <ConfirmModal
         content="You sure you want reset settings?"
         action={resetToDefaultSettings}
-        setOpen={setOpenModal}
+        onClose={() => setOpenModal(false)}
         open={openModal}
       />
 

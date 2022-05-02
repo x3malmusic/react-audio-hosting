@@ -10,12 +10,12 @@ import {
 } from "@material-ui/core";
 import AppButton from "../AppButton";
 
-export default function ChoosePlaylistModal({ open, setOpen, changePlaylist, playlists, ...props }) {
+export default function ChoosePlaylistModal({ open, onClose, changePlaylist, playlists, ...props }) {
   const [chosenPlaylist, setChosenPlaylist] = useState("")
 
   const setPlaylist = () => {
     changePlaylist(chosenPlaylist)
-    setOpen(false)
+    onClose();
   }
 
   const changeHandler = (e) => {
@@ -23,7 +23,7 @@ export default function ChoosePlaylistModal({ open, setOpen, changePlaylist, pla
   }
 
   return (
-    <Dialog open={open} {...props}>
+    <Dialog onClose={onClose} open={open} {...props}>
       <DialogTitle>Open Playlist</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -37,7 +37,7 @@ export default function ChoosePlaylistModal({ open, setOpen, changePlaylist, pla
         <AppButton onClick={setPlaylist}>
           Open
         </AppButton>
-        <AppButton onClick={() => setOpen(false)}>
+        <AppButton onClick={onClose}>
           Cancel
         </AppButton>
       </DialogActions>
