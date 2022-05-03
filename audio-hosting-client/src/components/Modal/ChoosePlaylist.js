@@ -11,7 +11,7 @@ import {
 import AppButton from "../AppButton";
 
 export default function ChoosePlaylistModal({ open, onClose, changePlaylist, playlists, ...props }) {
-  const [chosenPlaylist, setChosenPlaylist] = useState("")
+  const [chosenPlaylist, setChosenPlaylist] = useState(playlists?.[0]?._id ? playlists[0]._id : "")
 
   const setPlaylist = () => {
     changePlaylist(chosenPlaylist)
