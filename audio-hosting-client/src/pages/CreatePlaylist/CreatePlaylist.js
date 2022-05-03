@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box } from "@material-ui/core";
 import Playlist from "../../components/Playlist/Playlist";
-import Modal from "../../components/Modal/Modal";
+import CreatePlaylistModal from "../../components/Modal/CreatePlaylistModal";
 import AllSongsList from "../../components/AllSongsList";
 import SearchInput from "../../components/SearchInput";
 import SaveNewPlaylistButton from "../../containers/SaveNewPlaylist"
@@ -44,7 +44,7 @@ export default function CreatePlaylist({ allSongs = [], newPlaylistSongs, setSon
 
       </Box>
 
-      <Modal
+      <CreatePlaylistModal
         title="Create Playlist"
         open={openModal}
         onClose={() => setOpenModal(false)}
