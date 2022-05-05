@@ -1,7 +1,6 @@
-import { SET_SONGS_NEW_PLAYLIST, SET_NAME_NEW_PLAYLIST } from "../actions/types";
+import { SET_SONGS_NEW_PLAYLIST } from "../actions/types";
 
 const initialState = {
-  name: "",
   songs: []
 };
 
@@ -11,11 +10,6 @@ const newPlaylist = (state = initialState, action) => {
       return {
         ...state,
         songs: action.payload,
-      };
-    case SET_NAME_NEW_PLAYLIST:
-      return {
-        ...state,
-        name: action.payload,
       };
     default:
       return state;

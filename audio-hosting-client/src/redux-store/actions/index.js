@@ -4,7 +4,6 @@ import {
   LOG_OUT,
   SET_LOADING,
   SET_SONGS_IN_PLAYLIST,
-  SET_NAME_NEW_PLAYLIST,
   SET_SONGS_NEW_PLAYLIST,
   SET_CURRENT_PLAYLIST,
   REORDER_SONGS_IN_PLAYLIST,
@@ -29,11 +28,6 @@ export const logout = () => ({
 
 export const setLoading = (payload) => ({
   type: SET_LOADING,
-  payload
-});
-
-export const setNameOfNewPlaylist = (payload) => ({
-  type: SET_NAME_NEW_PLAYLIST,
   payload
 });
 
