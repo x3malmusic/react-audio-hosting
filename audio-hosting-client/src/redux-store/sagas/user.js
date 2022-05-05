@@ -77,8 +77,8 @@ const uploadTrack = function* ({ payload: { file, setUploadProgress } }) {
   yield put({ type: SET_SONGS, payload: { ...allSongs } });
 };
 
-const createNewPlaylist = function* () {
-  const { songs, name } = yield select(state => state.newPlaylist);
+const createNewPlaylist = function* ({ payload: name }) {
+  const { songs } = yield select(state => state.newPlaylist);
 
   const playlist = yield createPlaylist({ name, songs });
 
