@@ -14,8 +14,14 @@ export const registerSchema = Yup.object().shape({
     .required("Email is required"),
   password: Yup.string()
     .required("Enter password")
-    .length(6, "Password should be at least 6 characters long"),
+    .min(6, "Password should be at least 6 characters long"),
   repeatPassword: Yup.string()
     .required("Repeat password")
     .oneOf([Yup.ref("password"), null], "Passwords should match")
+})
+
+export const createPlaylistSchema = Yup.object().shape({
+  name: Yup.string()
+    .required("Enter the name")
+    .min(3, "Playlist name should be at least 3 characters long"),
 })
