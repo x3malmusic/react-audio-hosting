@@ -1,2 +1,2 @@
-working demo - https://614479b393c50e20a646aa6a--zealous-jepsen-efa071.netlify.app
+working demo - https://react-audio-hosting-pjt7.vercel.app
 base creds: email = test@mail.com, password = qweasd
